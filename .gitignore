@@ -1,0 +1,20 @@
+# Environnement virtuel
+env/
+venv/
+*.pyc
+__pycache__/
+
+# Fichiers de config
+*.sqlite3
+*.log
+*.pot
+*.pyc
+*.pyo
+
+# Fichiers système
+.DS_Store
+
+# Django
+*.db
+/media/
+staticfiles/
