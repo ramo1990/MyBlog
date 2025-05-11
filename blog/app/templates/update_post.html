@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h2>Modifier le post : {{ post.title }}</h2>
+
+<form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ post_form.as_p }}
+
+    <h4>Images existantes</h4>
+    {{ formset.management_form }}
+    {% for form in formset %}
+        <div class="mb-3">
+            {% if form.instance and form.instance.image %}
+                <img src="{{ form.instance.image.url }}" alt="image existante" width="150">
+            {% endif %}
+            {{ form.image.label }} : {{ form.image }} <br>
+            Supprimer l'image ? {{ form.DELETE }} (Cochez pour supprimer)
+        </div>
+    {% endfor %}
+
+    <h4>Ajouter de nouvelles images :</h4>
+    <input type="file" name="new_images" multiple> <br><br>
+
+    <button type="submit">Enregistrer</button>
+</form>
+
+{% endblock %}

@@ -16,7 +16,7 @@ class Post(models.Model):
            updated = models.DateTimeField(auto_now=True)
            content = models.TextField()
            status = models.IntegerField(choices=STATUS, default=0)
-           image = models.ImageField(upload_to='post_images/', null=True, blank=True)
+        #    image = models.ImageField(upload_to='post_images/', null=True, blank=True)
            
            class Meta:
                    ordering = ['-created_on']
@@ -30,11 +30,11 @@ class Post(models.Model):
                 super().save(*args, **kwargs)
 
 # Supprimer l'image principale si le post est supprimé
-@receiver(pre_delete, sender=Post)
-def delete_post_image(sender, instance, **kwargs):
-    if instance.image:
-        if os.path.isfile(instance.image.path):
-            os.remove(instance.image.path)
+# @receiver(pre_delete, sender=Post)
+# def delete_post_image(sender, instance, **kwargs):
+#     if instance.image:
+#         if os.path.isfile(instance.image.path):
+#             os.remove(instance.image.path)
             
 # Nouveau modèle : Images multiples
 class PostImage(models.Model):

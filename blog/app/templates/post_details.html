@@ -34,7 +34,11 @@
 
      <!-- Ajouter un bouton pour rediriger vers la page de création de post -->
     <div class="col-md-8 mt-3">
-      <a href="{% url 'create_post' %}" class="btn btn-success"> créer un nouveau post</a>
+      <a href="{% url 'create_post' %}" class="btn btn-success"> Créer un nouveau post</a>
+
+      {% if user == post.author %}
+        <a href="{% url 'update_post' post.slug %}" class="btn btn-warning"> Modifier ce post</a>
+      {% endif %}
     </div>
     {% block sidebar %} {% include 'sidebar.html' %} {% endblock sidebar %}
   </div>

@@ -8,6 +8,7 @@ urlpatterns = [
     path('', views.PostList.as_view(), name='home'),
     path('new/', create_post, name='create_post'), # URL pour créer un post
     path('<slug:slug>/', views.PostDetailView.as_view(), name='post_detail'),
+    path('<slug:slug>/edit/', views.update_post, name='update_post')
     
 ]
 
