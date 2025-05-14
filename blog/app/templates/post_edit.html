@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-4">
+  <h2>Modifier le post : {{ form.instance.title }}</h2>
+
+  <form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+
+    <button type="submit" class="btn btn-primary mt-3">💾 Enregistrer les modifications</button>
+    <a href="{% url 'post_detail' form.instance.slug %}" class="btn btn-secondary mt-3">↩ Retour</a>
+  </form>
+</div>
+{% endblock %}

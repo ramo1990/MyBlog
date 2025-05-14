@@ -5,9 +5,9 @@
     <div class="overlay"></div>
     <div class="container">
         <div class="row">
-            <div class="col-md-8 mt-3 left">
+            <div class="col-12 col-md-8 mt-3">
                 <div class="site-heading">
-                    <h3 class="site-heading my-4 mt-3 text-black"> {% block title %} {{ object.title }} {% endblock title %}</h3>
+                    <h3 class="site-heading my-4 text-white"> {% block title %} {{ object.title }} {% endblock title %}</h3>
                 </div>
             </div>
         </div>
@@ -16,28 +16,22 @@
 
 <div class="container">
   <div class="row">
-    <div class="col-md-8 card mb-4  mt-3 left  top">
+    <div class="col-12 col-md-8 mt-4 mb-4">
+
+      <div class="card"> 
       <div class="card-body">
         {% if post.image %}
-        <img src="{{ post.image.url }}" alt="{{ post.title }}" class="img-fluid">
+        <img src="{{ post.image.url }}" alt="{{ post.title }}" class="img-fluid mb-3">
         {% endif %}
-
-        <!-- Images supplémentaires -->
-        {% for img in post.images.all %}
-            <img src="{{img.image.url}}" alt="Image de {{post.title}}" class="img-fluid mb-3">
-        {% endfor %}
-
-        <p class=" text-muted">{{ post.author }} | {{ post.created_on }}</p>
-        <p class="card-text ">{{ object.content | safe }}</p>
+        <p class=" text-muted mb-2">{{ post.author }} | {{ post.created_on|date:"d M Y" }}</p>
+        <div class="card-text ">{{ object.content | safe }}</div>
       </div>
-    </div>
-
-     <!-- Ajouter un bouton pour rediriger vers la page de création de post -->
-    <div class="col-md-8 mt-3">
-      <a href="{% url 'create_post' %}" class="btn btn-success"> Créer un nouveau post</a>
-
-      {% if user == post.author %}
-        <a href="{% url 'update_post' post.slug %}" class="btn btn-warning"> Modifier ce post</a>
+      </div>
+      {% if user == object.author or user.is_superuser %}
+        <div class="mt-4">
+          <a href="{% url 'post_edit' post.slug %}" class="btn btn-sm btn-outline-primary">✏️ Modifier</a>
+          <a href="{% url 'post_delete' post.slug %}" class="btn btn-sm btn-outline-danger">🗑 Supprimer</a>
+        </div>
       {% endif %}
     </div>
     {% block sidebar %} {% include 'sidebar.html' %} {% endblock sidebar %}
