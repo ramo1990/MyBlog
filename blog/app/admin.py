@@ -1,20 +1,10 @@
 from django.contrib import admin
-from .models import Post, PostImage
-# Register your models here.
+from .models import Post
 
-class PostImageInline(admin.TabularInline):
-    model = PostImage
-    extra = 1
-
-@admin.register(Post)
 class PostAdmin(admin.ModelAdmin):
-    list_display = ('title', 'author', 'status', 'created_on')
-    search_fields = ('title', 'content')
-    list_filter = ('status', 'created_on')
-    prepopulated_fields = {'slug': ('title',)} # Le slug est généré automatiquement à partir du titre
-    inlines = [PostImageInline]
+    list_display = ('title' , 'slug' , 'status' , 'created_on')
+    list_filter = ('status',)
+    search_fields = ['title', 'content']
 
-@admin.register(PostImage)
-class PostImageAdmin(admin.ModelAdmin):
-    list_display = ('post', 'image')
-
+admin.site.register(Post , PostAdmin)
+# Register your models here.

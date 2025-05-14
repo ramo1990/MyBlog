@@ -1,86 +1,45 @@
 {% load static %}
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>{% block title %}✍ YourBlog{% endblock %}</title>
+  <title>✍ YourBlog</title>
+
+  <!-- Bootstrap Theme -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@4.5.2/dist/lumen/bootstrap.min.css">
 
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Reggae+One&display=swap" rel="stylesheet">
-
-  <style>
-    * {
-      font-family: "Poppins", sans-serif;
-    }
-    .custom-margin {
-      padding-left: 12.6%;
-      padding-right: 12.6%;
-    }
-    body {
-      position: relative;
-    }
-    img {
-      border-radius: 6px;
-      margin-bottom: 20px;
-      max-width: 100%;
-      height: auto;
-    }
-    .navbar-brand {
-      color: #000;
-      font-family: "Reggae One", system-ui;
-      font-weight: 400;
-      font-style: normal;
-    }
-    main {
-      min-height: 100vh;
-    }
-  </style>
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
 <body>
 
   <!-- Navigation -->
-  <nav class="navbar navbar-expand-lg navbar-light bg-light custom-margin">
+  <nav class="navbar navbar-expand-lg bg-light custom-margin">
     <div class="container-fluid">
-      <a class="navbar-brand" href="{% url 'home' %}">✍ your Blog</a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor03" aria-controls="navbarColor03" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-
+      <a class="navbar-brand" href="{% url 'home' %}">✍ MyBlog</a>
       <div class="collapse navbar-collapse" id="navbarColor03">
         <ul class="navbar-nav ml-auto">
-          <li class="nav-item">
-            <a class="nav-link text-dark" href="#">Features</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link text-dark" href="#">Pricing</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link text-dark" href="#">About</a>
-          </li>
-          <li><a class="nav-link text-dark" href="#">Bienvenue {{ user.username }} !</a> </li>
+          <li class="nav-item"><a class="nav-link text-dark" href="#">ACCUEIL</a></li>
+          <li class="nav-item"><a class="nav-link text-dark" href="#">DESTINATIONS</a></li>
+          <li class="nav-item"><a class="nav-link text-dark" href="#">Culture et traditions</a></li>
+          <li class="nav-item"><a class="nav-link text-dark" href="#">Conseils de voyage</a></li>
+          <li class="nav-item"><a class="nav-link text-dark" href="#">Contact</a></li>
+          <li class="nav-item"><a class="nav-link text-dark" href="#">A PROPOS</a></li>
         </ul>
       </div>
     </div>
   </nav>
 
-  <!-- Main content -->
-  <main class="custom-margin py-4">
+  <main>
     {% block content %}
     <!-- le contenu ici -->
-    {% endblock %}
+    {% endblock content %}
   </main>
 
-  <!-- Footer -->
-  <footer class="py-3 bg-light">
-    <p class="m-0 text-dark text-center">&copy; 2024 MyBlog</p>
+  <footer class="py-3">
+    <p class="m-0 text-dark text-center">Copyright &copy; 2024 YourBlog</p>
   </footer>
-
-  <!-- Bootstrap JS (nécessaire pour navbar responsive) -->
-  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
 
 </body>
 </html>
