@@ -9,6 +9,7 @@ urlpatterns = [
     path('post/<slug:slug>/edit/', PostUpdateView.as_view(), name='post_edit'),
     path('post/<slug:slug>/delete/', PostDeleteView.as_view(), name='post_delete'),
     path('destinations/', DestinationListView.as_view(), name='destination_list'),
+    path('destinations/<slug:slug>/', DestinationDetailView.as_view(), name='destination_detail'),
     path('<slug:slug>/', DetailView.as_view(), name='post_detail'),
 ]
 

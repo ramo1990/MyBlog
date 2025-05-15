@@ -1,3 +1,4 @@
+from typing import Any
 from django.shortcuts import render, redirect
 from .models import *
 from django.views import generic
@@ -54,6 +55,16 @@ def sign_up(request):
     return render(request, 'signup.html', {'form': form})
 
 class DestinationListView(ListView):
-    model = Destinatoins
+    model = Destinations
     template_name = 'destination_list.html'
     context_object_name = "destinations"
+
+class DestinationDetailView(DetailView):
+    model = Destinations
+    template_name = 'destination_detail.html'
+    context_object_name = 'destination'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['gallery'] = self.object.images.all()
+        return context
