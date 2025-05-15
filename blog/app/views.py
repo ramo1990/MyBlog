@@ -1,8 +1,11 @@
-from django.shortcuts import render
-from .models import Post
+from django.shortcuts import render, redirect
+from .models import *
 from django.views import generic
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
-from django.views.generic import UpdateView, DeleteView
+from django.views.generic import UpdateView, DeleteView, ListView
+from django.contrib.auth.models import User
+from django.contrib.auth import login
+from .forms import *
 
 
 class PostList(generic.ListView):
@@ -35,3 +38,22 @@ class PostDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     def test_func(self):
         post = self.get_object()
         return self.request.user == post.author or self.request.user.is_superuser
+    
+# Creer un user via formulaire
+def sign_up(request):
+    if request.method == 'POST':
+        form = SignUpForm(request.POST)
+        if form.is_valid():
+            user = form.save(commit=False)
+            user.set_password(form.cleaned_data['password'])
+            user.save()
+            login(request, user)  # Connecte l'utilisateur après l'inscription
+            return redirect('home')  # Redirection après l'inscription
+    else:
+        form = SignUpForm()
+    return render(request, 'signup.html', {'form': form})
+
+class DestinationListView(ListView):
+    model = Destinatoins
+    template_name = 'destination_list.html'
+    context_object_name = "destinations"

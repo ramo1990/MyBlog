@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container mt-4">
+    <h2 class="text-center mb-4">Villes à visiter en Côte d'Ivoire 🇨🇮</h2>
+    <div class="row">
+        {% for destination in destinations %}
+        <div class="col-md-4 mb-4">
+            <div class="card h-100 shadow-sm">
+                {% if destination.image %}
+                <img src="{{ destination.image.url }}" class="card-img-top" alt="{{ destination.ville }}">
+                {% endif %}
+                <div class="card-body">
+                    <h5 class="card-title">{{ destination.ville }}</h5>
+                    <p class="card-text">{{ destination.description|truncatewords:20 }}</p>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <p>Aucune ville trouvée.</p>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

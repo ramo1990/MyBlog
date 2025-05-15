@@ -32,3 +32,17 @@ def delete_post_image(sender, instance, **kwargs):
     if instance.image:
         if os.path.isfile(instance.image.path):
             os.remove(instance.image.path)
+
+class Destinatoins(models.Model):
+    ville = models.CharField(max_length=100)
+    description = models.TextField()
+    image = models.ImageField(upload_to='destinations/', blank=True, null=True)
+    date_publiée = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ['ville']
+        verbose_name = "ville en CI"
+        verbose_name_plural = "Destinations en CI"
+    
+    def __str__(self):
+        return self.ville
