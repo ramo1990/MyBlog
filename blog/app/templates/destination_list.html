@@ -10,7 +10,7 @@
                 <img src="{{ destination.image.url }}" class="card-img-top" alt="{{ destination.ville }}">
                 {% endif %}
                 <div class="card-body">
-                    <h5 class="card-title">{{ destination.ville }}</h5>
+                    <h5 class="card-title"> <a href="{{ destination.get_absolute_url }}">{{ destination.ville }}</a></h5>
                     <p class="card-text">{{ destination.description|truncatewords:20 }}</p>
                 </div>
             </div>
