@@ -54,6 +54,7 @@ def sign_up(request):
         form = SignUpForm()
     return render(request, 'signup.html', {'form': form})
 
+# section Destinations
 class DestinationListView(ListView):
     model = Destinations
     template_name = 'destination_list.html'
@@ -68,3 +69,9 @@ class DestinationDetailView(DetailView):
         context = super().get_context_data(**kwargs)
         context['gallery'] = self.object.images.all()
         return context
+
+# section Culture et traditions
+def culture_view(request):
+    # culture = Culture.objects.first() # on suppose qu'une seule entrée
+    cultures = Culture.objects.all()
+    return render(request, 'culture.html', {'cultures':cultures})

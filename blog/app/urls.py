@@ -10,6 +10,7 @@ urlpatterns = [
     path('post/<slug:slug>/delete/', PostDeleteView.as_view(), name='post_delete'),
     path('destinations/', DestinationListView.as_view(), name='destination_list'),
     path('destinations/<slug:slug>/', DestinationDetailView.as_view(), name='destination_detail'),
+    path('culture/', culture_view, name='culture'),
     path('<slug:slug>/', DetailView.as_view(), name='post_detail'),
 ]
 
