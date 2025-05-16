@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Post, Destinations, ImageSupplementaire
+from .models import *
 
 class PostAdmin(admin.ModelAdmin):
     list_display = ('title' , 'slug' , 'status' , 'created_on')
@@ -16,7 +16,9 @@ class DestinationAdmin(admin.ModelAdmin):
     prepopulated_fields = {"slug": ("ville",)}
     inlines = [ImageSupplementaireInline]  # intègre les images
 
+
 admin.site.register(Post , PostAdmin)
 admin.site.register(Destinations, DestinationAdmin)
+admin.site.register(Culture)
 # Register your models here.
 

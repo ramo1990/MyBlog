@@ -72,3 +72,13 @@ class ImageSupplementaire(models.Model):
 
     def __str__(self):
         return f"Image de {self.destination.ville}"
+    
+class Culture(models.Model):
+    titre = models.CharField(max_length=200)
+    contenu = models.TextField()
+    image = models.ImageField(upload_to='cultures/gallery/', blank=True, null=True)
+    video_url = models.URLField(blank=True, null=True, help_text="Coller ici l'URL Youtube")
+    audio_file = models.FileField(upload_to='culture/audio/',blank=True, null=True)
+
+    def __str__(self):
+        return self.titre
