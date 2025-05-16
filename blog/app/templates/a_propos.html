@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-10 mx-auto">
+            <h2 class="mb-4 text-center">À propos de MyBlog</h2>
+            <img src="{% static 'images/cotiv-ethnies.gif' %}" alt="Panorama Abidjan" class="img-fluid rounded mb-4">
+
+            <p>
+                <strong>Bienvenue sur <span style="color: #2c3e50;">MyBlog</span></strong> – votre guide culturel et touristique à travers la Côte d’Ivoire.
+            </p>
+
+            <p>
+                Ce blog est né de la passion de faire découvrir les merveilles de la Côte d’Ivoire : ses villes dynamiques, sa diversité culturelle, ses traditions uniques et ses lieux encore méconnus du grand public.
+            </p>
+
+            <p>
+                <strong>Que trouverez-vous ici ?</strong>
+                <ul>
+                    <li>Des <a href="{% url 'destination_list' %}"><strong>destinations incontournables</strong></a> comme Abidjan, Yamoussoukro, Grand-Bassam…</li>
+                    <li>Des articles sur la <a href="{% url 'culture' %}"><strong>culture ivoirienne</strong></a> : danses, musiques, rites, vêtements, et plus encore.</li>
+                    <li>Des <a href="{% url 'conseils' %}"><strong>conseils pratiques</strong></a> pour préparer vos voyages.</li>
+                    <li>Une galerie d’images, de vidéos et des témoignages d’expériences locales.</li>
+                </ul>
+            </p>
+
+            <p>
+                Notre mission est de <strong>mettre en lumière la richesse ivoirienne</strong>, tout en offrant un espace participatif où chacun peut apprendre, partager et s’inspirer.
+            </p>
+
+            <p>
+                Merci de faire partie de cette belle aventure. 🌍
+            </p>
+
+            <p class="text-center mt-4">
+                <a href="{% url 'contact' %}" class="btn btn-primary">Nous contacter</a>
+            </p>
+        </div>
+    </div>
+</div>
+{% endblock %}

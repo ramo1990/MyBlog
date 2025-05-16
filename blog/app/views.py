@@ -7,6 +7,7 @@ from django.views.generic import UpdateView, DeleteView, ListView
 from django.contrib.auth.models import User
 from django.contrib.auth import login
 from .forms import *
+# from django.utils.translation import gettext_lazy as _
 
 
 class PostList(generic.ListView):
@@ -39,20 +40,6 @@ class PostDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     def test_func(self):
         post = self.get_object()
         return self.request.user == post.author or self.request.user.is_superuser
-    
-# Creer un user via formulaire
-def sign_up(request):
-    if request.method == 'POST':
-        form = SignUpForm(request.POST)
-        if form.is_valid():
-            user = form.save(commit=False)
-            user.set_password(form.cleaned_data['password'])
-            user.save()
-            login(request, user)  # Connecte l'utilisateur après l'inscription
-            return redirect('home')  # Redirection après l'inscription
-    else:
-        form = SignUpForm()
-    return render(request, 'signup.html', {'form': form})
 
 # section Destinations
 class DestinationListView(ListView):
@@ -75,3 +62,24 @@ def culture_view(request):
     # culture = Culture.objects.first() # on suppose qu'une seule entrée
     cultures = Culture.objects.all()
     return render(request, 'culture.html', {'cultures':cultures})
+
+# section conseilVoyage
+def conseils_view(request):
+    conseils = ConseilVoyage.objects.all()
+    return render(request, 'conseils.html', {'conseils':conseils})
+
+# section contact
+def contact_view(request):
+    if request.method == 'POST':
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return render(request, 'contact_success.html', {'form':form}) # page de remerciement
+    else:
+        form = ContactForm()
+        return render(request, 'contact.html', {'form':form})
+    
+# section A Propos
+def a_propos_page(request):
+    # contenu = APropos.objects.last() # récupère le dernier contenu "À propos"
+    return render(request, 'a_propos.html')

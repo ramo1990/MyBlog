@@ -20,5 +20,8 @@ class DestinationAdmin(admin.ModelAdmin):
 admin.site.register(Post , PostAdmin)
 admin.site.register(Destinations, DestinationAdmin)
 admin.site.register(Culture)
+admin.site.register(ConseilVoyage)
+admin.site.register(MessageContact)
+admin.site.register(APropos)
 # Register your models here.
 
