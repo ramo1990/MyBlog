@@ -5,6 +5,8 @@ from django.db.models.signals import pre_delete
 from django.dispatch.dispatcher import receiver
 import os
 from django.utils.text import slugify
+# from django.utils.translation import gettext_lazy as _
+from ckeditor.fields import RichTextField
 
 STATUS = ((0, "Draft" ) , (1, "Published"))
 
@@ -74,7 +76,7 @@ class ImageSupplementaire(models.Model):
         return f"Image de {self.destination.ville}"
     
 class Culture(models.Model):
-    titre = models.CharField(max_length=200)
+    titre = models.CharField("Title", max_length=200)
     contenu = models.TextField()
     image = models.ImageField(upload_to='cultures/gallery/', blank=True, null=True)
     video_url = models.URLField(blank=True, null=True, help_text="Coller ici l'URL Youtube")
@@ -82,3 +84,39 @@ class Culture(models.Model):
 
     def __str__(self):
         return self.titre
+
+# section conseilVoyage
+class ConseilVoyage(models.Model):
+    titre = models.CharField(max_length=200)
+    contenu = RichTextField()
+    date_publication = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ['-date_publication']
+        verbose_name = "Conseil de voyage"
+        verbose_name_plural = "Conseils de voyage"
+
+    def __str__(self):
+        return self.titre
+
+# section contact
+class MessageContact(models.Model):
+    nom = models.CharField(max_length=100)
+    email = models.EmailField(null=True, blank=True)
+    sujet = models.CharField(max_length=200)
+    message = models.TextField()
+    date_envoi = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.nom} - {self.sujet}"
+    
+# section A propos
+class APropos(models.Model):
+    titre = models.CharField(max_length=200)
+    contenu = models.TextField()
+    image = models.ImageField(upload_to='a_propos/', blank=True, null=True)
+    date_modifiee = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.titre
+    
