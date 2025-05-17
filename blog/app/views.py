@@ -58,10 +58,27 @@ class DestinationDetailView(DetailView):
         return context
 
 # section Culture et traditions
-def culture_view(request):
-    # culture = Culture.objects.first() # on suppose qu'une seule entrée
-    cultures = Culture.objects.all()
-    return render(request, 'culture.html', {'cultures':cultures})
+class CultureListView(ListView):
+    model = Culture
+    template_name = 'culture_list.html'
+    context_object_name = 'cultures'
+
+class CultureDetailView(DetailView):
+    model = Culture
+    template_name = 'culture_detail.html'
+    context_object_name = 'culture'
+    slug_field = 'slug'
+    slug_url_kwarg = 'slug'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['gallery'] = self.object.images.all()
+        return context
+
+# def culture_view(request):
+#     # culture = Culture.objects.first() # on suppose qu'une seule entrée
+#     cultures = Culture.objects.all()
+#     return render(request, 'culture.html', {'cultures':cultures})
 
 # section conseilVoyage
 def conseils_view(request):
