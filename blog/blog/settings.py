@@ -18,7 +18,7 @@ SECRET_KEY = 'django-insecure-8od!o(8&n+wao%^bnkat2p8#r#ma7rdr)-%s6=ds090uets5s*
 DEBUG = False # pour la prod
 
 
-ALLOWED_HOSTS = ['myblog.herokuapp.com']
+ALLOWED_HOSTS = ['.onrender.com']
 
 
 # Application definition
@@ -128,6 +128,7 @@ MEDIA_URL = '/media/'
 
 STATIC_URL = '/static/'
 
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 # STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')] # pour la prod
 
 # Default primary key field type
