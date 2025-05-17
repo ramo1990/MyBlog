@@ -16,10 +16,13 @@ class DestinationAdmin(admin.ModelAdmin):
     prepopulated_fields = {"slug": ("ville",)}
     inlines = [ImageSupplementaireInline]  # intègre les images
 
+@admin.register(Culture)
+class CultureAdmin(admin.ModelAdmin):
+    prepopulated_fields = {'slug':('titre',)}
 
 admin.site.register(Post , PostAdmin)
 admin.site.register(Destinations, DestinationAdmin)
-admin.site.register(Culture)
+# admin.site.register(Culture)
 admin.site.register(ConseilVoyage)
 admin.site.register(MessageContact)
 admin.site.register(APropos)

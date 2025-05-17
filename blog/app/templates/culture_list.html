@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% comment %}
+{% block content %}
+<div class="container mt-4">
+    <h2>Culture et Traditions de la Côte d’Ivoire</h2>
+    <p>La Côte d’Ivoire est un véritable carrefour culturel où se mêlent plus de 60 ethnies, chacune avec ses propres langues, coutumes et savoir-faire. Cette diversité fait la richesse et la beauté du pays, offrant un patrimoine vivant et fascinant à découvrir.
+
+    </p>
+    {% if cultures %}
+        {% for culture in cultures %}
+        <div class="card mb-4 p-3">
+            <h4><a href="{% url 'culture_detail' slug=culture.slug %}">{{ culture.titre }}</a></h4>
+
+            {% if culture.image %}
+            <img src="{{ culture.image.url }}" alt="{{ culture.titre }}" class="img-fluid rounded mb-3">
+            {% endif %}
+
+            <p>{{ culture.contenu|linebreaks }}</p>
+
+            {% if culture.video_url %}
+            <div class="embed-responsive embed-responsive-16by9 mb-3">
+                <iframe class="embed-responsive-item" src="{{ culture.video_url }}" allowfullscreen></iframe>
+            </div>
+            {% endif %}
+
+            {% if culture.audio_file %}
+            <audio controls class="mb-4">
+                <source src="{{ culture.audio_file.url }}" type="audio/mpeg">
+                Votre navigateur ne supporte pas la lecture audio.
+            </audio>
+            {% endif %}
+        </div>
+        {% endfor %}
+    {% else %}
+        <p>Aucun contenu culturel pour le moment.</p>
+    {% endif %}
+</div>
+{% endblock %}
+{%endcomment%}
+
+{% block content %}
+<section class="culture-section">
+  <div class="container">
+    <div class="row">
+      {% for culture in cultures %}
+      <div class="col-md-4 mb-4">
+        <div class="culture-card">
+          {% if culture.image %}
+          <img src="{{ culture.image.url }}" alt="{{ culture.titre }}">
+          {% endif %}
+          <h5 class="culture-title">{{ culture.titre }}</h5>
+          <p class="culture-description">{{ culture.contenu|truncatewords:20 }}</p>
+          <a href="{% url 'culture_detail' slug=culture.slug %}" class="btn btn-sm btn-outline-primary mt-2">Lire plus</a>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endblock %}

@@ -1,4 +1,5 @@
 from pathlib import Path
+import dj_database_url
 # from django.utils.translation import gettext_lazy as _
 import os
 
@@ -13,9 +14,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-8od!o(8&n+wao%^bnkat2p8#r#ma7rdr)-%s6=ds090uets5s*'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+# DEBUG = True
+DEBUG = False # pour la prod
 
-ALLOWED_HOSTS = []
+
+ALLOWED_HOSTS = ['myblog.herokuapp.com']
 
 
 # Application definition
@@ -67,10 +70,11 @@ WSGI_APPLICATION = 'blog.wsgi.application'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+    'default': dj_database_url.config(default='postgres://localhost')
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.sqlite3',
+    #     'NAME': BASE_DIR / 'db.sqlite3',
+    # }
 }
 
 

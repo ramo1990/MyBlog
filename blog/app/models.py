@@ -74,16 +74,34 @@ class ImageSupplementaire(models.Model):
 
     def __str__(self):
         return f"Image de {self.destination.ville}"
-    
+
+# section culture et  tradiction
 class Culture(models.Model):
-    titre = models.CharField("Title", max_length=200)
+    titre = models.CharField(max_length=200)
+    slug = models.SlugField(unique=True, blank=True) # editable=True; genere le slug automatiquement
     contenu = models.TextField()
-    image = models.ImageField(upload_to='cultures/gallery/', blank=True, null=True)
+    image = models.ImageField(upload_to='cultures_images/', blank=True, null=True)
     video_url = models.URLField(blank=True, null=True, help_text="Coller ici l'URL Youtube")
-    audio_file = models.FileField(upload_to='culture/audio/',blank=True, null=True)
+    audio_file = models.FileField(upload_to='culture_audio/',blank=True, null=True)
+
+    def save(self, *args, **kwargs):
+        if not self.slug or Culture.objects.filter(slug=self.slug).exclude(pk=self.pk).exists():
+            base_slug = slugify(self.titre)
+            slug = base_slug
+            counter = 1
+            while Culture.objects.filter(slug=slug).exclude(pk=self.pk).exists():
+                slug = f'{base_slug}-{counter}'
+                counter += 1
+            self.slug = slug
+        super().save(*args, **kwargs)
 
     def __str__(self):
         return self.titre
+    
+class CultureImage(models.Model):
+    culture = models.ForeignKey(Culture, on_delete=models.CASCADE, related_name='images')
+    image = models.ImageField(upload_to='culture_images/')
+    description = models.TextField(blank=True, null=True)
 
 # section conseilVoyage
 class ConseilVoyage(models.Model):
