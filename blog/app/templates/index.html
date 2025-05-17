@@ -1,25 +1,27 @@
 {% extends "base.html" %}
+{% load static %}
 {% block content %}
 
-<header class="masthead">
-  <div class="overlay"></div>
-  <div class="container">
-    <div class="row">
-      <div class="col-md-8 mt-3 left">
+<!-- Hero full-width -->
+<header class="masthead" style="background-image: url('{% static 'images/cotiv-ethnies.gif' %}'); height: 60vh; background-size: cover; background-position: center; position: relative;">
+  <div class="overlay" style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background-color: rgba(0,0,0,0.6);"></div>
+  <div class="container h-100">
+    <div class="row h-100 align-items-center">
+      <div class="col-md-8 text-white">
         <div class="site-heading">
-          <h3 class="site-heading my-4 mt-3 text-white">Bienvenue sur mon blog</h3>
-          <p class="text-light">Partagez mes réflexions et découvertes avec moi</p>
+          <h1 class="display-4 fw-bold">Bienvenue sur MyBlog</h1>
+          <p class="lead">Explorez la Côte d’Ivoire autrement</p>
         </div>
       </div>
     </div>
   </div>
 </header>
 
-<div class="container">
+<div class="container mt-5">
   <div class="row">
-    <div class="col-md-8 mt-3 left">
+    <div class="col-md-8">
       {% for post in post_list %}
-      <div class="card mb-4">
+      <div class="card mb-4 shadow-sm">
         <div class="card-body">
           {% if post.image %}
           <img src="{{ post.image.url }}" alt="{{ post.title }}" class="img-fluid mb-2">
