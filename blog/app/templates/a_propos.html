@@ -6,33 +6,31 @@
 <div class="container mt-5">
     <div class="row">
         <div class="col-md-10 mx-auto">
-            <h2 class="mb-4 text-center">À propos de MyBlog</h2>
+            <h2 class="mb-4 text-center">À propos de <span style="color: #2c3e50;">MyBlog</span></h2>
             <img src="{% static 'images/cotiv-ethnies.gif' %}" alt="Panorama Abidjan" class="img-fluid rounded mb-4">
 
             <p>
-                <strong>Bienvenue sur <span style="color: #2c3e50;">MyBlog</span></strong> – votre guide culturel et touristique à travers la Côte d’Ivoire.
+                <strong>Bienvenue sur <span style="color: #2c3e50;">MyBlog</span></strong>, votre guide culturel et touristique dédié à la découverte de la magnifique Côte d’Ivoire.
             </p>
 
             <p>
-                Ce blog est né de la passion de faire découvrir les merveilles de la Côte d’Ivoire : ses villes dynamiques, sa diversité culturelle, ses traditions uniques et ses lieux encore méconnus du grand public.
+                Né d’une véritable passion, ce blog vous invite à explorer les trésors cachés du pays : des villes vibrantes aux traditions ancestrales, en passant par une diversité culturelle riche et fascinante.
+            </p>
+
+            <p><strong>Que trouverez-vous ici ?</strong></p>
+            <ul>
+                <li>Des <a href="{% url 'destination_list' %}"><strong>destinations incontournables</strong></a> telles qu’Abidjan, Yamoussoukro, Grand-Bassam et bien d’autres.</li>
+                <li>Des articles passionnants sur la <a href="{% url 'culture' %}"><strong>culture ivoirienne</strong></a> : danses, musiques, rites, vêtements traditionnels, et plus encore.</li>
+                <li>Des <a href="{% url 'conseils' %}"><strong>conseils pratiques</strong></a> pour préparer au mieux votre voyage.</li>
+                <li>Une galerie riche en images, vidéos et témoignages authentiques d’expériences locales.</li>
+            </ul>
+
+            <p>
+                Notre mission ? <strong>Mettre en lumière la richesse culturelle et humaine de la Côte d’Ivoire</strong>, tout en créant un espace convivial où chacun peut apprendre, partager et s’inspirer.
             </p>
 
             <p>
-                <strong>Que trouverez-vous ici ?</strong>
-                <ul>
-                    <li>Des <a href="{% url 'destination_list' %}"><strong>destinations incontournables</strong></a> comme Abidjan, Yamoussoukro, Grand-Bassam…</li>
-                    <li>Des articles sur la <a href="{% url 'culture' %}"><strong>culture ivoirienne</strong></a> : danses, musiques, rites, vêtements, et plus encore.</li>
-                    <li>Des <a href="{% url 'conseils' %}"><strong>conseils pratiques</strong></a> pour préparer vos voyages.</li>
-                    <li>Une galerie d’images, de vidéos et des témoignages d’expériences locales.</li>
-                </ul>
-            </p>
-
-            <p>
-                Notre mission est de <strong>mettre en lumière la richesse ivoirienne</strong>, tout en offrant un espace participatif où chacun peut apprendre, partager et s’inspirer.
-            </p>
-
-            <p>
-                Merci de faire partie de cette belle aventure. 🌍
+                Merci de nous accompagner dans cette belle aventure. Ensemble, découvrons et célébrons la Côte d’Ivoire. 🌍
             </p>
 
             <p class="text-center mt-4">

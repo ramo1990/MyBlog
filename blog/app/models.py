@@ -88,7 +88,7 @@ class Culture(models.Model):
 # section conseilVoyage
 class ConseilVoyage(models.Model):
     titre = models.CharField(max_length=200)
-    contenu = RichTextField()
+    contenu = models.TextField()
     date_publication = models.DateTimeField(auto_now_add=True)
 
     class Meta:
