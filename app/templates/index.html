@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+
+<!-- Hero full-width -->
+<header class="masthead" style="background-image: url('{% static 'images/cotiv-ethnies.gif' %}'); height: 60vh; background-size: cover; background-position: center; position: relative;">
+  <div class="overlay" style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background-color: rgba(0,0,0,0.6);"></div>
+  <div class="container h-100">
+    <div class="row h-100 align-items-center">
+      <div class="col-md-8 text-white">
+        <div class="site-heading">
+          <h1 class="display-4 fw-bold">Bienvenue sur MyBlog</h1>
+          <p class="lead">Explorez la Côte d’Ivoire autrement</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-md-8">
+      {% for post in post_list %}
+      <div class="card mb-4 shadow-sm">
+        <div class="card-body">
+          {% if post.image %}
+          <img src="{{ post.image.url }}" alt="{{ post.title }}" class="img-fluid mb-2">
+          {% endif %}
+          <h2 class="cardtitle">{{ post.title }}</h2>
+          <p class="card-text text-muted h6">{{ post.author }} | {{ post.created_on }}</p>
+          <p class="card-text">{{ post.content|slice:":200" }}</p>
+          <a href="{% url 'post_detail' post.slug  %}" class="btn btn-primary">Voir plus &rarr;</a>
+        </div>
+      </div>
+      {% empty %}
+      <p>Aucun article pour le moment.</p>
+      {% endfor %}
+    </div>
+
+    {% block sidebar %}
+    {% include 'sidebar.html' %}
+    {% endblock sidebar %}
+  </div>
+</div>
+
+{% endblock %}

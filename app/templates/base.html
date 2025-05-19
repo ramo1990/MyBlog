@@ -1,0 +1,56 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>✍ YourBlog</title>
+
+  <!-- Bootstrap Theme -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@4.5.2/dist/lumen/bootstrap.min.css">
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg bg-light custom-margin">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="{% url 'home' %}">✍ MyBlog</a>
+      <div class="collapse navbar-collapse" id="navbarColor03">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item"><a class="nav-link text-dark" href="{% url 'home' %}">ACCUEIL</a></li>
+          <li class="nav-item"><a class="nav-link text-dark" href="{% url 'destination_list' %}">Destinations 🇨🇮</a></li>
+          <li class="nav-item"><a class="nav-link text-dark" href="{% url 'culture' %}">Culture et traditions</a></li>
+          <li class="nav-item"><a class="nav-link text-dark" href="{% url 'conseils' %}">Conseils de voyage</a></li>
+          <li class="nav-item"><a class="nav-link text-dark" href="{% url 'contact' %}">Contact</a></li>
+          <li class="nav-item"><a class="nav-link text-dark" href="{% url 'a_propos' %}">A PROPOS</a></li>
+
+          <form action="{% url 'set_language' %}" method="post" class="d-inline">
+            {% csrf_token %}
+            <select name="language" onchange="this.form.submit()" class="form-select form-select-sm w-auto d-inline">
+              <option value="fr" {% if LANGUAGE_CODE == 'fr' %}selected{% endif %}>🇫🇷 Français</option>
+              <option value="en" {% if LANGUAGE_CODE == 'en' %}selected{% endif %}>🇬🇧 English</option>
+            </select>
+          </form>
+          
+          <!-- # Creer un user via formulaire -->
+          {% comment %} <div><a href="{% url 'sign_up' %}" class="btn btn-primary">Créer un compte</a></div> {% endcomment %}
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+    {% block content %}
+    <!-- le contenu ici -->
+    {% endblock content %}
+  </main>
+
+  <footer class="py-3">
+    <p class="m-0 text-dark text-center">Copyright &copy; 2025 MyBlog</p>
+  </footer>
+
+</body>
+</html>
