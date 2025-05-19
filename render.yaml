@@ -2,8 +2,12 @@ services:
   - type: web
     name: myblog
     env: python
-    buildCommand: pip install -r requirements.txt
-    startCommand: gunicorn blog.wsgi:application
+    buildCommand: |
+      pip install -r requirements.txt
+      python manage.py collectstatic --noinput
+    startCommand: |
+      python manage.py migrate
+      gunicorn blog.wsgi:application
     plan: free
     envVars:
       - key: DJANGO_SETTINGS_MODULE
