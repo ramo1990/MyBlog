@@ -6,7 +6,7 @@ from django.dispatch.dispatcher import receiver
 import os
 from django.utils.text import slugify
 # from django.utils.translation import gettext_lazy as _
-from ckeditor.fields import RichTextField
+# from ckeditor.fields import RichTextField
 
 STATUS = ((0, "Draft" ) , (1, "Published"))
 
