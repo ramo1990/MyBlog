@@ -5,14 +5,13 @@ from django.db.models.signals import pre_delete
 from django.dispatch.dispatcher import receiver
 import os
 from django.utils.text import slugify
-# from django.utils.translation import gettext_lazy as _
 # from ckeditor.fields import RichTextField
 
 STATUS = ((0, "Draft" ) , (1, "Published"))
 
 class Post(models.Model):
     title = models.CharField(max_length=200 , unique= True)
-    slug = models.SlugField(max_length=200 , unique= True)
+    slug = models.SlugField(max_length=200 , unique= True, blank=True)
     author = models.ForeignKey(User , on_delete= models.CASCADE, related_name = 'blog_posts') #permet de savoir qui a créé le post
     created_on = models.DateTimeField(auto_now_add= True)
     updated_on = models.DateTimeField(auto_now= True)
@@ -28,6 +27,18 @@ class Post(models.Model):
 
     def get_absolute_url(self):
         return reverse('post_detail', kwargs={'slug': self.slug})
+    
+    def save(self, *args, **kwargs):
+        if not self.slug or Post.objects.filter(slug=self.slug).exclude(pk=self.pk).exists():
+            base_slug = slugify(self.titre)
+            slug = base_slug
+            counter = 1
+            while Post.objects.filter(slug=slug).exclude(pk=self.pk).exists():
+                slug = f'{base_slug}-{counter}'
+                counter += 1
+            self.slug = slug
+        super().save(*args, **kwargs)
+        
     
 @receiver(pre_delete, sender=Post)
 def delete_post_image(sender, instance, **kwargs):

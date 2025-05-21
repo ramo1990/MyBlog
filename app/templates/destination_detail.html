@@ -1,23 +1,26 @@
 {% extends 'base.html' %}
 {% block content %}
 <div class="container mt-4">
-    <div class="row">
-        <div class="col-md-8">
+    <div class="row justify-content-center">
+        <div class="col-12 col-md-10 col-lg-8">
             <h2>{{ destination.ville }}</h2>
+
             {% if destination.image %}
             <img src="{{ destination.image.url }}" class="img-fluid rounded mb-3" alt="{{ destination.ville }}">
             {% endif %}
-            <p>{{ destination.description }}</p>
+
+            <p class="mb-4">{{ destination.description }}</p>
 
             {% if gallery %}
             <hr>
-            <h4>Galerie photo</h4>
+            <h4 class="mb-3">Galerie photo</h4>
+
             <div class="row">
                 {% for image in gallery %}
-                <div class="col-md-4 mb-3">
+                <div class="col-12 col-sm-6 col-md-4 mb-3">
                     <img src="{{ image.image.url }}" class="img-fluid rounded" alt="Image de {{ destination.ville }}">
                     {% if image.description %}
-                    <p class="mt-1">{{ image.description }}</p>
+                    <p class="mt-1 small text-muted">{{ image.description }}</p>
                     {% endif %}
                 </div>
                 {% endfor %}

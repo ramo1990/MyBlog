@@ -3,21 +3,29 @@
 
 {% block content %}
 <div class="container mt-4">
-    <h1 class="mb-4">Conseils de voyage en Côte d'Ivoire</h1>
-    <p>Préparez votre séjour en toute sérénité grâce à ces conseils pratiques pour voyager en Côte d'Ivoire.</p>
+  <div class="row justify-content-center">
+    <div class="col-12 col-md-10 col-lg-8">
 
-    {% if conseils %}
+      <h1 class="mb-4 text-center">Conseils de voyage en Côte d'Ivoire</h1>
+      <p class="mb-4 text-justify">
+        Préparez votre séjour en toute sérénité grâce à ces conseils pratiques pour voyager en Côte d'Ivoire.
+      </p>
+
+      {% if conseils %}
         {% for conseil in conseils %}
-            <div class="card mb-3">
-                <div class="card-body">
-                    <h4>{{ conseil.titre }}</h4>
-                    <p class="text-muted">{{ conseil.date_publication|date:"d M Y" }}</p>
-                    <p>{{ conseil.contenu|markdownify|safe }}</p>
-                </div>
+          <div class="card mb-4 shadow-sm">
+            <div class="card-body">
+              <h4 class="card-title">{{ conseil.titre }}</h4>
+              <p class="text-muted small">{{ conseil.date_publication|date:"d M Y" }}</p>
+              <div class="card-text">{{ conseil.contenu|markdownify|safe }}</div>
             </div>
+          </div>
         {% endfor %}
-    {% else %}
-        <p>Aucun conseil de voyage pour le moment.</p>
-    {% endif %}
+      {% else %}
+        <p class="text-center">Aucun conseil de voyage pour le moment.</p>
+      {% endif %}
+
+    </div>
+  </div>
 </div>
 {% endblock %}

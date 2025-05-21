@@ -1,13 +1,13 @@
 {% load static %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
   <meta charset="UTF-8">
+  <title>✍ MyBlog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>✍ YourBlog</title>
 
-  <!-- Bootstrap Theme -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@4.5.2/dist/lumen/bootstrap.min.css">
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 
   <!-- Custom CSS -->
   <link rel="stylesheet" href="{% static 'css/style.css' %}">
@@ -15,28 +15,23 @@
 <body>
 
   <!-- Navigation -->
-  <nav class="navbar navbar-expand-lg bg-light custom-margin">
+  <nav class="navbar navbar-expand-lg navbar-light bg-light custom-margin">
     <div class="container-fluid">
       <a class="navbar-brand" href="{% url 'home' %}">✍ MyBlog</a>
-      <div class="collapse navbar-collapse" id="navbarColor03">
-        <ul class="navbar-nav ml-auto">
-          <li class="nav-item"><a class="nav-link text-dark" href="{% url 'home' %}">ACCUEIL</a></li>
-          <li class="nav-item"><a class="nav-link text-dark" href="{% url 'destination_list' %}">Destinations 🇨🇮</a></li>
-          <li class="nav-item"><a class="nav-link text-dark" href="{% url 'culture' %}">Culture et traditions</a></li>
-          <li class="nav-item"><a class="nav-link text-dark" href="{% url 'conseils' %}">Conseils de voyage</a></li>
-          <li class="nav-item"><a class="nav-link text-dark" href="{% url 'contact' %}">Contact</a></li>
-          <li class="nav-item"><a class="nav-link text-dark" href="{% url 'a_propos' %}">A PROPOS</a></li>
 
-          <form action="{% url 'set_language' %}" method="post" class="d-inline">
-            {% csrf_token %}
-            <select name="language" onchange="this.form.submit()" class="form-select form-select-sm w-auto d-inline">
-              <option value="fr" {% if LANGUAGE_CODE == 'fr' %}selected{% endif %}>🇫🇷 Français</option>
-              <option value="en" {% if LANGUAGE_CODE == 'en' %}selected{% endif %}>🇬🇧 English</option>
-            </select>
-          </form>
-          
-          <!-- # Creer un user via formulaire -->
-          {% comment %} <div><a href="{% url 'sign_up' %}" class="btn btn-primary">Créer un compte</a></div> {% endcomment %}
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMenu"
+        aria-controls="navbarMenu" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarMenu">
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+          <li class="nav-item"><a class="nav-link" href="{% url 'home' %}">ACCUEIL</a></li>
+          <li class="nav-item"><a class="nav-link" href="{% url 'destination_list' %}">Destinations 🇨🇮</a></li>
+          <li class="nav-item"><a class="nav-link" href="{% url 'culture' %}">Culture et traditions</a></li>
+          <li class="nav-item"><a class="nav-link" href="{% url 'conseils' %}">Conseils de voyage</a></li>
+          <!-- <li class="nav-item"><a class="nav-link" href="{% url 'contact' %}">Contact</a></li> -->
+          <li class="nav-item"><a class="nav-link" href="{% url 'a_propos' %}">A PROPOS</a></li>
         </ul>
       </div>
     </div>
@@ -51,6 +46,28 @@
   <footer class="py-3">
     <p class="m-0 text-dark text-center">Copyright &copy; 2025 MyBlog</p>
   </footer>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Bouton Retour en haut -->
+<button onclick="topFunction()" id="btnTop" title="Retour en haut">↑</button>
+
+<script>
+  const btn = document.getElementById("btnTop");
+
+  window.onscroll = function () {
+    if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
+      btn.style.display = "block";
+    } else {
+      btn.style.display = "none";
+    }
+  };
+
+  function topFunction() {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+</script>
 
 </body>
 </html>
