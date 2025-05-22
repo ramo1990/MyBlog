@@ -138,32 +138,6 @@ footer {
   color: #555;
   line-height: 1.5;
 }
-@media (max-width: 768px) {
-  nav .nav-link {
-    padding: 10px;
-    text-align: center;
-  }
-
-  footer p {
-    font-size: 14px;
-  }
-
-  .custom-margin {
-    margin-bottom: 1rem;
-  }
-}
-
-.navbar-toggler-icon {
-  display: inline-block;
-  width: 1.5em;
-  height: 1.5em;
-  vertical-align: middle;
-  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba%280, 0, 0, 0.7%29' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: 100%;
-  border: none;
-}
 
 #btnTop {
   display: none;
@@ -175,14 +149,21 @@ footer {
   border: none;
   outline: none;
   background-color: #0d6efd;
-  color: rgb(37, 20, 20);
+  color: white;
   cursor: pointer;
   padding: 12px 16px;
   border-radius: 50%;
   box-shadow: 0 4px 6px rgba(0,0,0,0.3);
 }
+
 #btnTop:hover {
   background-color: #0b5ed7;
+}
+.culture-section {
+  background-color: #f9f9f9;
+}
+.card-title {
+  font-weight: bold;
 }
 
 h2 {
@@ -194,3 +175,23 @@ audio {
   border-radius: 4px;
 }
 
+.card-title {
+  font-weight: 600;
+  font-size: 1.25rem;
+}
+
+.card-text p {
+  margin-bottom: 0.75rem;
+  line-height: 1.6;
+}
+
+form p {
+  margin-bottom: 1.2rem;
+}
+
+form input, form textarea, form select {
+  width: 100%;
+  padding: 0.75rem;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}

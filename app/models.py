@@ -30,7 +30,7 @@ class Post(models.Model):
     
     def save(self, *args, **kwargs):
         if not self.slug or Post.objects.filter(slug=self.slug).exclude(pk=self.pk).exists():
-            base_slug = slugify(self.titre)
+            base_slug = slugify(self.title)
             slug = base_slug
             counter = 1
             while Post.objects.filter(slug=slug).exclude(pk=self.pk).exists():

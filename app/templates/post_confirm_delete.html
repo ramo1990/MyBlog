@@ -2,13 +2,21 @@
 
 {% block content %}
 <div class="container mt-5">
-  <h2>Confirmer la suppression</h2>
-  <p>Es-tu sûr de vouloir supprimer : <strong>{{ object.title }}</strong> ?</p>
+  <div class="row justify-content-center">
+    <div class="col-12 col-md-8 col-lg-6">
+      <div class="card shadow-sm border-danger">
+        <div class="card-body">
+          <h2 class="card-title text-center text-danger mb-4">⚠️ Confirmer la suppression</h2>
+          <p class="text-center">Es-tu sûr de vouloir supprimer <strong>{{ object.title }}</strong> ? Cette action est irréversible.</p>
 
-  <form method="POST">
-    {% csrf_token %}
-    <button type="submit" class="btn btn-danger">🗑 Oui, supprimer</button>
-    <a href="{% url 'post_detail' object.slug %}" class="btn btn-secondary">Annuler</a>
-  </form>
+          <form method="POST" class="d-flex flex-column align-items-center gap-3 mt-4">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger px-4">🗑 Oui, supprimer</button>
+            <a href="{% url 'post_detail' object.slug %}" class="btn btn-outline-secondary">Annuler</a>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 {% endblock %}
