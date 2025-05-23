@@ -4,13 +4,13 @@
 {% block content %}
 
 <!-- Hero Section -->
-<header class="masthead py-5 text-white text-center" style="background: url('{% static 'images/cotiv-ethnies.gif' %}') no-repeat center center; background-size: cover;">
-  <div class="overlay" style="background-color: rgba(0, 0, 0, 0.5); height: 100%; width: 100%; position: absolute; top: 0; left: 0;"></div>
-  <div class="container position-relative">
-    <div class="row justify-content-center">
-      <div class="col-12 col-md-10 col-lg-8">
-        <div class="site-heading position-relative">
-          <h1 class="display-5 fw-bold">Bienvenue sur mon blog dédié à la Côte d'Ivoire</h1>
+<header class="masthead">
+  <div class="overlay"></div>
+  <div class="container h-100">
+    <div class="row h-100 align-items-center">
+      <div class="col-md-8">
+        <div class="site-heading">
+          <h1 class="display-4 fw-bold">Bienvenue sur mon blog dédié à la Côte d'Ivoire</h1>
           <p class="lead">Explorez la Côte d’Ivoire autrement</p>
         </div>
       </div>
@@ -40,15 +40,6 @@
     {% endfor %}
   </div>
   
-
-    <!-- Sidebar désactivé (optionnel) -->
-    {# 
-    <div class="col-md-4">
-      {% block sidebar %}
-      {% include 'sidebar.html' %}
-      {% endblock sidebar %}
-    </div>
-    #}
-  </div>
+</div>
 
 {% endblock content %}

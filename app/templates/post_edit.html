@@ -2,24 +2,14 @@
 
 {% block content %}
 <div class="container mt-4">
-  <div class="row justify-content-center">
-    <div class="col-12 col-md-10 col-lg-8">
-      <div class="card shadow-sm">
-        <div class="card-body">
-          <h2 class="mb-4 text-primary">✏️ Modifier le post : <strong>{{ form.instance.title }}</strong></h2>
+  <h2>Modifier le post : {{ form.instance.title }}</h2>
 
-          <form method="POST" enctype="multipart/form-data">
-            {% csrf_token %}
-            {{ form.as_p }}
+  <form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
 
-            <div class="d-flex flex-column flex-sm-row gap-3 mt-4">
-              <button type="submit" class="btn btn-primary">💾 Enregistrer</button>
-              <a href="{% url 'post_detail' form.instance.slug %}" class="btn btn-outline-secondary">↩ Retour</a>
-            </div>
-          </form>
-        </div>
-      </div>
-    </div>
-  </div>
+    <button type="submit" class="btn btn-primary mt-3">💾 Enregistrer les modifications</button>
+    <a href="{% url 'post_detail' form.instance.slug %}" class="btn btn-secondary mt-3">↩ Retour</a>
+  </form>
 </div>
 {% endblock %}

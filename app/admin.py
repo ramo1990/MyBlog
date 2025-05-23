@@ -1,16 +1,10 @@
 from django.contrib import admin
 from .models import *
 
-# @admin.register(Post)
-class PostAdmin(admin.ModelAdmin):
-    list_display = ('title' , 'slug' , 'status' , 'created_on')
-    list_filter = ('status',)
-    search_fields = ['title', 'content']
-    prepopulated_fields = {'slug': ('title',)}  # <- auto-remplit le champ slug côté admin
-
-    class Media:
-        js = ('admin/js/jquery.init.js',) # pour forcer l'init jQuery dans admin
-
+# class PostAdmin(admin.ModelAdmin):
+#     list_display = ('title' , 'slug' , 'status' , 'created_on')
+#     list_filter = ('status',)
+#     search_fields = ['title', 'content']
 
 class ImageSupplementaireInline(admin.TabularInline):
     model = ImageSupplementaire
@@ -26,11 +20,18 @@ class DestinationAdmin(admin.ModelAdmin):
 class CultureAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug':('titre',)}
 
-admin.site.register(Post , PostAdmin)
+@admin.register(Post)
+class PostAdmin(admin.ModelAdmin):
+    prepopulated_fields = {'slug':('title',)}
+    list_display = ('title' , 'slug' , 'status' , 'created_on')
+    list_filter = ('status',)
+    search_fields = ['title', 'content']
+
+# admin.site.register(Post , PostAdmin)
 admin.site.register(Destinations, DestinationAdmin)
 # admin.site.register(Culture)
 admin.site.register(ConseilVoyage)
-admin.site.register(MessageContact)
+# admin.site.register(MessageContact)
 admin.site.register(APropos)
 # Register your models here.
 
