@@ -1,6 +1,10 @@
 {% extends 'base.html' %}
 {% load static %}
 
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/culture_list.css' %}">
+{% endblock %}
+
 {% block content %}
 <section class="culture-section py-4">
   <div class="container">

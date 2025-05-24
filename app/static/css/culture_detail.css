@@ -1,0 +1,50 @@
+/* === Détail Culture === */
+
+/* Titre de la culture */
+.container h2 {
+    color: #F77F00; /* Orange */
+    font-weight: 700; /* Texte gras */
+    margin-bottom: 1rem; /* Espace sous le titre */
+    border-bottom: 3px solid #008751; /* Ligne verte sous le titre */
+    padding-bottom: 0.5rem; /* Espace entre le texte et la ligne */
+    text-align: center; /* Centre le texte */
+  }
+  
+  /* Image principale */
+  .img-fluid.rounded.mb-4 {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Ombre douce autour de l’image */
+    max-height: 400px; /* Hauteur maximale pour éviter que l’image soit trop grande */
+    object-fit: cover; /* Remplit sans déformer l’image */
+    width: 100%;  /* Prend toute la largeur du conteneur */
+    border-radius: 0.75rem; /* Bords arrondis */
+  }
+  
+ /* Description de la destination */
+  .container .mb-4 {
+    font-size: 1.1rem; /* Légèrement plus grand que la normale */
+    color: #333; /* Texte gris foncé, facile à lire */
+    line-height: 1.7; /* Espacement agréable entre les lignes */
+  }
+  
+  /* Vidéo responsive */
+  .ratio {
+    border-radius: 0.5rem;
+    overflow: hidden;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+  }
+  
+  /* Audio player */
+  audio {
+    background-color: #f5f5f5;
+    border-radius: 0.5rem;
+    padding: 0.5rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  }
+  
+  /* Responsive tweaks */
+  @media (max-width: 768px) {
+    .container h2 {
+      font-size: 1.5rem;
+    }
+  }
+  

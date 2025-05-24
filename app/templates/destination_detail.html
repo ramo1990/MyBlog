@@ -1,4 +1,10 @@
 {% extends 'base.html' %}
+{% load static %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/destination_detail.css' %}">
+{% endblock %}
+
 {% block content %}
 <div class="container mt-4">
     <div class="row justify-content-center">
@@ -17,12 +23,16 @@
 
             <div class="row">
                 {% for image in gallery %}
+
                 <div class="col-12 col-sm-6 col-md-4 mb-3">
-                    <img src="{{ image.image.url }}" class="img-fluid rounded" alt="Image de {{ destination.ville }}">
-                    {% if image.description %}
-                    <p class="mt-1 small text-muted">{{ image.description }}</p>
-                    {% endif %}
+                    <div class="d-flex flex-column h-100">
+                        <img src="{{ image.image.url }}" class="img-fluid rounded" alt="Image de {{ destination.ville }}">
+                        {% if image.description %}
+                        <p class="mt-1 small text-muted">{{ image.description }}</p>
+                        {% endif %}
+                    </div>
                 </div>
+
                 {% endfor %}
             </div>
             {% endif %}

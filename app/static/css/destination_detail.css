@@ -1,0 +1,50 @@
+/* === Destination Detail === */
+
+/* Titre de la ville */
+h2 {
+    color: #F77F00; /* Orange */
+    font-weight: 700; /* Texte gras */
+    margin-bottom: 1rem; /* Espace sous le titre */
+    border-bottom: 3px solid #008751; /* Ligne verte sous le titre */
+    padding-bottom: 0.5rem; /* Espace entre le texte et la ligne */
+    text-align: center; /* Centre le texte */
+  }
+/* Image principale de la destination */
+.img-fluid.rounded.mb-3 {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Ombre douce autour de l’image */
+    max-height: 400px; /* Hauteur maximale pour éviter que l’image soit trop grande */
+    object-fit: cover; /* Remplit sans déformer l’image */
+    width: 100%;  /* Prend toute la largeur du conteneur */
+    border-radius: 0.75rem; /* Bords arrondis */
+  }
+/* Description de la destination */
+p.mb-4 {
+    font-size: 1.1rem; /* Légèrement plus grand que la normale */
+    color: #333; /* Texte gris foncé, facile à lire */
+    line-height: 1.7; /* Espacement agréable entre les lignes */
+  }
+/* Titre Galerie */
+h4 {
+    color: #008751;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    border-left: 4px solid #F77F00; /* Ligne orange sur la gauche */
+    padding-left: 0.5rem; /* Espace entre texte et ligne */
+  }
+/* Images de galerie */
+.row .img-fluid.rounded {
+    height: 200px; /* Hauteur fixe */
+    width: 100%; /* Largeur prend tout le conteneur */
+    object-fit: cover; /* Coupe pour remplir sans déformer */
+    border-radius: 0.5rem;
+    transition: transform 0.3s ease; /* Animation fluide */
+  }
+  .row .img-fluid.rounded:hover {
+    transform: scale(1.03); /* Zoom léger au survol */
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1); /* Ombre plus forte */
+  }
+/* Texte sous les images */
+.small.text-muted {
+    font-style: italic; /* Texte en italique */
+    color: #666; /* Gris doux, moins dominant */
+  }

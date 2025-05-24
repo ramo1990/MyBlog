@@ -1,0 +1,81 @@
+/* === (Bannière d’accueil) index.html === */
+
+.masthead {
+    position: relative;
+    background: url('/static/images/cat.1_.jpg') no-repeat center center;
+    background-size: cover; /* image remplir toute la section*/
+    height: 60vh;
+    color: white;
+    display: flex; /* Centre verticalement le contenu */
+    align-items: center;
+  }
+/* filtre sur l'image mais en dessous du texte */
+.masthead .overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* filtre sombre */
+}
+/*Place le texte au-dessus de l’overlay*/
+.site-heading {
+position: relative;
+z-index: 2;
+}
+/*Grosse taille + très gras*/
+.site-heading h1 {
+font-size: 2.8rem;
+font-weight: 700;
+margin-bottom: 0.5rem;
+}
+/*Moins grand et plus léger*/
+.site-heading p {
+font-size: 1.25rem;
+font-weight: 300;
+}
+
+/* Cartes d'articles(Posts) */
+.card {
+border: none;
+border-radius: 0.75rem;
+overflow: hidden; /*Coupe le contenu qui dépasse*/
+transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+/*Lève légèrement le post à la souris*/
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  }
+/*Donne une hauteur fixe à l’image.*/
+.card-img-top {
+height: 200px;
+object-fit: cover; /* Remplit sans déformer */
+}
+.card-title {
+margin-bottom: 0.5rem;
+}
+.card-text {
+flex-grow: 1; /*un btn toujours en bas de la carte*/
+margin-bottom: 1rem;
+}
+/*Bouton orange vif personnalisé*/
+.btn-primary {
+    background-color: #F77F00;
+    border: none;
+  }
+/*Couleur plus foncée au survol*/
+.btn-primary:hover {
+background-color: #e65c00;
+}
+/* Adapte le titre principal et la hauteur du header pour que ça reste 
+  lisible sur tablette/téléphone. */
+@media (max-width: 768px) {
+.site-heading h1 {
+    font-size: 2rem;
+}
+.masthead {
+    height: 50vh;
+    padding: 2rem;
+}
+}
