@@ -14,7 +14,8 @@ urlpatterns = [
 
     path('culture/', CultureListView.as_view(), name='culture'),
     path('culture/<slug:slug>/', CultureDetailView.as_view(), name='culture_detail'),
-
+    path('agenda', agenda_list, name='agenda_list'),
+    path('agenda/<slug:slug>/', agenda_detail, name='agenda_detail'),
     path('conseils/', conseils_view, name='conseils'),
     path('contact/', contact_view, name='contact'),
     path('a-propos/', a_propos_page, name='a_propos'),

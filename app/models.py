@@ -9,6 +9,7 @@ from django.utils.text import slugify
 
 STATUS = ((0, "Draft" ) , (1, "Published"))
 
+# section post
 class Post(models.Model):
     title = models.CharField(max_length=200 , unique= True)
     slug = models.SlugField(max_length=200 , unique= True, blank=True)
@@ -39,13 +40,39 @@ class Post(models.Model):
             self.slug = slug
         super().save(*args, **kwargs)
         
-    
+
 @receiver(pre_delete, sender=Post)
 def delete_post_image(sender, instance, **kwargs):
     # Supprimer le fichier image associé lors de la suppression de l'article
     if instance.image:
         if os.path.isfile(instance.image.path):
             os.remove(instance.image.path)
+
+# section agenda
+class Agenda(models.Model):
+    titre = models.CharField(max_length=200)
+    slug = models.SlugField(max_length=200, unique=True, blank=True)
+    date_debut = models.DateField()
+    date_fin = models.DateField(null=True, blank=True)
+    description = models.TextField()
+    image = models.ImageField(upload_to='agenda_images/')
+    lieu = models.CharField(max_length=255, blank=True)
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            base_slug = slugify(self.titre)
+            slug = base_slug
+            count = 1
+            while Agenda.objects.filter(slug=slug).exists():
+                slug = f"{base_slug}-{count}"
+                count += 1
+            self.slug = slug
+        super().save(*args, **kwargs)
+
+    def __str__(self):
+        return self.titre
+
+
 
 class Destinations(models.Model):
     ville = models.CharField(max_length=100)

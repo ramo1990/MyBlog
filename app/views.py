@@ -1,11 +1,11 @@
 from typing import Any
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from .models import *
 from django.views import generic
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.views.generic import UpdateView, DeleteView, ListView
-from django.contrib.auth.models import User
-from django.contrib.auth import login
+# from django.contrib.auth.models import User
+# from django.contrib.auth import login
 from .forms import *
 # from django.utils.translation import gettext_lazy as _
 
@@ -13,6 +13,12 @@ from .forms import *
 class PostList(generic.ListView):
     queryset = Post.objects.filter(status=1).order_by('-created_on')
     template_name = 'index.html'
+    context_object_name = 'post_list'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['events'] = Agenda.objects.order_by('date_debut')[:6]
+        return context
 
 class DetailView(generic.DetailView):
     model = Post
@@ -100,3 +106,12 @@ def contact_view(request):
 def a_propos_page(request):
     # contenu = APropos.objects.last() # récupère le dernier contenu "À propos"
     return render(request, 'a_propos.html')
+
+# section agenda
+def agenda_list(request):
+    evenements = Agenda.objects.order_by('date_debut')
+    return render(request, 'agenda_list.html', {'evenements': evenements})
+
+def agenda_detail(request, slug):
+    event = get_object_or_404(Agenda, slug=slug)
+    return render(request, 'agenda_detail.html', {'event': event})

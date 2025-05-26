@@ -79,3 +79,10 @@ background-color: #e65c00;
     padding: 2rem;
 }
 }
+
+.swiper-button-next, .swiper-button-prev {
+  background-color: #ADE1C1;
+  padding: 12px;
+  border-radius: 4px;
+  color: #6C1D45;
+}

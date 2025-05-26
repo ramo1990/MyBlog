@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% load static %}
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/agenda_list.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2 class="text-center mb-4">Agenda Incontournables</h2>
+
+  <div class="row">
+    {% for event in evenements %}
+    <div class="col-12 col-sm-6 col-md-4 mb-4">
+      <div class="card h-100 shadow-sm">
+        {% if event.image %}
+        <img src="{{ event.image.url }}" class="card-img-top" alt="{{ event.titre }}">
+        {% endif %}
+        <div class="card-body d-flex flex-column">
+
+          <h5 class="card-title">
+            {% if event.slug %}
+            <a href="{% url 'agenda_detail' slug=event.slug %}">{{ event.titre }}</a>
+            {% else %}
+            <span class="text-muted">{{ event.titre }}(pas de lien)</span>
+            {% endif %}
+        </h5>
+
+          <p class="card-text">{{ event.description|truncatewords:20 }}</p>
+          <p class="text-muted mt-auto">
+            {% if event.date_fin %}
+              Du {{ event.date_debut|date:"d M Y" }} au {{ event.date_fin|date:"d M Y" }}
+            {% else %}
+              Le {{ event.date_debut|date:"d M Y" }}
+            {% endif %}
+          </p>
+
+          {% if event.slug %}
+          <a href="{% url 'agenda_detail' slug=event.slug %}" class="btn btn-ivoire mt-auto">Voir plus &rarr;</a>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+    {% empty %}
+    <p>Aucun événement trouvé.</p>
+    {% endfor %}
+  </div>
+</section>
+{% endblock %}
