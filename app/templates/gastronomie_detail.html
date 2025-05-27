@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% comment %}
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/agenda_detail.css' %}">
+{% endblock %}
+{% endcomment %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-12 col-md-10 col-lg-8">
+            <h2>{{ plat.titre }}</h2>
+
+            {% if plat.image %}
+            <img src="{{ plat.image.url }}" alt="{{plat.titre}}" class="img-fluid rounded mb-3">
+            {% endif %}
+
+            <p class="mb-4"> {{plat.description}} </p>
+            <p class="text-muted">
+                Publié le {{ plat.date_pub|date:"d M Y" }}
+            </p>
+        </div>
+    </div>
+</div>
+{% endblock %}

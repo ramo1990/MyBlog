@@ -19,7 +19,10 @@ urlpatterns = [
     path('conseils/', conseils_view, name='conseils'),
     path('contact/', contact_view, name='contact'),
     path('a-propos/', a_propos_page, name='a_propos'),
-    path('i18n/setlang/', set_language, name='set_language'),  # ✅ permet à reverse('set_language') de fonctionner
+    path('gastronomie/', gastronomie_list, name='gastronomie_list'),
+    path('gastronomie/<slug:slug>/', gastronomie_detail, name='gastronomie_detail'),
+    path('ville/', ville_list, name='ville_list'),
+    path('ville/<slug:slug>/', ville_detail, name='ville_detail'),
     path('<slug:slug>/', DetailView.as_view(), name='post_detail'),
 ]
 

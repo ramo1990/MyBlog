@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% load static %}
+ {% comment %}
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/gastronomie_list.css' %}">
+{% endblock %}
+{% endcomment %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2 class="text-center mb-4">Gastronomie</h2>
+
+  <div class="row">
+    {% for gastro in plat %}
+    <div class="col-12 col-sm-6 col-md-4 mb-4">
+      <div class="card h-100 shadow-sm">
+        {% if gastro.image %}
+        <img src="{{ gastro.image.url }}" class="card-img-top" alt="{{ gastro.titre }}">
+        {% endif %}
+        <div class="card-body d-flex flex-column">
+
+          <h5 class="card-title">
+            {% if gastro.slug %}
+            <a href="{% url 'gastronomie_detail' slug=gastro.slug %}">{{ gastro.titre }}</a>
+            {% else %}
+            <span class="text-muted">{{ gastro.titre }}(pas de lien)</span>
+            {% endif %}
+        </h5>
+
+          <p class="card-text">{{ gastro.description|truncatewords:20 }}</p>
+          <p class="text-muted mt-auto">
+            {{ gastro.date|date:"d M Y" }}
+          </p>
+
+          {% if plat.slug %}
+            <a href="{% url 'gastronomie_detail' slug=plat.slug %}" class="btn btn-ivoire mt-auto">Voir plus &rarr;</a>
+          {% else %}
+            <span>pas de lien dispo</span>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+    {% empty %}
+    <p>Aucun événement trouvé.</p>
+    {% endfor %}
+
+  </div>
+{% endblock %}

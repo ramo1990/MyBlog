@@ -72,8 +72,7 @@ class Agenda(models.Model):
     def __str__(self):
         return self.titre
 
-
-
+# section destinations
 class Destinations(models.Model):
     ville = models.CharField(max_length=100)
     slug = models.SlugField(max_length=120, unique=True, blank=True)
@@ -175,4 +174,35 @@ class APropos(models.Model):
 
     def __str__(self):
         return self.titre
-    
+
+# section gastronomie
+class Gastronomie(models.Model):
+    titre = models.CharField(max_length=200)
+    description = models.TextField()
+    image = models.ImageField(upload_to='gastronomie_images/', blank=True, null=True)
+    date_pub = models.DateTimeField(auto_now_add=True)
+    slug = models.SlugField(unique=True, blank=True)
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(self.titre)
+        super().save(*args, **kwargs)
+
+    def __str__(self):
+        return self.titre
+
+#section ville et patrimoine
+class VillePatrimoine(models.Model):
+    titre = models.CharField(max_length=200)
+    description = models.TextField()
+    image = models.ImageField(upload_to='villes_patrimoine/', blank=True, null=True)
+    date_pub = models.DateTimeField(auto_now_add=True)
+    slug = models.SlugField(unique=True, blank=True)
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(self.titre)
+        super().save(*args, **kwargs)
+
+    def __str__(self):
+        return self.titre

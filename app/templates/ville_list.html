@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% load static %}
+ {% comment %}
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/gastronomie_list.css' %}">
+{% endblock %}
+{% endcomment %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2 class="text-center mb-4">Ville & Gastronomie</h2>
+
+  <div class="row">
+    {% for ville in villes %}
+    <div class="col-12 col-sm-6 col-md-4 mb-4">
+      <div class="card h-100 shadow-sm">
+        {% if ville.image %}
+        <img src="{{ ville.image.url }}" class="card-img-top" alt="{{ ville.titre }}">
+        {% endif %}
+        <div class="card-body d-flex flex-column">
+
+          <h5 class="card-title">
+            {% if ville.slug %}
+            <a href="{% url 'ville_detail' slug=ville.slug %}">{{ ville.titre }}</a>
+            {% else %}
+            <span class="text-muted">{{ ville.titre }}(pas de lien)</span>
+            {% endif %}
+        </h5>
+
+          <p class="card-text">{{ ville.description|truncatewords:20 }}</p>
+          <p class="text-muted mt-auto">
+            {{ ville.date_pub|date:"d M Y" }}
+          </p>
+
+          {% if ville.slug %}
+            <a href="{% url 'ville_detail' slug=ville.slug %}" class="btn btn-ivoire mt-auto">Voir plus &rarr;</a>
+          {% else %}
+            <span>pas de lien dispo</span>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+    {% empty %}
+    <p>Aucun événement trouvé.</p>
+    {% endfor %}
+
+  </div>
+{% endblock %}

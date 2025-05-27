@@ -5,12 +5,6 @@
     <link rel="stylesheet" href="{% static 'css/index.css' %}">
 {% endblock %}
 
-<!-- SwiperJS CDN -->
-<script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
-
-<!-- Ton fichier JS -->
-<script src="{% static 'js/main.js' %}"></script>
-
 {% block content %}
 
 <!-- Hero Section -->
@@ -57,10 +51,12 @@
   </div>
   
 </section>
+
 <!-- section agenda -->
 <section class="container mt-5 mb-5">
   <h2 class="text-center mb-5 text-uppercase">Agenda incontournables</h2>
 
+  <!-- swiper -->
   <div class="row g-4">
     {% for event in events|slice:":8" %}
     <div class="col-12 col-md-6 col-lg-4 mb-4">
@@ -92,31 +88,75 @@
     <p>Aucun article pour le moment.</p>
     {% endfor %}
   </div>
-  <!-- Swiper -->
-<!-- <div class="swiper-container">
-  <div class="swiper-wrapper">
-    {% for event in events|slice:":8" %}
-    <div class="swiper-slide">
-      <div class="card shadow-sm h-100">
-        <img src="{{ event.image.url }}" class="card-img-top" alt="{{ event.titre }}" style="height: 180px; object-fit: cover;">
-        <div class="card-body text-center">
-          <h6 class="fw-bold">{{ event.titre }}</h6>
-          <p class="text-muted small">{{ event.date|date:"d F" }}{% if event.date_fin %} au {{ event.date_fin|date:"d F" }}{% endif %}</p>
-        </div>
-      </div>
-    </div>
-    {% endfor %}
-  </div> -->
-
-    <!-- Arrows -->
-    <div class="swiper-button-next"></div>
-    <div class="swiper-button-prev"></div>
-  </div>
 
   <div class="text-center mb-4">
     <a href="{% url 'agenda_list' %}" class="btn btn-primary btn-lg">VOIR TOUT L'AGENDA →</a>
   </div>
 
 </section>
+
+<!-- Section Gastronomie -->
+<section class="container mt-5 mb-5">
+  <h2 class="text-center mb-5 text-uppercase">Découvertes Gastronomiques</h2>
+
+  <div class="row g-4">
+    {% for plat in gastronomie_list %}
+    <div class="col-12 col-md-6 col-lg-4 mb-4">
+      <div class="card h-100 shadow-sm">
+        {% if plat.image %}
+        <img src="{{ plat.image.url }}" alt="{{ plat.titre }}" class="img-fluid card-img-top">
+        {% endif %}
+        <div class="card-body d-flex flex-column">
+          <h2 class="card-title h5">{{ plat.titre }}</h2>
+          <p class="text-muted small">{{ plat.date_pub|date:"d F Y" }}</p>
+          <p class="card-text">{{ plat.content|truncatechars:200 }}</p>
+          <a href="{% url 'gastronomie_detail' plat.slug %}" class="btn btn-primary mt-auto">Voir plus &rarr;</a>
+        </div>
+      </div>
+    </div>
+    {% empty %}
+    <p>Aucune spécialité gastronomique disponible pour le moment.</p>
+    {% endfor %}
+  </div>
+
+  <div class="text-center mb-4">
+    <a href="{% url 'gastronomie_list' %}" class="btn btn-primary btn-lg">VOIR TOUT →</a>
+  </div>
+</section>
+
+<!-- Section Ville & Patrimoine -->
+<section class="container mt-5 mb-5">
+  <h2 class="text-center mb-5 text-uppercase">Villes et Patrimoine</h2>
+
+  <div class="row g-4">
+    {% for ville in ville_list %}
+    <div class="col-12 col-md-6 col-lg-4 mb-4">
+      <div class="card h-100 shadow-sm">
+        {% if ville.image %}
+        <img src="{{ ville.image.url }}" alt="{{ ville.titre }}" class="img-fluid card-img-top">
+        {% endif %}
+        <div class="card-body d-flex flex-column">
+          <h2 class="card-title h5">{{ ville.titre }}</h2>
+          <p class="text-muted small">{{ ville.date_pub|date:"d M Y" }}</p>
+          <p class="card-text">{{ ville.description|truncatechars:200 }}</p>
+
+          {% if ville.slug %}
+          <a href="{% url 'ville_detail' ville.slug %}" class="btn btn-primary mt-auto">Voir plus &rarr;</a>
+          {% else %}
+          <span class="btn btn-secondary mt-auto disabled">Pas de lien</span>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+    {% empty %}
+    <p class="text-center">Aucune ville disponible pour le moment.</p>
+    {% endfor %}
+  </div>
+
+  <div class="text-center mt-4">
+    <a href="{% url 'ville_list' %}" class="btn btn-primary btn-lg">Voir toutes les villes →</a>
+  </div>
+</section>
+
 
 {% endblock content %}

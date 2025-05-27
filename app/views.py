@@ -4,11 +4,8 @@ from .models import *
 from django.views import generic
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.views.generic import UpdateView, DeleteView, ListView
-# from django.contrib.auth.models import User
-# from django.contrib.auth import login
-from .forms import *
-# from django.utils.translation import gettext_lazy as _
 
+from .forms import *
 
 class PostList(generic.ListView):
     queryset = Post.objects.filter(status=1).order_by('-created_on')
@@ -18,6 +15,8 @@ class PostList(generic.ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['events'] = Agenda.objects.order_by('date_debut')[:6]
+        context['gastronomie_list'] = Gastronomie.objects.order_by('date_pub')[:6]
+        context['ville_list'] = VillePatrimoine.objects.order_by('-date_pub')[:6]
         return context
 
 class DetailView(generic.DetailView):
@@ -81,11 +80,6 @@ class CultureDetailView(DetailView):
         context['gallery'] = self.object.images.all()
         return context
 
-# def culture_view(request):
-#     # culture = Culture.objects.first() # on suppose qu'une seule entrée
-#     cultures = Culture.objects.all()
-#     return render(request, 'culture.html', {'cultures':cultures})
-
 # section conseilVoyage
 def conseils_view(request):
     conseils = ConseilVoyage.objects.all()
@@ -115,3 +109,21 @@ def agenda_list(request):
 def agenda_detail(request, slug):
     event = get_object_or_404(Agenda, slug=slug)
     return render(request, 'agenda_detail.html', {'event': event})
+
+# section gastronomie
+def gastronomie_list(request):
+    plat = Gastronomie.objects.all()
+    return render(request, 'gastronomie_list.html', {'plat':plat})
+
+def gastronomie_detail(request, slug):
+    plat = get_object_or_404(Gastronomie, slug=slug)
+    return render(request, 'gastronomie_detail.html', {'plat':plat})
+
+# section ville
+def ville_list(request):
+    villes = VillePatrimoine.objects.all()
+    return render(request, 'ville_list.html', {'villes':villes})
+
+def ville_detail(request, slug):
+    ville = get_object_or_404(VillePatrimoine, slug=slug)
+    return render(request, 'ville_detail.html', {'ville':ville})

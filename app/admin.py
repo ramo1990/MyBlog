@@ -27,11 +27,10 @@ class PostAdmin(admin.ModelAdmin):
     list_filter = ('status',)
     search_fields = ['title', 'content']
 
+admin.site.register(VillePatrimoine)
+admin.site.register(Gastronomie)
 admin.site.register(Agenda)
 admin.site.register(Destinations, DestinationAdmin)
-# admin.site.register(Culture)
 admin.site.register(ConseilVoyage)
-# admin.site.register(MessageContact)
 admin.site.register(APropos)
-# Register your models here.
 
