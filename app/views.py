@@ -15,8 +15,8 @@ class PostList(generic.ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['events'] = Agenda.objects.order_by('date_debut')[:6]
-        context['gastronomie_list'] = Gastronomie.objects.order_by('date_pub')[:6]
-        context['ville_list'] = VillePatrimoine.objects.order_by('-date_pub')[:6]
+        context['gastronomie_list'] = Gastronomie.objects.order_by('date')[:6]
+        context['ville_list'] = VillePatrimoine.objects.order_by('-date')[:6]
         return context
 
 class DetailView(generic.DetailView):

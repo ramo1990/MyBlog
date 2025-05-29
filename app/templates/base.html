@@ -19,7 +19,7 @@
   <!-- Navigation -->
   <nav class="navbar navbar-expand-lg navbar-light bg-light custom-margin">
     <div class="container-fluid">
-      <a class="navbar-brand" href="{% url 'home' %}">✍ MyBlog</a>
+      <a class="navbar-brand" href="{% url 'home' %}"><span class="brand-abidjan">Abidjan</span></a>
 
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMenu"
         aria-controls="navbarMenu" aria-expanded="false" aria-label="Toggle navigation">
@@ -32,8 +32,14 @@
           <li class="nav-item"><a class="nav-link" href="{% url 'destination_list' %}">Destinations 🇨🇮</a></li>
           <li class="nav-item"><a class="nav-link" href="{% url 'culture' %}">Culture et traditions</a></li>
           <li class="nav-item"><a class="nav-link" href="{% url 'conseils' %}">Conseils de voyage</a></li>
-          <!-- <li class="nav-item"><a class="nav-link" href="{% url 'contact' %}">Contact</a></li> -->
+          <li class="nav-item"><a class="nav-link" href="#">Que faire ?</a></li>
+          <li class="nav-item"><a class="nav-link" href="#">Où manger</a></li>
+          <li class="nav-item"><a class="nav-link" href="#">Hébergement</a></li>
+          <li class="nav-item"><a class="nav-link" href="#">infos pratiques</a></li>
+          <li class="nav-item"><a class="nav-link" href="#">Blog</a></li>
           <li class="nav-item"><a class="nav-link" href="{% url 'a_propos' %}">A PROPOS</a></li>
+          <li class="nav-item"><a class="nav-link" href="{% url 'contact' %}">Contact</a></li>
+
         </ul>
       </div>
     </div>
@@ -46,7 +52,11 @@
   </main>
 
   <footer class="py-3">
-    <p class="m-0 text-white text-center">Copyright &copy; 2025 MyBlog</p>
+    <p class="m-0 text-white text-center">&copy; 2025 Visit Abidjan. Tous droits réservés.</p>
+    <nav>
+      <a href="/mentions-legales.html">Mentions légales</a> |
+      <a href="/politique-confidentialite.html">Politique de confidentialité</a>
+    </nav>
   </footer>
 
   <!-- Bootstrap JS -->

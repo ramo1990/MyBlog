@@ -12,6 +12,22 @@ body {
   .navbar {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   }
+
+/* Style spécial pour le mot "Abidjan" */
+.brand-abidjan {
+  font-family: 'Fredoka One', cursive;
+  font-size: 3.5rem;
+  color: #F77F00;
+  text-shadow: 3px 3px #008751;
+  transition: transform 0.3s ease;
+  font-weight: bold;
+  letter-spacing: -1px; /* Pour resserrer les lettres */
+  padding: 0.5rem;
+}
+.brand-abidjan:hover {
+  transform: scale(1.05);
+}
+
   /* section lien dans Navbar: accueil, destination, ...*/
   .navbar .nav-link {
     font-weight: 500;

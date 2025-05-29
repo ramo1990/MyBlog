@@ -43,20 +43,20 @@ class Post(models.Model):
 
 @receiver(pre_delete, sender=Post)
 def delete_post_image(sender, instance, **kwargs):
-    # Supprimer le fichier image associé lors de la suppression de l'article
+    # Supprime le fichier image associé lors de la suppression de l'article
     if instance.image:
         if os.path.isfile(instance.image.path):
             os.remove(instance.image.path)
 
 # section agenda
 class Agenda(models.Model):
-    titre = models.CharField(max_length=200)
+    title = models.CharField(max_length=200)
     slug = models.SlugField(max_length=200, unique=True, blank=True)
     date_debut = models.DateField()
     date_fin = models.DateField(null=True, blank=True)
-    description = models.TextField()
-    image = models.ImageField(upload_to='agenda_images/')
-    lieu = models.CharField(max_length=255, blank=True)
+    content = models.TextField()
+    image = models.ImageField(upload_to='agenda_images/', null=True, blank=True)
+    place = models.CharField(max_length=255, blank=True)
 
     def save(self, *args, **kwargs):
         if not self.slug:
@@ -70,32 +70,32 @@ class Agenda(models.Model):
         super().save(*args, **kwargs)
 
     def __str__(self):
-        return self.titre
+        return self.title
 
 # section destinations
 class Destinations(models.Model):
-    ville = models.CharField(max_length=100)
+    title = models.CharField(max_length=100)
     slug = models.SlugField(max_length=120, unique=True, blank=True)
-    description = models.TextField()
+    content = models.TextField()
     image = models.ImageField(upload_to='destinations/', blank=True, null=True)
     latitude = models.FloatField(blank=True, null=True)
     longitude = models.FloatField(blank=True, null=True)
-    date_publiée = models.DateTimeField(auto_now_add=True)
+    date = models.DateTimeField(auto_now_add=True)
 
     class Meta:
-        ordering = ['ville']
-        verbose_name = "ville en CI"
-        verbose_name_plural = "Destinations en CI"
+        ordering = ['title']
+        verbose_name = "ville d'abidjan"
+        verbose_name_plural = "Destinations abidjan"
     
     def __str__(self):
-        return self.ville
+        return self.title
 
     def get_absolute_url(self):
         return reverse('destination_detail', args=[self.slug])
     
     def save(self, *args, **kwargs):
         if not self.slug:
-            base_slug = slugify(self.ville)
+            base_slug = slugify(self.title)
             slug = base_slug
             num = 1
             while Destinations.objects.filter(slug=slug).exists():
@@ -114,9 +114,9 @@ class ImageSupplementaire(models.Model):
 
 # section culture et  tradiction
 class Culture(models.Model):
-    titre = models.CharField(max_length=200)
+    title = models.CharField(max_length=200)
     slug = models.SlugField(unique=True, blank=True) # editable=True; genere le slug automatiquement
-    contenu = models.TextField()
+    content = models.TextField()
     image = models.ImageField(upload_to='cultures_images/', blank=True, null=True)
     video_url = models.URLField(blank=True, null=True, help_text="Coller ici l'URL Youtube")
     audio_file = models.FileField(upload_to='culture_audio/',blank=True, null=True)
@@ -133,7 +133,7 @@ class Culture(models.Model):
         super().save(*args, **kwargs)
 
     def __str__(self):
-        return self.titre
+        return self.title
     
 class CultureImage(models.Model):
     culture = models.ForeignKey(Culture, on_delete=models.CASCADE, related_name='images')
@@ -142,17 +142,29 @@ class CultureImage(models.Model):
 
 # section conseilVoyage
 class ConseilVoyage(models.Model):
-    titre = models.CharField(max_length=200)
-    contenu = models.TextField()
-    date_publication = models.DateTimeField(auto_now_add=True)
+    title = models.CharField(max_length=200)
+    slug = models.SlugField(max_length=200 , unique= True, blank=True)
+    content = models.TextField()
+    date = models.DateTimeField(auto_now_add=True)
 
     class Meta:
-        ordering = ['-date_publication']
+        ordering = ['-date']
         verbose_name = "Conseil de voyage"
         verbose_name_plural = "Conseils de voyage"
+    
+    def save(self, *args, **kwargs):
+        if not self.slug: # or ConseilVoyage.objects.filter(slug=self.slug).exclude(pk=self.pk).exists():
+            base_slug = slugify(self.title)
+            slug = base_slug
+            counter = 1
+            while ConseilVoyage.objects.filter(slug=slug).exclude(pk=self.pk).exists():
+                slug = f'{base_slug}-{counter}'
+                counter += 1
+            self.slug = slug
+        super().save(*args, **kwargs)
 
     def __str__(self):
-        return self.titre
+        return self.title
 
 # section contact
 class MessageContact(models.Model):
@@ -167,42 +179,42 @@ class MessageContact(models.Model):
     
 # section A propos
 class APropos(models.Model):
-    titre = models.CharField(max_length=200)
-    contenu = models.TextField()
+    title = models.CharField(max_length=200)
+    content = models.TextField()
     image = models.ImageField(upload_to='a_propos/', blank=True, null=True)
-    date_modifiee = models.DateTimeField(auto_now=True)
+    updated_on = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return self.titre
+        return self.title
 
 # section gastronomie
 class Gastronomie(models.Model):
-    titre = models.CharField(max_length=200)
-    description = models.TextField()
+    title = models.CharField(max_length=200)
+    slug = models.SlugField(unique=True, blank=True)    
+    content = models.TextField()
+    date = models.DateTimeField(auto_now_add=True)
     image = models.ImageField(upload_to='gastronomie_images/', blank=True, null=True)
-    date_pub = models.DateTimeField(auto_now_add=True)
-    slug = models.SlugField(unique=True, blank=True)
 
     def save(self, *args, **kwargs):
         if not self.slug:
-            self.slug = slugify(self.titre)
+            self.slug = slugify(self.title)
         super().save(*args, **kwargs)
 
     def __str__(self):
-        return self.titre
+        return self.title
 
 #section ville et patrimoine
 class VillePatrimoine(models.Model):
-    titre = models.CharField(max_length=200)
-    description = models.TextField()
-    image = models.ImageField(upload_to='villes_patrimoine/', blank=True, null=True)
-    date_pub = models.DateTimeField(auto_now_add=True)
+    title = models.CharField(max_length=200)
     slug = models.SlugField(unique=True, blank=True)
+    content = models.TextField()
+    date = models.DateTimeField(auto_now_add=True)
+    image = models.ImageField(upload_to='villes_patrimoine/', blank=True, null=True)
 
     def save(self, *args, **kwargs):
         if not self.slug:
-            self.slug = slugify(self.titre)
+            self.slug = slugify(self.title)
         super().save(*args, **kwargs)
 
     def __str__(self):
-        return self.titre
+        return self.title

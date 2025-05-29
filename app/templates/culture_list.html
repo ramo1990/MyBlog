@@ -22,8 +22,8 @@
           <img src="{{ culture.image.url }}" class="card-img-top" alt="{{ culture.titre }}">
           {% endif %}
           <div class="card-body d-flex flex-column">
-            <h5 class="card-title">{{ culture.titre }}</h5>
-            <p class="card-text">{{ culture.contenu|truncatewords:20 }}</p>
+            <h5 class="card-title">{{ culture.title }}</h5>
+            <p class="card-text">{{ culture.content|truncatewords:20 }}</p>
             <a href="{% url 'culture_detail' slug=culture.slug %}" class="btn btn-outline-primary mt-auto">Lire plus</a>
           </div>
         </div>

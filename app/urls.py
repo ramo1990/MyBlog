@@ -14,15 +14,15 @@ urlpatterns = [
 
     path('culture/', CultureListView.as_view(), name='culture'),
     path('culture/<slug:slug>/', CultureDetailView.as_view(), name='culture_detail'),
-    path('agenda', agenda_list, name='agenda_list'),
+    path('agenda/', agenda_list, name='agenda_list'),
     path('agenda/<slug:slug>/', agenda_detail, name='agenda_detail'),
-    path('conseils/', conseils_view, name='conseils'),
-    path('contact/', contact_view, name='contact'),
-    path('a-propos/', a_propos_page, name='a_propos'),
     path('gastronomie/', gastronomie_list, name='gastronomie_list'),
     path('gastronomie/<slug:slug>/', gastronomie_detail, name='gastronomie_detail'),
     path('ville/', ville_list, name='ville_list'),
     path('ville/<slug:slug>/', ville_detail, name='ville_detail'),
+    path('conseils/', conseils_view, name='conseils'),
+    path('contact/', contact_view, name='contact'),
+    path('a-propos/', a_propos_page, name='a_propos'),
     path('<slug:slug>/', DetailView.as_view(), name='post_detail'),
 ]
 

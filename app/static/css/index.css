@@ -2,7 +2,7 @@
 
 .masthead {
     position: relative;
-    background: url('/static/images/cat.1_.jpg') no-repeat center center;
+    background: url('/static/images/image.png') no-repeat center center;
     background-size: cover; /* image remplir toute la section*/
     height: 60vh;
     color: white;
