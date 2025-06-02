@@ -98,8 +98,18 @@ def contact_view(request):
     
 # section A Propos
 def a_propos_page(request):
-    # contenu = APropos.objects.last() # récupère le dernier contenu "À propos"
-    return render(request, 'a_propos.html')
+    contenu = APropos.objects.all().order_by('-updated_on') # récupère le dernier contenu "À propos"
+    return render(request, 'a_propos.html', {'contenu': contenu})
+
+# def ajouter_apropos(request):
+#     if request.method == 'POST':
+#         form = AProposForm(request.POST, request.FILES)
+#         if form.is_valid():
+#             form.save()
+#             return redirect('a_propos')
+#     else:
+#         form = AProposForm()
+#     return render(request, 'ajouter_apropos.html', {'form':form})
 
 # section agenda
 def agenda_list(request):

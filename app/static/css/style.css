@@ -48,6 +48,12 @@ body {
     text-align: center;
     padding: 1rem 0;
   }
+  .footer a:hover {
+    color: #F77F00;
+  }
+  .socialIcons a {
+    transition: color 0.3s ease;
+  }
   
   /* Layout principal*/
   main.container {
@@ -89,6 +95,9 @@ body {
   #btnTop:hover {
     background-color: #008751;
   }
+.dropdown-menu {
+  list-style-type: none;
+}
   
   /* Responsive Tweaks pour petit ecran*/
   @media (max-width: 768px) {

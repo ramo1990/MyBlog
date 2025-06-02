@@ -23,6 +23,7 @@ urlpatterns = [
     path('conseils/', conseils_view, name='conseils'),
     path('contact/', contact_view, name='contact'),
     path('a-propos/', a_propos_page, name='a_propos'),
+    # path('a-propos/ajouter/', ajouter_apropos, name='ajouter_apropos'),
     path('<slug:slug>/', DetailView.as_view(), name='post_detail'),
 ]
 
