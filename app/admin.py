@@ -43,6 +43,16 @@ class ConseilVoyageAdmin(admin.ModelAdmin):
     list_display = ('title', 'slug', 'date')
     prepopulated_fields = {'slug': ('title',)} # rempli le slug automatiquement
 
+@admin.register(Hebergement)
+class HebergementAdmin(admin.ModelAdmin):
+    list_display = ('title', 'slug', 'categorie')
+    prepopulated_fields = {'slug': ('title',)}
+
+@admin.register(Restaurant)
+class RestaurantAdmin(admin.ModelAdmin):
+    list_display = ('title', 'slug', 'categorie')
+    prepopulated_fields = {'slug': ('title',)}
+
 admin.site.register(Destinations, DestinationAdmin)
 # admin.site.register(ConseilVoyage)
 admin.site.register(APropos)

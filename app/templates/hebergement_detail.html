@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% load static %}
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/agenda_detail.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <a href="{% url 'hebergements_list' %}" class="btn btn-secondary mb-3">← Retour à la liste</a>
+    
+    <div class="row justify-content-center">
+        <div class="col-12 col-md-10 col-lg-8">
+            <h2>{{ hebergement.title }}</h2>
+
+            {% if hebergement.image %}
+            <img src="{{ hebergement.image.url }}" alt="hebergement.titre" class="img-fluid rounded mb-3">
+            {% else %}
+            <img src="{% static 'images/default_hebergement.jpg' %}" alt="Image par défaut" class="img-fluid rounded mb-3">
+            {% endif %}
+            <p class="mb-4"> <strong> Catégorie :</strong>{{hebergement.get_categorie_display}} </p>
+            <p class="mb-4"> <strong>Quartier :</strong> {{hebergement.quartier}} </p>
+            <p class="mb-4"> <strong>Adresse :</strong> {{hebergement.adresse}} </p>
+            <p class="mb-4"> <strong>Prix minimum :</strong> {{hebergement.prix_min}} </p>
+            <p class="mb-4"> {{hebergement.content}} </p>
+
+            <p>
+                {% if hebergement.site_web %}
+                <p><a href="{{ hebergement.site_web }}" target="_blank" rel="noopener noreferrer"> Visiter le site officiel</a></p>
+                {% endif %}
+            </p>
+        </div>
+    </div>
+</div>
+{% endblock %}

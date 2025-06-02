@@ -218,3 +218,56 @@ class VillePatrimoine(models.Model):
 
     def __str__(self):
         return self.title
+
+# section hebergement
+class Hebergement(models.Model):
+    CATEGORIES = [
+        ('luxe', 'Hôtel de luxe'),
+        ('moyen', 'Hôtel milieu de game'),
+        ('location', 'Location de vacances'),
+        ('atypique', 'Hébergement atypique'),
+    ]
+    title = models.CharField(max_length=200)
+    slug = models.SlugField(unique=True, blank=True)
+    content = models.TextField()
+    categorie = models.CharField(max_length=20, choices=CATEGORIES)
+    quartier = models.CharField(max_length=100)
+    adresse = models.TextField()
+    prix_min = models.DecimalField(max_digits=10, decimal_places=2)
+    image = models.ImageField(upload_to='hebergements/', blank=True, null=True)
+    site_web = models.URLField(blank=True, null=True)
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(self.title)
+        super().save(*args, **kwargs)
+    
+    def __str__(self):
+        return self.title
+
+# section où manger
+class Restaurant(models.Model):
+    CATEGORIES = [
+        ('gastro', 'Gastronomie'),
+        ('rapide', 'Restauration rapide'),
+        ('local', 'Cuisine locale'),
+        ('cafes', 'Café & Boulangeries'),
+    ]
+
+    title = models.CharField(max_length=200)
+    slug = models.SlugField(unique=True, blank=True)
+    content = models.TextField()
+    categorie = models.CharField(max_length=20, choices=CATEGORIES)
+    quartier = models.CharField(max_length=100)
+    adresse = models.TextField()
+    phone = models.CharField(max_length=20, blank=True, null=True)
+    image = models.ImageField(upload_to='restaurants/', blank=True, null=True)
+    site_web = models.URLField(blank=True, null=True)
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(self.slug)
+        super().save(*args, **kwargs)
+
+    def __str__(self):
+        return self.title

@@ -4,6 +4,7 @@ from .models import *
 from django.views import generic
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.views.generic import UpdateView, DeleteView, ListView
+from collections import defaultdict
 
 from .forms import *
 
@@ -137,3 +138,37 @@ def ville_list(request):
 def ville_detail(request, slug):
     ville = get_object_or_404(VillePatrimoine, slug=slug)
     return render(request, 'ville_detail.html', {'ville':ville})
+
+# section Hebergement
+def hebergements_list(request):
+    hebergements = Hebergement.objects.all().order_by('categorie', 'quartier')
+    
+    categories = defaultdict(list)
+    for h in hebergements:
+        categories[h.get_categorie_display()].append(h)
+    
+    # print("Nombre d'hébergements :", hebergements.count())
+    # for h in hebergements:
+    #     print(" -", h.title, "| Catégorie:", h.get_categorie_display())
+
+    return render(request, 'hebergements_list.html', {
+        'categories':dict(categories)
+        })
+
+def hebergement_detail(request, slug):
+    hebergement = get_object_or_404(Hebergement, slug = slug)
+    return render(request, 'hebergement_detail.html', {'hebergement': hebergement})
+
+# section où manger
+def restaurants_list(request):
+    restaurants = Restaurant.objects.all().order_by('categorie', 'quartier')
+
+    categories = defaultdict(list)
+    for r in restaurants:
+        categories[r.get_categorie_display()].append(r)
+    
+    return render(request, 'restaurants_list.html', {'categories': dict(categories)})
+
+def restaurants_detail(request, slug):
+    restaurant = get_object_or_404(Restaurant, slug = slug)
+    return render(request, 'restaurant_detail.html', {'restaurant': restaurant})
