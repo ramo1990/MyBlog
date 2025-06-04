@@ -27,6 +27,9 @@ urlpatterns = [
     path('hebergements/<slug:slug>/', hebergement_detail, name='hebergement_detail'),
     path('restaurants/', restaurants_list, name='restaurants_list'),
     path('restaurants/<slug:slug>/', restaurants_detail, name='restaurants_detail'),
+    path('infos-pratiques/', infos_pratiques, name='infos_pratiques'),
+    path('que_faire/', que_faire, name='que_faire'),
+    path('que_faire/<slug:slug>/', detail_activite, name='detail_activite'),
     path('<slug:slug>/', DetailView.as_view(), name='post_detail'),
 ]
 

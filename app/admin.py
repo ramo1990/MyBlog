@@ -53,6 +53,26 @@ class RestaurantAdmin(admin.ModelAdmin):
     list_display = ('title', 'slug', 'categorie')
     prepopulated_fields = {'slug': ('title',)}
 
+@admin.register(InfoPratique)
+class InfoPratiqueAdmin(admin.ModelAdmin):
+    list_display = ('icon', 'title')
+
+# Que faire ?
+class ActiviteInline(admin.TabularInline):
+    model = Activite
+    extra = 1
+
+@admin.register(CategorieActivite)
+class CategorieActiviteAdmin(admin.ModelAdmin):
+    list_display = ('name', 'icon')
+    inlines = [ActiviteInline]
+
+@admin.register(Activite)
+class ActiviteAdmin(admin.ModelAdmin):
+    list_display = ('title', 'categorie')
+    prepopulated_fields = {'slug':('title',)}
+######
+
 admin.site.register(Destinations, DestinationAdmin)
 # admin.site.register(ConseilVoyage)
 admin.site.register(APropos)

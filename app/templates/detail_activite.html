@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block meta %}
+    <title>{{ activite.title }} | Activité à Abidjan</title>
+    <meta name="description" content="{{ activite.description|truncatechars:150 }}">
+{% endblock %}
+
+{% block content %}
+<main class="activite-detail">
+    <div class="container">
+        <h1>{{ activite.title }}</h1>
+        {% if activite.image %}
+        <img src="{{ activite.image.url }}" alt="{{ activite.title }}" class="activite-image">
+        {% endif %}
+        <p>{{ activite.content }}</p>
+
+        <a href="{% url 'que_faire' %}">← Retour à la liste des activités</a>
+    </div>
+</main>
+{% endblock %}

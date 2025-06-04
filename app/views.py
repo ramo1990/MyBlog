@@ -172,3 +172,17 @@ def restaurants_list(request):
 def restaurants_detail(request, slug):
     restaurant = get_object_or_404(Restaurant, slug = slug)
     return render(request, 'restaurant_detail.html', {'restaurant': restaurant})
+
+# section info pratique
+def infos_pratiques(request):
+    blocs = InfoPratique.objects.all()
+    return render(request, 'infos_pratiques.html', {'blocs':blocs})
+
+# section Que faire ?
+def que_faire(request):
+    categories = CategorieActivite.objects.prefetch_related('activites').all()
+    return render(request, 'que_faire.html', {'categories':categories})
+
+def detail_activite(request, slug):
+    activite = get_object_or_404(Activite, slug=slug)
+    return render(request, 'detail_activite.html', {'activite':activite})

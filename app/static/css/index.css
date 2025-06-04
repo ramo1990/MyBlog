@@ -1,14 +1,20 @@
-/* === (Bannière d’accueil) index.html === */
+:root {
+  --orange-ci: #F77F00;
+  --green-ci: #008751;
+  --white-ci: #FFFFFF;
+}
+
 
 .masthead {
-    position: relative;
-    background: url('/static/images/image.png') no-repeat center center;
-    background-size: cover; /* image remplir toute la section*/
-    height: 60vh;
-    color: white;
-    display: flex; /* Centre verticalement le contenu */
-    align-items: center;
-  }
+  position: relative;
+  background: url('/static/images/image.png') no-repeat center center;
+  background-size: cover; /* image remplir toute la section*/
+  height: 80vh;
+  color: var(--white-ci);
+  display: flex;  /* Centre verticalement le contenu */
+  align-items: center;
+}
+
 /* filtre sur l'image mais en dessous du texte */
 .masthead .overlay {
   position: absolute;
@@ -18,71 +24,156 @@
   width: 100%;
   background-color: rgba(0, 0, 0, 0.5); /* filtre sombre */
 }
-/*Place le texte au-dessus de l’overlay*/
+
+/* Place le texte au-dessus de l’overlay */
 .site-heading {
-position: relative;
-z-index: 2;
-}
+  position: relative;
+  z-index: 2;
+  }
 /*Grosse taille + très gras*/
 .site-heading h1 {
-font-size: 2.8rem;
-font-weight: 700;
-margin-bottom: 0.5rem;
-}
+  font-size: 2.8rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  }
 /*Moins grand et plus léger*/
 .site-heading p {
-font-size: 1.25rem;
-font-weight: 300;
-}
+  font-size: 1.25rem;
+  font-weight: 300;
+  }
+  
+/* varier les fonds de couleurs de section */
+  section:nth-of-type(even) {
+    background-color: #f8f9fa;
+    padding: 3rem 1rem;
+    border-radius: 12px;
+  }
 
 /* Cartes d'articles(Posts) */
 .card {
-border: none;
-border-radius: 0.75rem;
-overflow: hidden; /*Coupe le contenu qui dépasse*/
-transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border-top: 4px solid var(--orange-ci); /* accent orange */
+  border-radius: 0.75rem;
+  overflow: hidden; /*Coupe le contenu qui dépasse*/
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  max-width: 350px;
+  width: 100%;
 }
-/*Lève légèrement le post à la souris*/
 .card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-  }
-/*Donne une hauteur fixe à l’image.*/
-.card-img-top {
-height: 200px;
-object-fit: cover; /* Remplit sans déformer */
-}
-.card-title {
-margin-bottom: 0.5rem;
-}
-.card-text {
-flex-grow: 1; /*un btn toujours en bas de la carte*/
-margin-bottom: 1rem;
-}
-/*Bouton orange vif personnalisé*/
-.btn-primary {
-    background-color: #F77F00;
-    border: none;
-  }
-/*Couleur plus foncée au survol*/
-.btn-primary:hover {
-background-color: #e65c00;
-}
-/* Adapte le titre principal et la hauteur du header pour que ça reste 
-  lisible sur tablette/téléphone. */
-@media (max-width: 768px) {
-.site-heading h1 {
-    font-size: 2rem;
-}
-.masthead {
-    height: 50vh;
-    padding: 2rem;
-}
+  transform: translateY(-5px); /*Lève légèrement le post à la souris*/
+  box-shadow: 0 10px 20px rgba(0, 135, 81, 0.2); /* ombre verte douce */
 }
 
-.swiper-button-next, .swiper-button-prev {
-  background-color: #ADE1C1;
-  padding: 12px;
-  border-radius: 4px;
-  color: #6C1D45;
+/*Donne une hauteur fixe à l’image.*/
+.card-img-top {
+  height: 200px;
+  object-fit: cover; /* Remplit sans déformer */
+  }
+
+  h2.card-title {
+    font-size: 1rem;
+
+  } 
+  h2, h3 {
+    color: #008751;
+  }
+  .card .card-title {
+    color: #008751;
+    margin-bottom: 0.5rem;
+  }
+
+  .card-text {
+    flex-grow: 1; /*un btn toujours en bas de la carte*/
+    margin-bottom: 1rem;
+  }
+
+  /* Boutton */
+.btn-primary {
+    background: linear-gradient(to right, #F77F00, #FFFFFF, #008751);
+    border: none;
+    color: #1db820;
+    font-weight: bold;
+  }
+  .btn-primary:hover {
+    background: linear-gradient(to right, #008751, #FFFFFF, #F77F00);
+    color: rgb(185, 149, 17);
+  }
+
+body {
+  background-color: #ffffff;
+  color: #333;
 }
+
+/* Conteneur principal du carrousel */
+.agenda-carousel-container {
+  position: relative;
+  padding: 0 4rem; /* espace pour les flèches */
+  max-width: 1200px;
+  margin: 0 auto; /* centrer horizontalement */
+}
+
+.swiper {
+  padding: 2rem 0; /* espace vertical autour du carrousel */
+  position: relative;
+}
+
+.swiper-slide {
+  display: flex;
+  justify-content: center;
+  padding: 0 !important;
+}
+
+.swiper-button-next,
+.swiper-button-prev {
+  position: absolute;
+  top: 50%; /* centré verticalement */
+  transform: translateY(-50%);
+  color: white; /* couleur des flèches */
+  background-color: #1db820;
+  padding: 1.5rem;
+  /* border-radius: 50%; */
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  transition: opacity 0.3s ease;
+}
+/* Gauche et droite */
+.swiper-button-prev {
+  left: 0;
+}
+.swiper-button-next {
+  right: 0;
+}
+/* Flèche désactivée = plus transparente */
+.swiper-button-disabled {
+  background-color: #1db820; /* garde le bleu */
+  opacity: 0.3;               /* effet atténué */
+  pointer-events: none;       /* désactive le clic */
+}
+.swiper-button-next:not(.swiper-button-disabled):hover,
+.swiper-button-prev:not(.swiper-button-disabled):hover {
+  background-color: #F77F00;
+}
+/* hover uniquement si actif */
+.swiper-button-disabled {
+  opacity: 0.3;
+  pointer-events: none;
+}
+/* les flèches soient plus grandes */
+.swiper-button-next::after,
+.swiper-button-prev::after {
+  font-size: 40px;
+}
+
+/* Adapte le titre principal et la hauteur du header pour mobile */
+  @media (max-width: 768px) {
+    .site-heading h1 {
+        font-size: 2rem;
+    }
+    .masthead {
+        height: 50vh;
+        padding: 2rem;
+    }
+    }

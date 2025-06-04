@@ -271,3 +271,35 @@ class Restaurant(models.Model):
 
     def __str__(self):
         return self.title
+
+# Infos pratique
+class InfoPratique(models.Model):
+    icon = models.CharField(max_length=10, help_text= "Ex: 📍, 🛂, 💱")
+    title = models.CharField(max_length=100)
+    content = models.TextField(help_text= "Utilise des listes en HTML, ex: <ul><li>...</li></ul>")
+
+    def __str__(self):
+        return self.title
+
+# Que faire ?
+class CategorieActivite(models.Model):
+    name = models.CharField(max_length=100, blank=True, null=True)
+    icon = models.CharField(max_length=10, help_text="Emoji ou icône")
+
+    def __str__(self):
+        return self.name
+
+class Activite(models.Model):
+    categorie = models.ForeignKey(CategorieActivite, on_delete=models.CASCADE, related_name='activites')
+    title = models.CharField(max_length=200)
+    slug = models.SlugField(unique=True, blank=True)
+    content = models.TextField()
+    image = models.ImageField(upload_to='activites/', blank=True, null=True)
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(self.title)
+        super().save(*args, **kwargs)
+    
+    def __str__(self):
+        return self.title

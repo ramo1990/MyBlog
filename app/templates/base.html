@@ -9,6 +9,9 @@
   <!-- Bootstrap CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 
+  <!-- swiper CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
+
   <!-- font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
@@ -46,18 +49,17 @@
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Profiter</a>
                 <ul class="dropdown-menu">
-                  <li class="nav-item"><a class="nav-link" href="{% url 'restaurants_list' %}">Où manger</a></li>
-                  <li class="nav-item"><a class="nav-link" href="{% url 'hebergements_list' %}">Hébergement</a></li>
+                  <li class="dropdown-item"><a class="nav-link" href="{% url 'restaurants_list' %}">Où manger</a></li>
+                  <li class="dropdown-item"><a class="nav-link" href="{% url 'hebergements_list' %}">Hébergement</a></li>
                 </ul>
             </li>
 
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Séjourner</a>
                 <ul class="dropdown-menu">
-                  <li class="nav-item"><a class="nav-link" href="{% url 'conseils' %}">Conseils de voyage</a></li>
-                  <li class="nav-item"><a class="nav-link" href="#">infos pratiques</a></li>
-                  <li class="nav-item"><a class="nav-link" href="#">Que faire ?</a></li>
-
+                  <li class="dropdown-item"><a class="nav-link" href="{% url 'conseils' %}">Conseils de voyage</a></li>
+                  <li class="dropdown-item"><a class="nav-link" href="{% url 'infos_pratiques' %}">infos pratiques</a></li>
+                  <li class="dropdown-item"><a class="nav-link" href="{% url 'que_faire' %}">Que faire ?</a></li>
                 </ul>
             </li>
             
@@ -69,7 +71,7 @@
     </div>
   </nav>
 
-  <main>
+  <main class="container py-3">
     {% block content %}
     <!-- le contenu ici -->
     {% endblock content %}
@@ -86,9 +88,9 @@
     <!-- Navigation footer -->
     <div class="footerNav mb-3">
       <ul class="list-inline mb-0">
-        <li class="list-inline-item"><a href="#" class="text-white text-decoration-none">ACCUEIL</a></li>
-        <li class="list-inline-item"><a href="#" class="text-white text-decoration-none">A propos</a></li>
-        <li class="list-inline-item"><a href="#" class="text-white text-decoration-none">contact us</a></li>
+        <li class="list-inline-item"><a href="{% url 'home' %}" class="text-white text-decoration-none">ACCUEIL</a></li>
+        <li class="list-inline-item"><a href="{% url 'a_propos' %}" class="text-white text-decoration-none">A propos</a></li>
+        <li class="list-inline-item"><a href="{% url 'contact' %}" class="text-white text-decoration-none">contact us</a></li>
       </ul>
     </div>
     <!-- Droits et mentions -->
@@ -99,6 +101,7 @@
     </nav>
   </div>
   </footer>
+
 
   <!-- Bootstrap JS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
@@ -122,6 +125,68 @@
   }
 </script>
 
+<script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+
+<!-- swipper -->
+<script>
+  const swiper = new Swiper(".mySwiper", {
+    slidesPerView: 1.1, // pour effet de "carte qui dépasse"
+    spaceBetween: 10, // réduit l'espace entre les slides
+    centeredSlides: true, // ✅ centre les slides dans le wrapper
+    loop: false, // Désactiver la boucle
+    watchOverflow: true, // Désactiver flèches si 1 seul slide
+
+    navigation: {
+      nextEl: ".swiper-button-next",
+      prevEl: ".swiper-button-prev",
+    },
+
+    breakpoints: {
+      768: {
+        slidesPerView: 2,
+        spaceBetween: 15,
+        centeredSlides: false,
+      },
+      992: {
+        slidesPerView: 3,
+        spaceBetween: 20,
+        centeredSlides: false,
+      },
+      // 1200: {
+      //   slidesPerView: 3,
+      //   spaceBetween: 30
+      // },
+    },
+    on: {
+      slideChange: function() {
+        const swiperInstance = this;
+        document.querySelector('.swiper-button-next')
+          .classList.toggle('.swiper-button-disabled', swiperInstance.isEnd);
+        document.querySelector('.swiper-button-prev')
+          .classList.toggle('.swiper-button-disabled', swiperInstance.isBeginning);
+        // const nextBtn = document.querySelector('.swiper-button-next');
+        // const prevBtn = document.querySelector('.swiper-button-prev');
+
+        // // Désactiver le bouton Next à la fin
+        // if (swiperInstance.isEnd) {
+        //   nextBtn.classList.add('swiper-button-disabled');
+        // } else {
+        //   nextBtn.classList.remove('swiper-button-disabled');
+        // }
+        // // Désactiver le bouton Prev au début
+        // if (swiperInstance.isBeginning) {
+        //   prevBtn.classList.add('swiper-button-disabled');
+        // } else {
+        //   prevBtn.classList.remove('swiper-button-disabled');
+        // }
+      },
+      // À l'initialisation
+      init: function() {
+        this.emit('slideChange');
+      }
+    }
+  });
+</script>
 
 </body>
 </html>
