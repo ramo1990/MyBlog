@@ -1,0 +1,58 @@
+/* ====== Couleurs inspirées du drapeau ivoirien ====== */
+:root {
+    --orange-ci: #F77F00;
+    --vert-ci: #008751;
+    --blanc-ci: #ffffff;
+    --gris-texte: #333;
+    --gris-fond: #f9f9f9;
+  }
+
+  /* ====== Container principal ====== */
+.contact-page {
+    background-color: var(--gris-fond);
+    padding: 2rem;
+    border-radius: 8px;
+    max-width: 700px;
+    margin: 2rem auto;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  }
+
+  /* ====== Titre ====== */
+.contact-page h2 {
+    text-align: center;
+    color: var(--orange-ci);
+    margin-bottom: 1.5rem;
+  }
+
+/* ====== Champs de formulaire générés ====== */
+.contact-page form p {
+    margin-bottom: 1.5rem;
+  }
+.contact-page label {
+    font-weight: 600;
+    color: var(--vert-ci);
+    display: block;
+    margin-bottom: 0.5rem;
+  }
+
+.contact-page input,
+.contact-page textarea,
+.contact-page select {
+    width: 90%;
+    padding: 0.75rem;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 1rem;
+}
+
+/* ====== Bouton d'envoi ====== */
+.contact-page .btn-primary {
+    background-color: var(--orange-ci);
+    border-color: var(--orange-ci);
+    font-weight: bold;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+  }
+  .contact-page .btn-primary:hover {
+    background-color: var(--vert-ci);
+    border-color: var(--vert-ci);
+  }

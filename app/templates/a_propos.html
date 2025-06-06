@@ -1,42 +1,50 @@
 {% extends 'base.html' %}
-
 {% load static %}
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/a_propos.css' %}">
+{% endblock %}
 
 {% block content %}
-<div class="container mt-5">
-    <div class="row">
-        <div class="col-md-10 mx-auto">
-            <h2 class="mb-4 text-center">À propos de <span style="color: #2c3e50;">MyBlog</span></h2>
-            <img src="{% static 'images/cotiv-ethnies.gif' %}" alt="Panorama Abidjan" class="img-fluid rounded mb-4">
+  
+  <main class="page-a-propos">
+    <article>
+      <header>
+        <h1>À propos de Explore Abidjan</h1>
+      </header>
 
-            <p>
-                <strong>Bienvenue sur <span style="color: #2c3e50;">MyBlog</span></strong>, votre guide culturel et touristique dédié à la découverte de la magnifique Côte d’Ivoire.
-            </p>
+      <section>
+        <h2>Notre mission</h2>
+        <p>Bienvenue sur <strong>Explore Abidjan</strong>, votre guide incontournable pour découvrir les richesses touristiques, culturelles et gastronomiques d’Abidjan, la capitale économique de la Côte d’Ivoire.</p>
+        <p>Nous vous aidons à vivre une expérience authentique, que vous soyez visiteur occasionnel, aventurier curieux ou habitant local.</p>
+      </section>
 
-            <p>
-                Né d’une véritable passion, ce blog vous invite à explorer les trésors cachés du pays : des villes vibrantes aux traditions ancestrales, en passant par une diversité culturelle riche et fascinante.
-            </p>
+      <section>
+        <h2>Pourquoi visiter Abidjan ?</h2>
+        <p>Abidjan est une ville unique en Afrique de l’Ouest, où modernité et tradition cohabitent harmonieusement. Chaque quartier, de <em>Cocody</em> à <em>Yopougon</em>, a son ambiance et ses particularités à découvrir.</p>
+        <p>Que ce soit pour ses plages, ses marchés, sa vie nocturne ou sa cuisine, Abidjan vous offre une immersion culturelle inoubliable.</p>
+      </section>
 
-            <p><strong>Que trouverez-vous ici ?</strong></p>
-            <ul>
-                <li>Des <a href="{% url 'destination_list' %}"><strong>destinations incontournables</strong></a> telles qu’Abidjan, Yamoussoukro, Grand-Bassam et bien d’autres.</li>
-                <li>Des articles passionnants sur la <a href="{% url 'culture' %}"><strong>culture ivoirienne</strong></a> : danses, musiques, rites, vêtements traditionnels, et plus encore.</li>
-                <li>Des <a href="{% url 'conseils' %}"><strong>conseils pratiques</strong></a> pour préparer au mieux votre voyage.</li>
-                <li>Une galerie riche en images, vidéos et témoignages authentiques d’expériences locales.</li>
-            </ul>
+      <section>
+        <h2>Ce que vous trouverez sur notre site</h2>
+        <ul>
+          <li>Des <strong>guides de quartiers</strong> détaillés</li>
+          <li>Des idées d’<strong>activités et de sorties</strong> selon vos envies</li>
+          <li>Les <strong>meilleures adresses culinaires</strong> : maquis, restaurants, street food</li>
+          <li>Des suggestions d’<strong>hébergements</strong> adaptés à tous les budgets</li>
+          <li>Des <strong>conseils pratiques</strong> pour voyager sereinement</li>
+        </ul>
+      </section>
 
-            <p>
-                Notre mission ? <strong>Mettre en lumière la richesse culturelle et humaine de la Côte d’Ivoire</strong>, tout en créant un espace convivial où chacun peut apprendre, partager et s’inspirer.
-            </p>
+      <section>
+        <h2>Notre engagement</h2>
+        <p>Nous valorisons un tourisme <strong>responsable, local et durable</strong>. Notre objectif est de mettre en avant les talents, les cultures et les initiatives ivoiriennes qui font la richesse d’Abidjan.</p>
+      </section>
 
-            <p>
-                Merci de nous accompagner dans cette belle aventure. Ensemble, découvrons et célébrons la Côte d’Ivoire. 🌍
-            </p>
+      <section>
+        <h2>Contactez-nous</h2>
+        <p>Une question, une idée ou une collaboration ? Écrivez-nous à <a href="mailto:contact@exploreabidjan.com">contact@exploreabidjan.com</a> ou suivez-nous sur les réseaux sociaux.</p>
+      </section>
+    </article>
+  </main>
 
-            <p class="text-center mt-4">
-                <a href="{% url 'contact' %}" class="btn btn-primary">Nous contacter</a>
-            </p>
-        </div>
-    </div>
-</div>
-{% endblock %}
+  {% endblock %}

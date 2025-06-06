@@ -43,6 +43,8 @@
                 <ul class="dropdown-menu">
                   <li class="nav-item"><a class="nav-link" href="{% url 'destination_list' %}">Destinations 🇨🇮</a></li>
                   <li class="nav-item"><a class="nav-link" href="{% url 'culture' %}">Culture et traditions</a></li>
+                  <li class="nav-item"><a class="nav-link" href="#">Dans la nature</a></li>
+                  <li class="nav-item"><a class="nav-link" href="#">Autour de Babi</a></li>
                 </ul>
             </li>
 
@@ -50,7 +52,10 @@
               <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Profiter</a>
                 <ul class="dropdown-menu">
                   <li class="dropdown-item"><a class="nav-link" href="{% url 'restaurants_list' %}">Où manger</a></li>
-                  <li class="dropdown-item"><a class="nav-link" href="{% url 'hebergements_list' %}">Hébergement</a></li>
+                  <li class="dropdown-item"><a class="nav-link" href="#">Gastronomie</a></li>
+                  <li class="dropdown-item"><a class="nav-link" href="#">Sortir</a></li>
+                  <li class="dropdown-item"><a class="nav-link" href="#">Loisir</a></li>
+                  <li class="dropdown-item"><a class="nav-link" href="#">Shopping</a></li>
                 </ul>
             </li>
 
@@ -60,10 +65,12 @@
                   <li class="dropdown-item"><a class="nav-link" href="{% url 'conseils' %}">Conseils de voyage</a></li>
                   <li class="dropdown-item"><a class="nav-link" href="{% url 'infos_pratiques' %}">infos pratiques</a></li>
                   <li class="dropdown-item"><a class="nav-link" href="{% url 'que_faire' %}">Que faire ?</a></li>
+                  <li class="dropdown-item"><a class="nav-link" href="{% url 'hebergements_list' %}">Hébergement</a></li>
+                  <li class="dropdown-item"><a class="nav-link" href="#">Transports</a></li>
                 </ul>
             </li>
             
-          <li class="nav-item"><a class="nav-link" href="{% url 'a_propos' %}">A PROPOS</a></li>
+          <li class="nav-item"><a class="nav-link" href="{% url 'a_propos' %}">À PROPOS</a></li>
           <li class="nav-item"><a class="nav-link" href="{% url 'contact' %}">Contact</a></li>
 
         </ul>
@@ -128,65 +135,8 @@
 <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
 
 <!-- swipper -->
-<script>
-  const swiper = new Swiper(".mySwiper", {
-    slidesPerView: 1.1, // pour effet de "carte qui dépasse"
-    spaceBetween: 10, // réduit l'espace entre les slides
-    centeredSlides: true, // ✅ centre les slides dans le wrapper
-    loop: false, // Désactiver la boucle
-    watchOverflow: true, // Désactiver flèches si 1 seul slide
 
-    navigation: {
-      nextEl: ".swiper-button-next",
-      prevEl: ".swiper-button-prev",
-    },
-
-    breakpoints: {
-      768: {
-        slidesPerView: 2,
-        spaceBetween: 15,
-        centeredSlides: false,
-      },
-      992: {
-        slidesPerView: 3,
-        spaceBetween: 20,
-        centeredSlides: false,
-      },
-      // 1200: {
-      //   slidesPerView: 3,
-      //   spaceBetween: 30
-      // },
-    },
-    on: {
-      slideChange: function() {
-        const swiperInstance = this;
-        document.querySelector('.swiper-button-next')
-          .classList.toggle('.swiper-button-disabled', swiperInstance.isEnd);
-        document.querySelector('.swiper-button-prev')
-          .classList.toggle('.swiper-button-disabled', swiperInstance.isBeginning);
-        // const nextBtn = document.querySelector('.swiper-button-next');
-        // const prevBtn = document.querySelector('.swiper-button-prev');
-
-        // // Désactiver le bouton Next à la fin
-        // if (swiperInstance.isEnd) {
-        //   nextBtn.classList.add('swiper-button-disabled');
-        // } else {
-        //   nextBtn.classList.remove('swiper-button-disabled');
-        // }
-        // // Désactiver le bouton Prev au début
-        // if (swiperInstance.isBeginning) {
-        //   prevBtn.classList.add('swiper-button-disabled');
-        // } else {
-        //   prevBtn.classList.remove('swiper-button-disabled');
-        // }
-      },
-      // À l'initialisation
-      init: function() {
-        this.emit('slideChange');
-      }
-    }
-  });
-</script>
-
+<!-- <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script> -->
+<script src="{% static 'js/swiper-agenda.js' %}"></script>
 </body>
 </html>

@@ -1,6 +1,11 @@
 {% extends 'base.html' %}
+{% load static %}
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/contact.css' %}">
+{% endblock %}
+
 {% block content %}
-<div class="container mt-4">
+<div class="contact-page container mt-4">
     <h2>Contactez-nous</h2>
     <form method="post">
         {% csrf_token %}
@@ -9,3 +14,4 @@
     </form>
 </div>
 {% endblock %}
+
