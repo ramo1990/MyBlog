@@ -1,14 +1,15 @@
 {% extends "base.html" %}
 {% load static %}
- {% comment %}
-{% block extra_css %}
-    <link rel="stylesheet" href="{% static 'css/gastronomie_list.css' %}">
+ {% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/agenda_list.css' %}">
 {% endblock %}
-{% endcomment %}
 
 {% block content %}
 <div class="container mt-4">
-    <h2 class="text-center mb-4">Ville & Gastronomie</h2>
+    <h2 class="text-center mb-4">Villes & Patrimoines </h2>
+    <p>Bienvenue à Abidjan, capitale économique et culturelle de la Côte d’Ivoire, 
+      surnommée la perle des lagunes. Vibrante, contrastée et cosmopolite, 
+      Abidjan est une ville en constante évolution, entre modernité urbaine et richesse patrimoniale.</p>
 
   <div class="row">
     {% for ville in villes %}
@@ -29,7 +30,7 @@
 
           <p class="card-text">{{ ville.content|truncatewords:20 }}</p>
           <p class="text-muted mt-auto">
-            {{ ville.date|date:"d M Y" }}
+            <strong>Date :</strong> {{ ville.date|date:"d M Y" }}
           </p>
 
           {% if ville.slug %}

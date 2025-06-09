@@ -26,9 +26,11 @@
 <section class="container mt-5 mb-5">
   <h2 class="text-center mb-5 text-uppercase">A la une</h2>
 
-  <div class="row g-4">
-    {% for post in post_list|slice:":8" %}
-    <div class="col-12 col-md-6 col-lg-4 mb-4">
+<div class="agenda-carousel-container position-relative">
+  <div class="swiper mySwiper mb-4">
+    <div class="swiper-wrapper">
+      {% for post in post_list|slice:":6" %}
+    <div class="swiper-slide">
       <article class="card h-100 shadow-sm">
         {% if post.image %}
         <img src="{{ post.image.url }}" alt="{{ post.title }}" class="img-fluid card-img-top">
@@ -37,19 +39,24 @@
           <h2 class="card-title h5">{{ post.title }}</h2>
           <p class="text-muted small">{{ post.author }} | {{ post.created_on|date:"d F Y" }}</p>
           <p class="card-text">{{ post.content|truncatechars:200 }}</p>
+          {% if post.slug %}
           <a href="{% url 'post_detail' post.slug %}" class="btn btn-primary mt-auto">Voir plus &rarr;</a>
+          {% else %}
+          <span class="btn btn-secondary mt-auto disabled"> pas de lien</span>
+          {% endif %}
         </div>
       </article>
     </div>
-    {% empty %}
-    <p>Aucun article pour le moment.</p>
     {% endfor %}
   </div>
-
+</div>
+  <!-- Arrows -->
+  <div class="swiper-button-prev"></div>
+  <div class="swiper-button-next"></div>
+</div>
   <div class="text-center mb-4">
     <a href="{% url 'home' %}" class="btn btn-primary btn-lg">Nos derniers articles</a>
   </div>
-  
 </section>
 
 <!-- section agenda -->
@@ -96,16 +103,17 @@
   <div class="text-center mb-4">
     <a href="{% url 'agenda_list' %}" class="btn btn-primary btn-lg">VOIR TOUT L'AGENDA →</a>
   </div>
-
 </section>
 
 <!-- Section Gastronomie -->
 <section class="container mt-5 mb-5">
   <h2 class="text-center mb-5 text-uppercase">Découvertes Gastronomiques</h2>
 
-  <div class="row g-4">
-    {% for plat in gastronomie_list %}
-    <div class="col-12 col-md-6 col-lg-4 mb-4">
+  <div class="agenda-carousel-container position-relative">
+  <div class="swiper mySwiper mb-4">
+    <div class="swiper-wrapper">
+    {% for plat in gastronomie_list|slice:":6" %}
+    <div class="swiper-slide">
       <article class="card h-100 shadow-sm">
         {% if plat.image %}
         <img src="{{ plat.image.url }}" alt="{{ plat.title }}" class="img-fluid card-img-top">
@@ -114,14 +122,21 @@
           <h2 class="card-title h5">{{ plat.title }}</h2>
           <p class="text-muted small">{{ plat.date|date:"d F Y" }}</p>
           <p class="card-text">{{ plat.content|truncatechars:200 }}</p>
+          {% if plat.slug %}
           <a href="{% url 'gastronomie_detail' plat.slug %}" class="btn btn-primary mt-auto">Voir plus &rarr;</a>
+          {% else %}
+          <span class="btn btn-secondary mt-auto disabled"> pas de lien</span>
+          {% endif %}
         </div>
       </article>
     </div>
-    {% empty %}
-    <p>Aucune spécialité gastronomique disponible pour le moment.</p>
     {% endfor %}
   </div>
+  </div>
+    <!-- Arrows -->
+    <div class="swiper-button-prev"></div>
+    <div class="swiper-button-next"></div>
+</div>
 
   <div class="text-center mb-4">
     <a href="{% url 'gastronomie_list' %}" class="btn btn-primary btn-lg">VOIR TOUT →</a>
@@ -130,11 +145,13 @@
 
 <!-- Section Ville & Patrimoine -->
 <section class="container mt-5 mb-5">
-  <h2 class="text-center mb-5 text-uppercase">Villes et Patrimoine</h2>
+  <h2 class="text-center mb-5 text-uppercase">Villes et Patrimoines </h2>
 
-  <div class="row g-4">
-    {% for ville in ville_list %}
-    <div class="col-12 col-md-6 col-lg-4 mb-4">
+  <div class="agenda-carousel-container position-relative">
+  <div class="swiper mySwiper mb-4">
+    <div class="swiper-wrapper">
+    {% for ville in ville_list|slice:":6" %}
+    <div class="swiper-slide">
       <article class="card h-100 shadow-sm">
         {% if ville.image %}
         <img src="{{ ville.image.url }}" alt="{{ ville.title }}" class="img-fluid card-img-top">
@@ -143,7 +160,6 @@
           <h2 class="card-title h5">{{ ville.title }}</h2>
           <p class="text-muted small">{{ ville.date|date:"d M Y" }}</p>
           <p class="card-text">{{ ville.content|truncatechars:200 }}</p>
-
           {% if ville.slug %}
           <a href="{% url 'ville_detail' ville.slug %}" class="btn btn-primary mt-auto">Voir plus &rarr;</a>
           {% else %}
@@ -152,15 +168,17 @@
         </div>
       </article>
     </div>
-    {% empty %}
-    <p class="text-center">Aucune ville disponible pour le moment.</p>
     {% endfor %}
   </div>
+</div>
+  <!-- Arrows -->
+  <div class="swiper-button-prev"></div>
+  <div class="swiper-button-next"></div>
+</div>
 
   <div class="text-center mt-4">
     <a href="{% url 'ville_list' %}" class="btn btn-primary btn-lg">Voir toutes les villes →</a>
   </div>
 </section>
-
 
 {% endblock content %}

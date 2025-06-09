@@ -52,7 +52,8 @@ def delete_post_image(sender, instance, **kwargs):
 class Agenda(models.Model):
     title = models.CharField(max_length=200)
     slug = models.SlugField(max_length=200, unique=True, blank=True)
-    date_debut = models.DateField()
+    date_debut = models.DateField(null=True, blank=True)
+    date_debut_texte = models.CharField(max_length=100, blank=True)
     date_fin = models.DateField(null=True, blank=True)
     content = models.TextField()
     image = models.ImageField(upload_to='agenda_images/', null=True, blank=True)

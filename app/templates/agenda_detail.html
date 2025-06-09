@@ -8,19 +8,23 @@
 <div class="container mt-4">
     <div class="row justify-content-center">
         <div class="col-12 col-md-10 col-lg-8">
-            <h2>{{ event.titre }}</h2>
+            <h2>{{ event.title }}</h2>
 
             {% if event.image %}
-            <img src="{{ event.image.url }}" alt="event.titre" class="img-fluid rounded mb-3">
+            <img src="{{ event.image.url }}" alt="event.title" class="img-fluid rounded mb-3">
             {% endif %}
 
-            <p class="mb-4"> {{event.description}} </p>
+            <p class="mb-4"> {{event.content}} </p>
             <p class="text-muted">
-                {% if event.date_fin %}
-                  Du {{ event.date_debut|date:"d M Y" }} au {{ event.date_fin|date:"d M Y" }}
-                {% else %}
-                  Le {{ event.date_debut|date:"d M Y" }}
-                {% endif %}
+                {% if event.date_debut and event.date_fin %}
+                {{ event.date_debut|date:"j F Y" }} - {{ event.date_fin|date:"j F Y" }}
+            {% elif event.date_debut %}
+                {{ event.date_debut|date:"j F Y" }}
+            {% elif  event.date_debut_texte %}
+                {{ event.date_debut_texte }}
+            {% else %}
+              Non renseignée
+            {% endif %}
             </p>
         </div>
     </div>
