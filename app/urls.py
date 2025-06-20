@@ -4,6 +4,7 @@ from django.conf.urls.static import static
 from .views import *
 from django.conf.urls.i18n import i18n_patterns
 from django.views.i18n import set_language
+from django.views.generic import TemplateView
 
 urlpatterns = [
     path('', PostList.as_view(), name='home'),
@@ -11,7 +12,6 @@ urlpatterns = [
     path('post/<slug:slug>/delete/', PostDeleteView.as_view(), name='post_delete'),
     path('destinations/', DestinationListView.as_view(), name='destination_list'),
     path('destinations/<slug:slug>/', DestinationDetailView.as_view(), name='destination_detail'),
-
     path('culture/', CultureListView.as_view(), name='culture'),
     path('culture/<slug:slug>/', CultureDetailView.as_view(), name='culture_detail'),
     path('agenda/', agenda_list, name='agenda_list'),
@@ -30,6 +30,9 @@ urlpatterns = [
     path('infos-pratiques/', infos_pratiques, name='infos_pratiques'),
     path('que_faire/', que_faire, name='que_faire'),
     path('que_faire/<slug:slug>/', detail_activite, name='detail_activite'),
+    path('search/', search, name='search'),
+    path('mentions-legales/', TemplateView.as_view(template_name="mentions-legales.html"), name="mentions_legales"),
+    path('politique-confidentialite/', TemplateView.as_view(template_name="politique-confidentialite.html"), name="politique_confidentialite"),
     path('<slug:slug>/', DetailView.as_view(), name='post_detail'),
 ]
 

@@ -1,0 +1,109 @@
+<!-- templates/search_results.html -->
+{% extends "base.html" %}
+{% block content %}
+  <h2>Résultats pour "{{ query }}"</h2>
+
+  {% if destinations or restaurants or ville_patrimoine or post or agenda or culture or conseil_voyage or gastronomie or hebergement or Info_pratique or que_faire %}
+    {% if destinations %}
+      <h4>🏝️ Destinations</h4>
+      <ul>
+        {% for d in destinations %}
+          <li>{{ d.title }}</li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+
+    {% if restaurants %}
+      <h4>🍽️ Restaurants</h4>
+      <ul>
+        {% for r in restaurants %}
+          <li>{{ r.title }} – {{ r.categorie }}</li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+
+    {% if ville_patrimoine %}
+      <h4>📅 Ville</h4>
+      <ul>
+        {% for v in ville_patrimoine %}
+          <li>{{ v.title }} à {{ v.content }}</li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+
+    {% if post %}
+      <h4>Post</h4>
+      <ul>
+        {% for p in post %}
+          <li>{{ p.title }} à {{ p.content }}</li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+
+    {% if agenda %}
+      <h4>agenda</h4>
+      <ul>
+        {% for a in agenda %}
+          <li>{{ a.title }} à {{ a.content }}</li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+
+    {% if culture %}
+      <h4>culture</h4>
+      <ul>
+        {% for c in culture %}
+          <li>{{ c.title }} à {{ c.content }}</li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+
+    {% if conseil_voyage %}
+      <h4>conseil voyage</h4>
+      <ul>
+        {% for c in conseil_voyage %}
+          <li>{{ c.title }} à {{ c.content }}</li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+
+    {% if gastronomie %}
+      <h4>gastronomie</h4>
+      <ul>
+        {% for g in gastronomie %}
+          <li>{{ g.title }} à {{ g.content }}</li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+
+    {% if hebergement %}
+      <h4>hebergement</h4>
+      <ul>
+        {% for h in hebergement %}
+          <li>{{ h.title }} à {{ h.content }}</li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+    
+    {% if Info_pratique %}
+      <h4>Info_pratique</h4>
+      <ul>
+        {% for i in Info_pratique %}
+          <li>{{ i.title }} à {{ i.content }}</li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+
+    {% if que_faire %}
+      <h4>que_faire</h4>
+      <ul>
+        {% for q in que_faire %}
+          <li>{{ q.title }} à {{ q.content }}</li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+
+  {% else %}
+    <p>Aucun résultat trouvé pour <strong>{{ query }}</strong>.</p>
+  {% endif %}
+{% endblock %}

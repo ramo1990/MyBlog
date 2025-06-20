@@ -85,6 +85,73 @@ footer {
   border-color: rgba(255, 255, 255, 0.6); /* bordure blanche légèrement transparente */
 }
 
+#mobileSearchOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background-color: rgba(255, 255, 255, 0.95);
+  z-index: 1050;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+}
+#mobileSearchOverlay .overlay-content {
+  width: 100%;
+  max-width: 500px;
+}
+
+/* Bouton de recherche navbar */
+#searchToggle {
+  background: linear-gradient(to right, var(--orange-ci), var(--green-ci));
+  color: var(--white-ci);
+  border: none;
+  padding: 0.45rem 0.75rem;
+  border-radius: 50px;
+  font-size: 1.1rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+#searchToggle:hover {
+  background: var(--green-ci);
+  color: var(--white-ci);
+  transform: scale(1.05);
+}
+
+/* Icône dans le bouton */
+#searchToggle::before {
+  content: "🔍";
+  font-size: 1.1rem;
+}
+
+/* Supprime le texte dans le bouton s’il y en a accidentellement */
+#searchToggle span {
+  display: none;
+}
+/* Bouton vert personnalisé pour recherche mobile */
+.btn-ci-green {
+  background-color: var(--green-ci) !important;
+  color: var(--white-ci) !important;
+  border: none;
+  padding: 0.6rem 1rem;
+  border-radius: 8px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  transition: background-color 0.3s ease;
+  text-align: center;
+}
+
+.btn-ci-green:hover {
+  background-color: #006f43 !important; /* un vert un peu plus foncé */
+}
+
+
 /* Responsive Tweaks pour petit ecran*/
 @media (max-width: 768px) {
   .brand-abidjan::after {

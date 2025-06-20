@@ -3,7 +3,7 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
-  <title>✍ MyBlog</title>
+  <title>🌍 Abidjan-Tourisme</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <!-- Bootstrap CSS -->
@@ -23,6 +23,17 @@
   {% endblock %}
 </head>
 <body>
+
+  <!-- overlay de recherche masqué -->
+  <div id="mobileSearchOverlay" class="d-none">
+    <div class="overlay-content">
+      <form method="GET" action="{% url 'search' %}">
+        <input type="search" name="q" placeholder="Rechercher..." class="form-control mb-2" autofocus>
+        <button type="submit" class="btn-ci-green w-100">Rechercher</button>
+      </form>
+      <button class="btn-close" id="closeSearchOverlay" aria-label="Fermer"></button>
+    </div>
+  </div>
 
   <!-- Navigation -->
   <nav class="navbar navbar-expand-lg navbar-light bg-light custom-margin">
@@ -75,6 +86,11 @@
 
         </ul>
       </div>
+      <!-- search -->
+      <form method="GET" action="{% url 'search' %}" class="d-flex align-items-center" id="searchForm">
+        <input id="searchInput" type="search" name="q" class="form-control me-2 d-none" placeholder="Rechercher...">
+        <button type="button" class="btn btn-outline-success" id="searchToggle" title="Rechercher"> 🔍 </button>
+      </form>
     </div>
   </nav>
 
@@ -95,18 +111,18 @@
     <!-- Navigation footer -->
     <div class="footerNav mb-3">
       <ul class="list-inline mb-0">
-        <li class="list-inline-item"><a href="{% url 'home' %}" class="text-white text-decoration-none">ACCUEIL</a></li>
+        <li class="list-inline-item"><a href="{% url 'home' %}" class="text-white text-decoration-none">Accueil</a></li>
         <li class="list-inline-item"><a href="{% url 'a_propos' %}" class="text-white text-decoration-none">A propos</a></li>
-        <li class="list-inline-item"><a href="{% url 'contact' %}" class="text-white text-decoration-none">contact us</a></li>
+        <li class="list-inline-item"><a href="{% url 'contact' %}" class="text-white text-decoration-none">Contact</a></li>
       </ul>
     </div>
     <!-- Droits et mentions -->
-    <p class="mb-1">&copy; 2025 Visit Abidjan. Tous droits réservés.</p>
     <nav>
-      <a href="/mentions-legales.html" class="text-white text-decoration-none me-2">Mentions légales</a> |
-      <a href="/politique-confidentialite.html" class="text-white text-decoration-none ms-2">Politique de confidentialité</a>
+      <a href="{% url 'mentions_legales' %}" class="text-white text-decoration-none me-2">Mentions légales</a> |
+      <a href="{% url 'politique_confidentialite' %}" class="text-white text-decoration-none ms-2">Politique de confidentialité</a>
     </nav>
   </div>
+  <p class="mb-1">&copy; 2025 Visit Abidjan. Tous droits réservés.</p>
   </footer>
 
 
@@ -135,8 +151,9 @@
 <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
 
 <!-- swipper -->
-
-<!-- <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script> -->
 <script src="{% static 'js/swiper-agenda.js' %}"></script>
+<!-- search -->
+<script src="{% static 'js/search-toggle.js' %}"></script>
+
 </body>
 </html>
