@@ -2,6 +2,7 @@
   --orange-ci: #F77F00;
   --green-ci: #008751;
   --white-ci: #FFFFFF;
+  --black-ci: #222;
 }
 
 
@@ -9,10 +10,28 @@
   position: relative;
   background: url('/static/images/image.png') no-repeat center center;
   background-size: cover; /* image remplir toute la section*/
-  height: 80vh;
+  height: 70vh;
   color: var(--white-ci);
   display: flex;  /* Centre verticalement le contenu */
   align-items: center;
+}
+
+.masthead .container {
+  z-index: 2;
+  position: relative;
+}
+
+.btn-ci {
+  background-color: var(--green-ci);
+  color: var(--white-ci);
+  padding: 0.5rem 1rem;
+  font-weight: 600;
+  border-radius: 8px;
+  border: none;
+  transition: background-color 0.3s ease;
+}
+.btn-ci:hover {
+  background-color: #006f43;
 }
 
 /* filtre sur l'image mais en dessous du texte */
@@ -23,6 +42,7 @@
   height: 100%;
   width: 100%;
   background-color: rgba(0, 0, 0, 0.5); /* filtre sombre */
+  z-index: 1;
 }
 
 /* Place le texte au-dessus de l’overlay */
@@ -32,62 +52,81 @@
   }
 /*Grosse taille + très gras*/
 .site-heading h1 {
-  font-size: 2.8rem;
+  font-size: 3rem;
+  color: var(--white-ci);
   font-weight: 700;
   margin-bottom: 0.5rem;
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
   }
 /*Moins grand et plus léger*/
 .site-heading p {
-  font-size: 1.25rem;
-  font-weight: 300;
+  font-size: 1.2rem;
+  /* font-weight: 300; */
+  color: var(--orange-ci);
+  }
+
+  section {
+    padding: 1rem 1rem;
   }
   
 /* varier les fonds de couleurs de section */
   section:nth-of-type(even) {
     background-color: #f8f9fa;
-    padding: 3rem 1rem;
+    /* padding: 3rem 1rem; */
     border-radius: 12px;
   }
 
 /* Cartes d'articles(Posts) */
 .card {
-  border-top: 4px solid var(--orange-ci); /* accent orange */
-  border-radius: 0.75rem;
+  /* border-top: 4px solid var(--orange-ci); */
+  border: none ;
+  border-radius: 10px;
   overflow: hidden; /*Coupe le contenu qui dépasse*/
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  /* transition: transform 0.3s ease, box-shadow 0.3s ease;
   max-width: 350px;
-  width: 100%;
+  width: 100%; */
 }
 .card:hover {
   transform: translateY(-5px); /*Lève légèrement le post à la souris*/
   box-shadow: 0 10px 20px rgba(0, 135, 81, 0.2); /* ombre verte douce */
 }
 
+.card-body {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
 /*Donne une hauteur fixe à l’image.*/
 .card-img-top {
   height: 200px;
   object-fit: cover; /* Remplit sans déformer */
   }
 
-  h2.card-title {
+  card-title {
     font-size: 1rem;
+    font-weight: 600;
+    color: var(--green-ci);
 
   } 
-  h2, h3 {
+  /* h2, h3 {
     color: #008751;
-  }
-  .card .card-title {
+  } */
+  /* .card .card-title {
     color: #008751;
     margin-bottom: 0.5rem;
-  }
+  } */
 
   .card-text {
     flex-grow: 1; /*un btn toujours en bas de la carte*/
     margin-bottom: 1rem;
+    color: var(--black-ci);
+    font-size: 0.9rem;
   }
 
   /* Boutton */
-.btn-primary {
+/* .btn-primary {
     background: linear-gradient(to right, #F77F00, #FFFFFF, #008751);
     border: none;
     color: #1db820;
@@ -96,19 +135,28 @@
   .btn-primary:hover {
     background: linear-gradient(to right, #008751, #FFFFFF, #F77F00);
     color: rgb(185, 149, 17);
-  }
+  } */
+/* Bouton toujours en bas */
+.card .btn {
+  margin-top: auto;
+}
+
 
 body {
-  background-color: #ffffff;
-  color: #333;
+  background-color: #fff;
+  color: var(--black-ci);
+  font-family: 'Poppins', sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
 }
 
 /* Conteneur principal du carrousel */
 .agenda-carousel-container {
+  margin-bottom: 2rem;
   position: relative;
-  padding: 0 4rem; /* espace pour les flèches */
-  max-width: 1200px;
-  margin: 0 auto; /* centrer horizontalement */
+  /* padding: 0 4rem; espace pour les flèches */
+  /* max-width: 1200px; */
+  /* margin: 0 auto; centrer horizontalement */
 }
 
 .swiper {
@@ -116,10 +164,28 @@ body {
   position: relative;
 }
 
+.swiper-wrapper {
+  align-items: stretch;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}
+
 .swiper-slide {
   display: flex;
   justify-content: center;
-  padding: 0 !important;
+  /* padding: 0 !important; */
+}
+.swiper-slide .card {
+  /* display: flex;
+  justify-content: center; */
+  /* padding: 0 !important; */
+  width: 100%;
+  max-width: 270px; /* taille proche des vignettes */
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  border-radius: 10px;
+  overflow: hidden;
 }
 
 .swiper-button-next,
@@ -127,10 +193,12 @@ body {
   position: absolute;
   top: 50%; /* centré verticalement */
   transform: translateY(-50%);
-  color: white; /* couleur des flèches */
-  background-color: #1db820;
-  padding: 1.5rem;
-  /* border-radius: 50%; */
+  color: var(--green-ci); /* couleur des flèches */
+  background-color: var(--white-ci);
+  padding: 10px;
+  border-radius: 50%;
+  border: 1px solid var(--green-ci);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   width: 48px;
   height: 48px;
   display: flex;
@@ -154,7 +222,8 @@ body {
 }
 .swiper-button-next:not(.swiper-button-disabled):hover,
 .swiper-button-prev:not(.swiper-button-disabled):hover {
-  background-color: #F77F00;
+  background-color: var(--green-ci);
+  color: var(--white-ci);
 }
 /* hover uniquement si actif */
 .swiper-button-disabled {
@@ -167,8 +236,34 @@ body {
   font-size: 40px;
 }
 
+.card-link {
+  color: inherit;
+  text-decoration: none;
+  transition: transform 0.3s ease;
+}
+.card-link:hover {
+  transform: scale(1.05);
+  text-decoration: none;
+}
+.card-img-top {
+  height: 160px;
+  object-fit: cover;
+}
+
+
 /* Adapte le titre principal et la hauteur du header pour mobile */
   @media (max-width: 768px) {
+    .card-text {
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .swiper-button-next,
+    .swiper-button-prev {
+      display: none !important;
+    }
     .site-heading h1 {
         font-size: 2rem;
     }
@@ -177,3 +272,51 @@ body {
         padding: 2rem;
     }
     }
+  
+.section-title {
+  color: var(--ci-primary, #2c3e50);
+  font-weight: 600;
+}
+
+
+/* Sur mobile, forcer chaque slide à 100% */
+@media (max-width: 576px) {
+  .post-card .card-body {
+    padding: 1rem;
+  }
+  .post-card .card-title {
+    font-size: 1.1rem;
+  }
+  .post-card .card-text {
+    font-size: 0.9rem;
+  }
+  .post-card img {
+    height: 180px;
+  }
+  .swiper-slide {
+    width: 100% !important;
+    padding: 0 !important;
+  }
+  .card {
+    width: 100%;
+    max-width: 100%;
+    flex: 1 0 auto;
+    max-height: 350px; /* Ajuste cette valeur selon ton besoin */
+    overflow: hidden;  /* Cache tout ce qui dépasse */
+    display: flex;
+    flex-direction: column;
+  }
+  .card-img-top {
+    height: 150px; /* réduit un peu la hauteur de l’image sur mobile */
+  }
+  .card-body {
+    overflow: hidden;
+    flex-grow: 1;
+  }
+  
+}
+/* Espacement pagination */
+/* .pagination {
+  flex-wrap: wrap;
+  justify-content: center;
+} */

@@ -1,0 +1,80 @@
+/* Conteneur principal */
+.post-list-container {
+    margin-top: 4rem;
+    margin-bottom: 4rem;
+  }
+  
+  /* Titre principal */
+  .post-list-container h1 {
+    text-align: center;
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: var(--ci-primary, #2c3e50);
+    margin-bottom: 3rem;
+  }
+  
+  /* Cartes */
+  .post-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: none;
+    border-radius: 0.5rem;
+    overflow: hidden;
+  }
+  
+  .post-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Image */
+  .post-card img {
+    height: 200px;
+    object-fit: cover;
+    width: 100%;
+  }
+  
+  /* Corps de la carte */
+  .post-card .card-body {
+    display: flex;
+    flex-direction: column;
+    padding: 1rem 1.2rem;
+  }
+  
+  .post-card .card-title {
+    font-size: 1.25rem;
+    font-weight: bold;
+    color: var(--ci-primary, #2c3e50);
+    margin-bottom: 0.5rem;
+  }
+  
+  .post-card .card-text {
+    color: #555;
+    font-size: 0.95rem;
+    margin-bottom: 1rem;
+  }
+  
+  .post-card .text-muted {
+    font-size: 0.85rem;
+  }
+  
+  /* Bouton */
+  .btn-ci {
+    background-color: var(--ci-accent, #f39c12);
+    color: white;
+    border: none;
+    transition: background-color 0.3s ease;
+  }
+  
+  .btn-ci:hover {
+    background-color: #e67e22;
+  }
+  
+  /* Pagination */
+  .pagination {
+    margin-top: 2rem;
+  }
+  
+  .pagination .btn {
+    min-width: 100px;
+  }
+  

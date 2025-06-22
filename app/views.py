@@ -25,6 +25,15 @@ class DetailView(generic.DetailView):
     model = Post
     template_name = 'post_details.html'
 
+class PostAllList(generic.ListView):
+    model = Post
+    template_name = 'post_list.html'
+    context_object_name = 'posts'
+    paginate_by = 9  # facultatif : pagination
+
+    def get_queryset(self):
+        return Post.objects.filter(status=1).order_by('-created_on')
+
 # permettre a certains users de modifier ou supprimer leur post
 class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Post
@@ -191,63 +200,61 @@ def detail_activite(request, slug):
 # search
 def search(request):
     query = request.GET.get('q', '').strip()
-    # results = []
-    destinations = []
-    restaurants = []
-    ville_patrimoine = []
-    post = []
-    agenda = []
-    culture = []
-    conseil_voyage = []
-    gastronomie = []
-    hebergement = []
-    Info_pratique = []
-    que_faire = []
+    results = []
+    # destinations = []
+    # restaurants = []
+    # ville_patrimoine = []
+    # post = []
+    # agenda = []
+    # culture = []
+    # conseil_voyage = []
+    # gastronomie = []
+    # hebergement = []
+    # Info_pratique = []
+    # que_faire = []
 
     if query:
-        destinations = Destinations.objects.filter(
-            Q(title__icontains=query) | Q(content__icontains=query)
-        )
-        restaurants = Restaurant.objects.filter(
-            Q(title__icontains=query) | Q(categorie__icontains=query)
-        )
-        ville_patrimoine = VillePatrimoine.objects.filter(
-            Q(title__icontains=query) | Q(content__icontains=query)
-        )
-        post = Post.objects.filter(
-            Q(title__icontains=query) | Q(content__icontains=query)
-        )
-        agenda = Agenda.objects.filter(
-            Q(title__icontains=query) | Q(content__icontains=query)
-        )
-        culture = Culture.objects.filter(
-            Q(title__icontains=query) | Q(content__icontains=query)
-        )
-        conseil_voyage = ConseilVoyage.objects.filter(
-            Q(title__icontains=query) | Q(content__icontains=query)
-        )
-        gastronomie = Gastronomie.objects.filter(
-            Q(title__icontains=query) | Q(content__icontains=query)
-        )
-        hebergement = Hebergement.objects.filter(
-            Q(title__icontains=query) | Q(content__icontains=query)
-        )
-        que_faire = Activite.objects.filter(
-            Q(title__icontains=query) | Q(content__icontains=query)
-        )
-        
+        destinations = Destinations.objects.filter(Q(title__icontains=query) | Q(content__icontains=query))
+        restaurants = Restaurant.objects.filter(Q(title__icontains=query) | Q(categorie__icontains=query))
+        ville_patrimoine = VillePatrimoine.objects.filter(Q(title__icontains=query) | Q(content__icontains=query))
+        post = Post.objects.filter(Q(title__icontains=query) | Q(content__icontains=query))
+        agenda = Agenda.objects.filter(Q(title__icontains=query) | Q(content__icontains=query))
+        culture = Culture.objects.filter(Q(title__icontains=query) | Q(content__icontains=query))
+        conseil_voyage = ConseilVoyage.objects.filter(Q(title__icontains=query) | Q(content__icontains=query))
+        gastronomie = Gastronomie.objects.filter(Q(title__icontains=query) | Q(content__icontains=query))
+        hebergement = Hebergement.objects.filter(Q(title__icontains=query) | Q(content__icontains=query))
+        que_faire = Activite.objects.filter(Q(title__icontains=query) | Q(content__icontains=query))
 
+        results = {
+            'destinations':destinations,
+            'restaurants':restaurants,
+            'ville_patrimoine':ville_patrimoine,
+            'post':post,
+            'agenda':agenda,
+            'culture':culture,
+            'conseil_voyage':conseil_voyage,
+            'gastronomie':gastronomie,
+            'hebergement':hebergement,
+            # 'Info_pratique':Info_pratique,
+            'que_faire':que_faire,
+        }
     return render(request, 'search_results.html', {
         'query':query,
-        'destinations':destinations,
-        'restaurants':restaurants,
-        'ville_patrimoine':ville_patrimoine,
-        'post':post,
-        'agenda':agenda,
-        'culture':culture,
-        'conseil_voyage':conseil_voyage,
-        'gastronomie':gastronomie,
-        'hebergement':hebergement,
-        'Info_pratique':Info_pratique,
-        'que_faire':que_faire,
+        'results':results
+        # 'destinations':destinations,
+        # 'restaurants':restaurants,
+        # 'ville_patrimoine':ville_patrimoine,
+        # 'post':post,
+        # 'agenda':agenda,
+        # 'culture':culture,
+        # 'conseil_voyage':conseil_voyage,
+        # 'gastronomie':gastronomie,
+        # 'hebergement':hebergement,
+        # 'Info_pratique':Info_pratique,
+        # 'que_faire':que_faire,
     })
+
+# Carousel Slide
+# def home(request):
+#     slides = CarouselSlide.objects.filter(active=True).order_by('order')
+#     return render(request, 'index.html', {'slides':slides})

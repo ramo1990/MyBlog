@@ -71,6 +71,11 @@ class CategorieActiviteAdmin(admin.ModelAdmin):
 class ActiviteAdmin(admin.ModelAdmin):
     list_display = ('title', 'categorie')
     prepopulated_fields = {'slug':('title',)}
+
+# @admin.register(CarouselSlide)
+# class CarouselSlideAdmin(admin.ModelAdmin):
+#     list_display = ('title', 'order', 'active')
+#     list_editable = ['order', 'active']
 ######
 
 admin.site.register(Destinations, DestinationAdmin)

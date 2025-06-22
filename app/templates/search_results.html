@@ -1,104 +1,115 @@
 <!-- templates/search_results.html -->
 {% extends "base.html" %}
-{% block content %}
-  <h2>Résultats pour "{{ query }}"</h2>
+{% load static %}
+{% block extra_css %}
+  <link rel="stylesheet" href="{% static 'css/search.css' %}">
+  <!-- <style>
+    body {
+      background-color: yellow !important;
+    }
+  </style> -->
+{% endblock %}
 
-  {% if destinations or restaurants or ville_patrimoine or post or agenda or culture or conseil_voyage or gastronomie or hebergement or Info_pratique or que_faire %}
-    {% if destinations %}
-      <h4>🏝️ Destinations</h4>
+{% block content %}
+<div class="container my-5">
+  <h2 class="text-center mb-4">Résultats pour "{{ query }}"</h2>
+
+  {% if results.destinations or results.restaurants or results.ville_patrimoine or results.post or results.agenda or results.culture or results.conseil_voyage or results.gastronomie or results.hebergement or results.que_faire %}
+    {% if results.destinations %}
+      <h4 class="mt-4">🏝️ Destinations</h4>
       <ul>
-        {% for d in destinations %}
-          <li>{{ d.title }}</li>
+        {% for d in results.destinations %}
+          <li><a href="{% url 'destination_detail' d.slug %}">{{ d.title }}</a></li>
         {% endfor %}
       </ul>
     {% endif %}
 
-    {% if restaurants %}
+    {% if results.restaurants %}
       <h4>🍽️ Restaurants</h4>
       <ul>
-        {% for r in restaurants %}
-          <li>{{ r.title }} – {{ r.categorie }}</li>
+        {% for r in results.restaurants %}
+          <li><a href="{% url 'restaurants_detail' r.slug %}">{{ r.title }}</a></li>
         {% endfor %}
       </ul>
     {% endif %}
 
-    {% if ville_patrimoine %}
+    {% if results.ville_patrimoine %}
       <h4>📅 Ville</h4>
       <ul>
-        {% for v in ville_patrimoine %}
-          <li>{{ v.title }} à {{ v.content }}</li>
+        {% for v in results.ville_patrimoine %}
+          <li><a href="{% url 'ville_detail' v.slug %}">{{ v.title }}</a></li>
         {% endfor %}
       </ul>
     {% endif %}
 
-    {% if post %}
+    {% if results.post %}
       <h4>Post</h4>
       <ul>
-        {% for p in post %}
-          <li>{{ p.title }} à {{ p.content }}</li>
+        {% for p in results.post %}
+          <li><a href="{% url 'home' %}">{{ p.title }}</a></li>
         {% endfor %}
       </ul>
     {% endif %}
 
-    {% if agenda %}
+    {% if results.agenda %}
       <h4>agenda</h4>
       <ul>
-        {% for a in agenda %}
-          <li>{{ a.title }} à {{ a.content }}</li>
+        {% for a in results.agenda %}
+          <li><a href="{% url 'agenda_detail' a.slug %}">{{ a.title }}</a></li>
         {% endfor %}
       </ul>
     {% endif %}
 
-    {% if culture %}
+    {% if results.culture %}
       <h4>culture</h4>
       <ul>
-        {% for c in culture %}
-          <li>{{ c.title }} à {{ c.content }}</li>
+        {% for c in results.culture %}
+          <li><a href="{% url 'culture_detail' c.slug %}">{{ c.title }}</a></li>
         {% endfor %}
       </ul>
     {% endif %}
 
-    {% if conseil_voyage %}
+    {% if results.conseil_voyage %}
       <h4>conseil voyage</h4>
       <ul>
-        {% for c in conseil_voyage %}
-          <li>{{ c.title }} à {{ c.content }}</li>
+        {% for c in results.conseil_voyage %}
+          <li><a href="{% url 'conseils' %}">{{ c.title }}</a></li>
         {% endfor %}
       </ul>
     {% endif %}
 
-    {% if gastronomie %}
+    {% if results.gastronomie %}
       <h4>gastronomie</h4>
       <ul>
-        {% for g in gastronomie %}
-          <li>{{ g.title }} à {{ g.content }}</li>
+        {% for g in results.gastronomie %}
+          <li><a href="{% url 'gastronomie_detail' g.slug %}">{{ g.title }}</a></li>
         {% endfor %}
       </ul>
     {% endif %}
 
-    {% if hebergement %}
+    {% if results.hebergement %}
       <h4>hebergement</h4>
       <ul>
-        {% for h in hebergement %}
-          <li>{{ h.title }} à {{ h.content }}</li>
+        {% for h in results.hebergement %}
+          <li><a href="{% url 'hebergement_detail' h.slug %}">{{ h.title }}</a></li>
         {% endfor %}
       </ul>
     {% endif %}
     
-    {% if Info_pratique %}
+    <!-- {% if Info_pratique %}
       <h4>Info_pratique</h4>
       <ul>
         {% for i in Info_pratique %}
-          <li>{{ i.title }} à {{ i.content }}</li>
+          <li><a href="{% url 'restaurants_detail' r.slug %}">{{ i.title }} à {{ i.content }}</a></li>
         {% endfor %}
       </ul>
-    {% endif %}
+    {% endif %} -->
 
-    {% if que_faire %}
+    {% if results.que_faire %}
       <h4>que_faire</h4>
       <ul>
-        {% for q in que_faire %}
-          <li>{{ q.title }} à {{ q.content }}</li>
+        {% for q in results.que_faire %}
+          <li><a href="{% url 'detail_activite' q.slug %}">{{ q.title }}</a></li>
         {% endfor %}
       </ul>
     {% endif %}
@@ -106,4 +117,5 @@
   {% else %}
     <p>Aucun résultat trouvé pour <strong>{{ query }}</strong>.</p>
   {% endif %}
+</div>
 {% endblock %}

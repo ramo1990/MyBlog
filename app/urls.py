@@ -8,6 +8,7 @@ from django.views.generic import TemplateView
 
 urlpatterns = [
     path('', PostList.as_view(), name='home'),
+    path("articles/", PostAllList.as_view(), name="post_list"),
     path('post/<slug:slug>/edit/', PostUpdateView.as_view(), name='post_edit'),
     path('post/<slug:slug>/delete/', PostDeleteView.as_view(), name='post_delete'),
     path('destinations/', DestinationListView.as_view(), name='destination_list'),

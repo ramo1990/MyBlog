@@ -22,13 +22,10 @@ class Post(models.Model):
 
     class Meta:
         ordering = ['-created_on']
-    
     def __str__(self):
         return self.title
-
     def get_absolute_url(self):
         return reverse('post_detail', kwargs={'slug': self.slug})
-    
     def save(self, *args, **kwargs):
         if not self.slug or Post.objects.filter(slug=self.slug).exclude(pk=self.pk).exists():
             base_slug = slugify(self.titre)
@@ -47,6 +44,20 @@ def delete_post_image(sender, instance, **kwargs):
     if instance.image:
         if os.path.isfile(instance.image.path):
             os.remove(instance.image.path)
+
+# section CarouselSlide
+# class CarouselSlide(models.Model):
+#     title = models.CharField(max_length=200, blank=True)
+#     subtitle = models.CharField(max_length=300, blank=True)
+#     image = models.ImageField(upload_to='carousel/')
+#     order = models.PositiveIntegerField(default=0)  # pour gérer l'ordre
+#     active = models.BooleanField(default=True)
+
+#     class Meta:
+#         ordering = ['order']
+#     def __str__(self):
+#         return self.title or f"Slide {self.pk}"
+
 
 # section agenda
 class Agenda(models.Model):

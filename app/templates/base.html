@@ -36,7 +36,7 @@
   </div>
 
   <!-- Navigation -->
-  <nav class="navbar navbar-expand-lg navbar-light bg-light custom-margin">
+  <nav class="navbar navbar-expand-md navbar-light bg-light custom-margin">
     <div class="container-fluid">
       <a class="navbar-brand" href="{% url 'home' %}"><span class="brand-abidjan">Abidjan</span></a>
 
@@ -89,7 +89,7 @@
       <!-- search -->
       <form method="GET" action="{% url 'search' %}" class="d-flex align-items-center" id="searchForm">
         <input id="searchInput" type="search" name="q" class="form-control me-2 d-none" placeholder="Rechercher...">
-        <button type="button" class="btn btn-outline-success" id="searchToggle" title="Rechercher"> 🔍 </button>
+        <button type="button" class="btn-ci-green" id="searchToggle" title="Rechercher"> 🔍 </button>
       </form>
     </div>
   </nav>
@@ -100,7 +100,7 @@
     {% endblock content %}
   </main>
 
-<footer class="py-3 footer text-white">
+<footer class="py-3 footer text-white container">
   <div class="container text-center">
     <!-- Réseaux sociaux -->
     <div class=" mb-3 socialIcons">
@@ -154,6 +154,7 @@
 <script src="{% static 'js/swiper-agenda.js' %}"></script>
 <!-- search -->
 <script src="{% static 'js/search-toggle.js' %}"></script>
+
 
 </body>
 </html>

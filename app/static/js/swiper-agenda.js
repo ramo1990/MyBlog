@@ -1,42 +1,79 @@
-  const swiper = new Swiper(".mySwiper", {
-    slidesPerView: 1.1, // pour effet de "carte qui dépasse"
-    spaceBetween: 10, // réduit l'espace entre les slides
-    centeredSlides: true, // centre les slides dans le wrapper
-    loop: false, // Désactiver la boucle
-    watchOverflow: true, // Désactiver flèches si 1 seul slide
+document.addEventListener("DOMContentLoaded", function () {
+  document.querySelectorAll('.agenda-carousel-container').forEach(container => {
+    const swiperEl = container.querySelector('.mySwiper');
+    const nextBtn = container.querySelector('.swiper-button-next');
+    const prevBtn = container.querySelector('.swiper-button-prev');
+    
+    const swiper = new Swiper(swiperEl, {
+      slidesPerView: 1.1,
+      spaceBetween: 5,
+      centeredSlides: true,
+      loop: false,
+      watchOverflow: true,
 
-    navigation: {
-      nextEl: ".swiper-button-next",
-      prevEl: ".swiper-button-prev",
-    },
+      navigation: {
+        nextEl: nextBtn,
+        prevEl: prevBtn,
+      },
 
-    breakpoints: {
-      768: {
-        slidesPerView: 2,
-        spaceBetween: 15,
-        centeredSlides: false,
+      breakpoints: {
+        576: {
+          slidesPerView: 1,
+          centeredSlides: false,
+        },
+        768: {
+          slidesPerView: 2,
+          spaceBetween: 15,
+          centeredSlides: false,
+        },
+        992: {
+          slidesPerView: 3,
+          spaceBetween: 20,
+          centeredSlides: false,
+        },
+        1200: {
+          slidesPerView: 4,
+          spaceBetween: 25,
+          centeredSlides: false,
+        },
       },
-      992: {
-        slidesPerView: 3,
-        spaceBetween: 20,
-        centeredSlides: false,
-      },
-      // 1200: {
-      //   slidesPerView: 3,
-      //   spaceBetween: 30
-      // },
-    },
-    on: {
-      slideChange: function() {
-        const swiperInstance = this;
-        document.querySelector('.swiper-button-next')
-          .classList.toggle('swiper-button-disabled', swiperInstance.isEnd);
-        document.querySelector('.swiper-button-prev')
-          .classList.toggle('swiper-button-disabled', swiperInstance.isBeginning);
-      },
-      // À l'initialisation
-      init: function() {
-        this.emit('slideChange');
+
+      on: {
+        slideChange: function () {
+          nextBtn.classList.toggle('swiper-button-disabled', this.isEnd);
+          prevBtn.classList.toggle('swiper-button-disabled', this.isBeginning);
+        },
+        init: function () {
+          this.emit('slideChange');
+        }
       }
-    }
+    });
   });
+});
+
+// const swiper = new Swiper(".mySwiper", {
+//   slidesPerView: 1.2,
+//   spaceBetween: 5,
+//   loop: false,
+//   centeredSlides: true,
+//   navigation: {
+//     nextEl: ".swiper-button-next",
+//     prevEl: ".swiper-button-prev",
+//   },
+//   breakpoints: {
+//     576: {
+//       slidesPerView: 1.1,
+//       spaceBetween: 10,
+//     },
+//     768: {
+//       slidesPerView: 2,
+//       spaceBetween: 15,
+//       centeredSlides: false,
+//     },
+//     992: {
+//       slidesPerView: 3,
+//       spaceBetween: 20,
+//       centeredSlides: false,
+//     },
+//   },
+// });
