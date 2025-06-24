@@ -79,6 +79,6 @@ class ActiviteAdmin(admin.ModelAdmin):
 ######
 
 admin.site.register(Destinations, DestinationAdmin)
-# admin.site.register(ConseilVoyage)
+admin.site.register(PlatTypique)
 admin.site.register(APropos)
 

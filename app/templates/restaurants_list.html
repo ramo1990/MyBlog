@@ -1,43 +1,158 @@
-{% extends "base.html" %}
+{% extends 'base.html' %}
 {% load static %}
-{% block extra_css %}
-    <link rel="stylesheet" href="{% static 'css/agenda_list.css' %}">
-{% endblock %}
+{% block extra_head %}
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+{% endblock extra_head %}
 
 {% block content %}
-<div class="container mt-4">
-    <h2 class="text-center mb-4">Où manger à Abidjan</h2></h2>
-    <p>Découvrez les meilleurs restaurants selon vos envies.</p>
-  
-    {% for cat_label, items in categories.items %}
+<div class="container my-5">
+    <h1 class="text-center">Où manger ?</h1>
+    <p class="lead text-center">Découvrez les meilleurs endroits pour savourer la cuisine locale ou internationale.</p>
+
+
+    <div class="text-center my-4">
+        <img src="{% static 'images/cotiv-ethnies.gif' %}" class="img-fluid rounded" alt="Cuisine locale">
+    </div>
+    <!-- plat typique -->
+    <h2 class="mt-5 text-center">Plats typiques à découvrir</h2>
+    <div class="row my-4">
+        {% for plat in plats %}
+        <div class="col-md-3 text-center">
+            <div class="card h-100 shadow-sm">
+                <img src="{% static plat.image %}" class="card-img-top" alt="{{ plat.nom }}">
+                <div class="card-body">
+                    <h5 class="card-title">{{ plat.nom }}</h5>
+                    <p class="card-text">{{ plat.description }}</p>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+<!--  -->
+    <h3 class="mt-5">Catégories</h3>
+    <div class="btn-group mb-4" role="group">
+        <a href="{% url 'restaurants_list' %}" class="btn {% if not selected_category %}btn-primary{% else %}btn-outline-primary{% endif %}">Toutes</a>
+        {% for key, name in categories.items %}
+            <a href="?categorie={{ key }}" class="btn {% if selected_category == key %}btn-primary{% else %}btn-outline-primary{% endif %}">
+                {{ name }}
+            </a>
+        {% endfor %}
+    </div>
+
+    <!-- Nos recommendations de resto -->
+    <h2 class="mt-5">Nos meilleures adresses</h2>
+    <div class="row my-4">
+        {% for resto in meilleurs_restos %}
+        <div class="col-md-4 mb-4">
+            <div class="card h-100 border-success">
+                {% if resto.image %}
+                    <img src="{{ resto.image.url }}" class="card-img-top" alt="{{ resto.title }}">
+                {% endif %}
+                <div class="card-body">
+                    <h5 class="card-title text-success">{{ resto.title }}</h5>
+                    <p class="card-text">{{ resto.content|truncatechars:100 }}</p>
+                    <p><strong>Adresse:</strong> {{ resto.adresse }}</p>
+                    {% if resto.site_web %}
+                        <a href="{{ resto.site_web }}" class="btn btn-sm btn-success" target="_blank">Visiter</a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        {% empty %}
+            <p>Aucune recommandation pour le moment.</p>
+        {% endfor %}
+    </div>
+    
+<!-- afficher le resto sur une carte -->
+    <h3 class="mt-5">Carte des restaurants</h3>
+    <div id="map" style="height: 500px;"></div>
+
+<!-- filtre -->
     <div class="row">
-    <h2>{{ cat_label }}</h2>
+        <form method="get" class="row g-3 mb-4">
+            <div class="col-md-3">
+                <select name="categorie" class="form-select">
+                    <option value="">Type de cuisine</option>
+                    {% for key, label in categories.items %}
+                        <option value="{{ key }}" {% if selected_category == key %}selected{% endif %}>{{ label }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="col-md-3">
+                <select name="prix" class="form-select">
+                    <option value="">Budget</option>
+                    {% for key, label in prix_choices.items %}
+                        <option value="{{ key }}" {% if selected_prix == key %}selected{% endif %}>{{ label }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <!-- <div class="col-md-3">
+                <select name="access" class="form-select">
+                    <option value="">Accessibilité</option>
+                    {% for key, label in accessibilites.items %}
+                        <option value="{{ key }}" {% if selected_access == key %}selected{% endif %}>{{ label }}</option>
+                    {% endfor %}
+                </select>
+            </div> -->
+            <div class="col-md-3">
+                <select name="tri" class="form-select">
+                    <option value="">Trier par</option>
+                    <option value="popularite" {% if sort_by == 'popularite' %}selected{% endif %}>Popularité</option>
+                    <option value="nouveaute" {% if sort_by == 'nouveaute' %}selected{% endif %}>Nouveauté</option>
+                </select>
+            </div>
+            <div class="col-12 text-end">
+                <button type="submit" class="btn btn-primary">Filtrer</button>
+            </div>
+        </form>
 
-    {% for r in items %}
-    <div class="col-12 col-sm-6 col-md-4 mb-4">
-      <div class="card h-100 shadow-sm">
         
-        {% if r.image %}
-        <img src="{{ r.image.url }}" class="card-img-top" alt="{{ r.title }}">
-        {% else %}
-        <img src="{% static 'images/default_restaurant.jpg' %}" alt="Image par défaut" class="card-img-top">
-        {% endif %}
-
-        <div class="card-body d-flex flex-column">
-        <p class="card-text"><a href="{% url 'restaurants_detail' r.slug %}">{{ r.title }}</a></p>
-        <p class="card-text"><strong>Quartier :</strong> {{ r.quartier }}</p>
-        <p class="card-text">{{ r.content|truncatewords:20 }}</p>
-            {% if r.site_web %}
-            <p><a href="{{ r.site_web }}" target="_blank">Visiter le site</a></p>
-            {% endif %}
-      </div>
+        {% for resto in restaurants %}
+        <div class="col-md-4 mb-4">
+                <div class="card h-100">
+                    <a href="{% url 'restaurants_detail' resto.slug %}">
+                    {% if resto.image %}
+                        <img src="{{ resto.image.url }}" class="card-img-top" alt="{{ resto.title }}">
+                    {% endif %}
+                    </a>
+                    <div class="card-body">
+                        <h5 class="card-title"><a href="{% url 'restaurants_detail' resto.slug %}">{{ resto.title }}</a></h5>
+                        <p class="card-text">{{ resto.content|truncatechars:100 }}</p>
+                        <p><strong>Quartier:</strong> {{ resto.quartier }}</p>
+                        <p><strong>Adresse:</strong> {{ resto.adresse }}</p>
+                        {% if resto.phone %}<p><strong>Tel:</strong> {{ resto.phone }}</p>{% endif %}
+                        {% if resto.site_web %}
+                            <a href="{{ resto.site_web }}" target="_blank" class="btn btn-sm btn-outline-secondary">Site web</a>
+                        {% endif %}
+                        
+                    </div>
+                </div>
+            </div>
+        {% empty %}
+            <p>Aucun restaurant trouvé dans cette catégorie.</p>
+        {% endfor %}
     </div>
-    </div>
-    {% endfor %}
-    </div>
-    {% empty %}
-        <p>Aucun restaurant disponible pour le momment.</p>
-    {% endfor %}
 </div>
+
+<!-- JS pour afficher la longitude latitude du resto  sur carte -->
+<script>
+    var map = L.map('map').setView([5.35, -4.01], 13);  // Centrage sur Abidjan ou autre
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '© OpenStreetMap contributors'
+    }).addTo(map);
+
+    {% for resto in restaurants %}
+        {% if resto.latitude and resto.longitude %}
+            {% if resto.latitude|floatformat and resto.longitude|floatformat %}
+                L.marker([{{ resto.latitude|floatformat:6 }}, {{ resto.longitude|floatformat:6 }}])
+                    .addTo(map)
+                    .bindPopup("<b>{{ resto.title|escapejs }}</b><br>{{ resto.adresse|escapejs }}");
+            {% endif %}
+        {% endif %}
+    {% endfor %}
+  </script>
+  
 {% endblock %}
 

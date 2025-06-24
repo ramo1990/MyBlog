@@ -6,6 +6,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.views.generic import UpdateView, DeleteView, ListView
 from collections import defaultdict
 from django.db.models import Q
+from django.contrib.auth.decorators import login_required
 
 from .forms import *
 
@@ -171,17 +172,65 @@ def hebergement_detail(request, slug):
 
 # section où manger
 def restaurants_list(request):
-    restaurants = Restaurant.objects.all().order_by('categorie', 'quartier')
-
-    categories = defaultdict(list)
-    for r in restaurants:
-        categories[r.get_categorie_display()].append(r)
+    # meilleurs_restos = Restaurant.objects.filter(est_recommande=True)
+    # categories = dict(Restaurant.CATEGORIES)
+    # selected_category = request.GET.get('categorie')
+    # plats = PlatTypique.objects.all()
+    # prix_choices = dict(Restaurant.PRIX_CHOICES)
+    # if selected_category:
+    #     restaurants = Restaurant.objects.filter(categorie=selected_category)
+    # else:
+    #     restaurants = Restaurant.objects.all()
     
-    return render(request, 'restaurants_list.html', {'categories': dict(categories)})
+    # selected_prix = request.GET.get('prix')
+    # sort_by = request.GET.get('tri')  # popularite, nouveaute
+    categories = dict(Restaurant.CATEGORIES)
+    prix_choices = dict(Restaurant.PRIX_CHOICES)
+    plats = PlatTypique.objects.all()
+
+    # Récupération des filtres
+    selected_category = request.GET.get('categorie')
+    selected_prix = request.GET.get('prix')
+    sort_by = request.GET.get('tri')
+
+    # Base queryset
+    restaurants = Restaurant.objects.all()
+
+    # Filtrage par catégorie
+    if selected_category:
+        restaurants = restaurants.filter(categorie=selected_category)
+
+    # Filtrage par prix
+    if selected_prix:
+        restaurants = restaurants.filter(prix_moyen=selected_prix)
+
+    # Tri
+    if sort_by == 'popularite':
+        restaurants = restaurants.order_by('-popularite')
+    elif sort_by == 'nouveaute':
+        restaurants = restaurants.order_by('-date_ajout')
+
+    # Meilleurs restos (recommandés)
+    meilleurs_restos = restaurants.filter(est_recommande=True)
+
+    return render(request, 'restaurants_list.html', {
+        'restaurants': restaurants,
+        'categories': categories,
+        'selected_category': selected_category,
+        'plats': plats,
+        'meilleurs_restos':meilleurs_restos,
+        'prix_choices': prix_choices,
+        'selected_prix': selected_prix,
+        'sort_by': sort_by,
+    })
 
 def restaurants_detail(request, slug):
-    restaurant = get_object_or_404(Restaurant, slug = slug)
-    return render(request, 'restaurant_detail.html', {'restaurant': restaurant})
+    resto = get_object_or_404(Restaurant, slug = slug)
+    plats = resto.plats.all()
+    return render(request, 'restaurant_detail.html', {
+        'resto': resto,
+        'plats': plats,
+        })
 
 # section info pratique
 def infos_pratiques(request):

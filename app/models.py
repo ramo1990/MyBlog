@@ -5,6 +5,7 @@ from django.db.models.signals import pre_delete
 from django.dispatch.dispatcher import receiver
 import os
 from django.utils.text import slugify
+# from django.contrib.auth.models import User
 # from ckeditor.fields import RichTextField
 
 STATUS = ((0, "Draft" ) , (1, "Published"))
@@ -260,10 +261,16 @@ class Hebergement(models.Model):
 # section où manger
 class Restaurant(models.Model):
     CATEGORIES = [
-        ('gastro', 'Gastronomie'),
+        ('resto', 'Restaurant'),
         ('rapide', 'Restauration rapide'),
         ('local', 'Cuisine locale'),
+         ('maquis', 'Maquis'),
         ('cafes', 'Café & Boulangeries'),
+    ]
+    PRIX_CHOICES = [
+        ('bas', 'Moins de 3 000 FCFA'),
+        ('moyen', 'Entre 3 000 et 7 000 FCFA'),
+        ('haut', 'Plus de 7 000 FCFA'),
     ]
 
     title = models.CharField(max_length=200)
@@ -273,8 +280,15 @@ class Restaurant(models.Model):
     quartier = models.CharField(max_length=100)
     adresse = models.TextField()
     phone = models.CharField(max_length=20, blank=True, null=True)
+    horaires = models.CharField(max_length=100, blank=True, null=True)
+    prix_moyen = models.CharField(max_length=50,choices=PRIX_CHOICES, blank=True, null=True)
     image = models.ImageField(upload_to='restaurants/', blank=True, null=True)
     site_web = models.URLField(blank=True, null=True)
+    est_recommande = models.BooleanField(default=False)
+    date_ajout = models.DateTimeField(auto_now_add=True)
+    popularite = models.PositiveIntegerField(default=0)  # compteur de clics ou visites
+    latitude = models.FloatField(blank=True, null=True)
+    longitude = models.FloatField(blank=True, null=True)
 
     def save(self, *args, **kwargs):
         if not self.slug:
@@ -283,7 +297,25 @@ class Restaurant(models.Model):
 
     def __str__(self):
         return self.title
+    
+class Plat(models.Model):
+    restaurant = models.ForeignKey(Restaurant, on_delete=models.CASCADE, related_name='plats')
+    nom = models.CharField(max_length=100)
+    description = models.TextField(blank=True, null=True)
+    prix = models.DecimalField(max_digits=6, decimal_places=2, blank=True, null=True)
+    image = models.ImageField(upload_to='plats/', blank=True, null=True)
 
+    def __str__(self):
+        return self.nom
+    
+# plat typique
+class PlatTypique(models.Model):
+    nom = models.CharField(max_length=100)
+    description = models.TextField()
+    image = models.ImageField(upload_to='plats/', blank=True, null=True)
+    def __str__(self):
+        return self.nom
+############
 # Infos pratique
 class InfoPratique(models.Model):
     icon = models.CharField(max_length=10, help_text= "Ex: 📍, 🛂, 💱")

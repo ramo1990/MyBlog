@@ -1,34 +1,84 @@
-{% extends "base.html" %}
+{% extends 'base.html' %}
 {% load static %}
-{% block extra_css %}
-    <link rel="stylesheet" href="{% static 'css/agenda_detail.css' %}">
+
+{% block extra_head %}
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 {% endblock %}
 
 {% block content %}
-<div class="container mt-4">
-    <a href="{% url 'hebergements_list' %}" class="btn btn-secondary mb-3">← Retour à la liste</a>
-    
-    <div class="row justify-content-center">
-        <div class="col-12 col-md-10 col-lg-8">
-            <h2>{{ restaurant.title }}</h2>
+<div class="container my-5">
+    <h1>{{ resto.title }}</h1>
 
-            {% if restaurant.image %}
-            <img src="{{ restaurant.image.url }}" alt="restaurant.title" class="img-fluid rounded mb-3">
-            {% else %}
-            <img src="{% static 'images/default_restaurant.jpg' %}" alt="Image par défaut" class="img-fluid rounded mb-3">
-            {% endif %}
-            <p class="mb-4"> <strong> Catégorie :</strong>{{restaurant.get_categorie_display}} </p>
-            <p class="mb-4"> <strong>Quartier :</strong> {{restaurant.quartier}} </p>
-            <p class="mb-4"> <strong>Adresse :</strong> {{restaurant.adresse}} </p>
-            <p class="mb-4"> <strong>N° téléphone :</strong> {{restaurant.phone}} </p>
-            <p class="mb-4"> {{restaurant.content}} </p>
+    {% if resto.image %}
+        <img src="{{ resto.image.url }}" class="img-fluid mb-4 rounded" alt="{{ resto.title }}">
+    {% endif %}
 
-            <p>
-                {% if restaurant.site_web %}
-                <p><a href="{{ restaurant.site_web }}" target="_blank" rel="noopener noreferrer"> Visiter le site officiel</a></p>
-                {% endif %}
-            </p>
+    <p><strong>Quartier :</strong> {{ resto.quartier }}</p>
+    <p><strong>Adresse :</strong> {{ resto.adresse }}</p>
+    <p><strong>Contact :</strong> {{ resto.phone }}</p>
+    <p><strong>Horaires :</strong> {{ resto.horaires }}</p>
+    <p><strong>Prix moyen :</strong> {{ resto.prix_moyen }}</p>
+    {% if resto.phone %}
+        <p><strong>Téléphone :</strong> {{ resto.phone }}</p>
+    {% endif %}
+    {% if resto.site_web %}
+        <p><a href="{{ resto.site_web }}" class="btn btn-sm btn-outline-primary" target="_blank">Voir le site web</a></p>
+    {% endif %}
+
+    <div class="mt-4">
+        <h4>Description</h4>
+        <p>{{ resto.content }}</p>
+    </div>
+
+    {% if resto.latitude and resto.longitude %}
+        <div class="mt-5">
+            <h4>Localisation</h4>
+            <div id="map" style="height: 400px;"></div>
+        </div>
+    {% endif %}
+</div>
+
+    {% if plats %}
+    <div class="mt-4">
+        <h4>Menu / Spécialités</h4>
+        <div class="row">
+            {% for plat in plats %}
+            <div class="col-md-4 mb-3">
+                <div class="card h-100">
+                    {% if plat.image %}
+                        <img src="{{ plat.image.url }}" class="card-img-top" alt="{{ plat.nom }}">
+                    {% endif %}
+                    <div class="card-body">
+                        <h5 class="card-title">{{ plat.nom }}</h5>
+                        <p class="card-text">{{ plat.description }}</p>
+                        {% if plat.prix %}
+                            <p class="text-muted">{{ plat.prix }} FCFA</p>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
         </div>
     </div>
-</div>
+    {% endif %}
+
+
+{% if resto.latitude and resto.longitude %}
+<script>
+    var lat = parseFloat("{{ resto.latitude|default:'' }}");
+    var lng = parseFloat("{{ resto.longitude|default:'' }}");
+    if (lat && lng) {
+        var map = L.map('map').setView([lat, lng], 15);  // zoom rapproché sur le resto
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '© OpenStreetMap contributors'
+        }).addTo(map);
+        L.marker([lat, lng]).addTo(map)
+        .bindPopup("<b>{{ resto.title|escapejs }}</b><br>{{ resto.adresse|escapejs }}")
+        .openPopup();
+    } else {
+        document.getElementById('map').innerHTML = '<p>Coordonnées non disponibles pour ce restaurant.</p>';
+    }
+</script>
+{% endif %}
 {% endblock %}

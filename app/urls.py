@@ -34,6 +34,8 @@ urlpatterns = [
     path('search/', search, name='search'),
     path('mentions-legales/', TemplateView.as_view(template_name="mentions-legales.html"), name="mentions_legales"),
     path('politique-confidentialite/', TemplateView.as_view(template_name="politique-confidentialite.html"), name="politique_confidentialite"),
+    # path('favori/<int:restaurant_id>/', toggle_favorite, name='toggle_favorite'),
+    # path('mes-favoris/', mes_favoris, name='mes_favoris'),
     path('<slug:slug>/', DetailView.as_view(), name='post_detail'),
 ]
 
