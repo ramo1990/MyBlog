@@ -1,0 +1,63 @@
+<form method="get" class="mb-4">
+    <div class="row g-2">
+      <div class="col-md-3">
+        <input type="text" name="q" class="form-control" placeholder="Rechercher..." value="{{ request.GET.q }}">
+      </div>
+      <div class="col-md-2">
+        <select name="type" class="form-select">
+          <option value="">Type</option>
+          <option value="plage">Plage</option>
+          <option value="nature">Nature</option>
+          <!-- etc. -->
+        </select>
+      </div>
+      <div class="col-md-2">
+        <select name="difficulte" class="form-select">
+          <option value="">Difficulté</option>
+          <option value="facile">Facile</option>
+          <option value="moyen">Moyen</option>
+          <option value="difficile">Difficile</option>
+        </select>
+      </div>
+      <div class="col-md-2">
+        <input type="number" name="duree" class="form-control" placeholder="Durée max (h)" step="0.5">
+      </div>
+      <div class="col-md-2">
+        <input type="text" name="acces" class="form-control" placeholder="Accès (bus, voiture)">
+      </div>
+      <div class="col-12 mt-2">
+        <label>Tags :</label><br>
+        {% for tag in tags %}
+          <label class="me-2">
+            <input type="checkbox" name="tags" value="{{ tag.nom }}" {% if tag.nom in request.GET.getlist('tags') %}checked{% endif %}>
+            {{ tag.nom }}
+          </label>
+        {% endfor %}
+      </div>
+      <div class="col-12 mt-3">
+        <button class="btn btn-success">Filtrer</button>
+      </div>
+    </div>
+  </form>
+  
+  <hr>
+  
+  <div class="row">
+    {% for lieu in lieux %}
+      <div class="col-md-4 mb-4">
+        <div class="card h-100">
+          {% if lieu.image %}
+            <img src="{{ lieu.image.url }}" class="card-img-top" alt="{{ lieu.nom }}">
+          {% endif %}
+          <div class="card-body">
+            <h5>{{ lieu.nom }}</h5>
+            <p>{{ lieu.description|truncatewords:15 }}</p>
+            <a href="{% url 'nature_detail' lieu.slug %}" class="btn btn-outline-success btn-sm">Voir +</a>
+          </div>
+        </div>
+      </div>
+    {% empty %}
+      <p>Aucun lieu trouvé avec ces filtres.</p>
+    {% endfor %}
+  </div>
+  

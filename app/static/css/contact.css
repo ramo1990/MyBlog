@@ -56,3 +56,41 @@
     background-color: var(--vert-ci);
     border-color: var(--vert-ci);
   }
+
+/* === Coordonnées de contact === */
+.contact-page .col-md-5 {
+  /* background-color: var(--blanc-ci); */
+  padding: 1.5rem;
+  /* border: 1px solid #ddd; */
+  border-radius: 8px;
+  /* box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05); */
+}
+
+/* Titres */
+.contact-page .col-md-5 h4,
+.contact-page .col-md-5 h5 {
+  color: var(--orange-ci);
+  font-weight: 600;
+}
+
+/* Texte */
+.contact-page .col-md-5 p {
+  color: var(--gris-texte);
+  font-size: 1rem;
+  margin-bottom: 0.75rem;
+}
+/* Icônes */
+.contact-page .col-md-5 p::before {
+  margin-right: 0.3rem;
+}
+/* Liens sociaux */
+.contact-page .col-md-5 a {
+  color: var(--vert-ci);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+.contact-page .col-md-5 a:hover {
+  color: var(--orange-ci);
+  text-decoration: underline;
+}

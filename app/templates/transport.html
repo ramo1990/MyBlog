@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% load static %}
+{% block extra_css %}
+  <link rel="stylesheet" href="{% static 'css/transport.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+  <h1 class="text-center text-primary mb-4">Se déplacer en Côte d’Ivoire</h1>
+  <p class="lead text-center mb-5">
+    Explorez les différents moyens de transport disponibles pour vos déplacements urbains ou interurbains.
+  </p>
+
+  {% for type, moyens in categories.items %}
+    {% if moyens %}
+      <h2 class="mt-5 text-success">{{ type }}</h2>
+      <div class="row">
+        {% for transport in moyens %}
+          <div class="col-md-4 mb-4">
+            <div class="card h-100 shadow-sm">
+              {% if transport.image %}
+                <img src="{{ transport.image.url }}" class="card-img-top" alt="{{ transport.nom }}">
+              {% else %}
+                <img src="{% static 'images/default.jpg' %}" class="card-img-top" alt="Transport">
+              {% endif %}
+              <div class="card-body d-flex flex-column">
+                <h5 class="card-title">{{ transport.nom }}</h5>
+                <p class="card-text">{{ transport.description|truncatewords:20 }}</p>
+                {% if transport.site_web %}
+                  <a href="{{ transport.site_web }}" target="_blank" class="btn btn-outline-primary mt-auto">Voir le site</a>
+                {% endif %}
+                <a href="{% url 'transport_detail' transport.slug %}" class="btn btn-outline-primary mt-auto">Voir détails</a>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    {% endif %}
+  {% endfor %}
+</div>
+{% endblock %}

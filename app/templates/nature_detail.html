@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% load static %}
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/nature.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+  <div class="row">
+    <div class="col-md-8 offset-md-2">
+
+      <h1 class="mb-3 text-success">{{ lieu.nom }}</h1>
+
+      {% if lieu.image %}
+        <img src="{{ lieu.image.url }}" class="img-fluid rounded mb-4" alt="Photo de {{ lieu.nom }}">
+      {% else %}
+        <img src="{% static 'images/default.jpg' %}" class="img-fluid rounded mb-4" alt="Image par défaut">
+      {% endif %}
+
+      <p class="lead">{{ lieu.description }}</p>
+
+      <hr>
+
+      <h4 class="text-primary mt-4">Infos pratiques</h4>
+      <ul class="list-group mb-4">
+        <li class="list-group-item"><strong>Localisation :</strong> {{ lieu.localisation }}</li>
+        <li class="list-group-item"><strong>Distance depuis Abidjan :</strong> {{ lieu.distance_km }} km</li>
+        <li class="list-group-item"><strong>Durée approximative :</strong> {{ lieu.duree }} heures</li>
+        {% if lieu.niveau_difficulte %}
+          <li class="list-group-item"><strong>Niveau :</strong> {{ lieu.niveau_difficulte|capfirst }}</li>
+        {% endif %}
+        {% if lieu.saison_ideale %}
+          <li class="list-group-item"><strong>Saison idéale :</strong> {{ lieu.saison_ideale }}</li>
+        {% endif %}
+        {% if lieu.equipement_conseille %}
+          <li class="list-group-item"><strong>Équipement conseillé :</strong> {{ lieu.equipement_conseille }}</li>
+        {% endif %}
+        {% if lieu.acces %}
+          <li class="list-group-item"><strong>Accès :</strong> {{ lieu.acces }}</li>
+        {% endif %}
+      </ul>
+
+      <a href="{% url 'nature' %}" class="btn btn-outline-success">← Retour aux sites</a>
+
+    </div>
+  </div>
+</div>
+{% endblock %}

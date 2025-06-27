@@ -1,0 +1,88 @@
+/* Section globale */
+.container {
+    max-width: 1200px;
+  }
+  
+  /* Titres */
+  h1.text-success {
+    font-family: 'Georgia', serif;
+    font-size: 2.8rem;
+  }
+  
+  h2.text-primary {
+    border-bottom: 2px solid #198754;
+    padding-bottom: 0.4rem;
+    margin-bottom: 1.5rem;
+    font-weight: bold;
+  }
+
+/* Cartes de lieux */
+.nature-card {
+    border: 1px solid #dee2e6;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.08);
+    border-radius: 10px;
+    overflow: hidden;
+    background-color: #fff;
+  }
+  .nature-card:hover {
+    transform: scale(1.02);
+    box-shadow: 0 8px 16px rgba(25, 135, 84, 0.2);
+  }
+/* Images */
+.nature-card img {
+    object-fit: cover;
+    height: 220px;
+    width: 100%;
+    border-bottom: 1px solid #dee2e6;
+  }
+  
+  /* Titres des cartes */
+  .nature-card .card-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #198754;
+  }
+
+/* Texte des cartes */
+.nature-card .card-text {
+    color: #444;
+    margin-bottom: 1rem;
+    flex-grow: 1;
+  }
+/* Bouton "Voir +" */
+.nature-card .btn-outline-success {
+    border-radius: 50px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+  }
+  
+  .nature-card .btn-outline-success:hover {
+    background-color: #198754;
+    color: #fff;
+  }
+
+  .btn-success {
+    border-radius: 30px;
+    padding: 10px 30px;
+    font-weight: 600;
+    transition: background-color 0.3s ease;
+  }
+  
+  .btn-success:hover {
+    background-color: #157347;
+  }
+  
+  .fst-italic {
+    font-family: 'Georgia', serif;
+  }
+
+  .lead {
+    font-size: 1.2rem;
+    line-height: 1.8;
+  }
+  
+  ul.list-group li {
+    font-size: 1rem;
+    background-color: #f8f9fa;
+  }

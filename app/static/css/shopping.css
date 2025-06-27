@@ -1,0 +1,77 @@
+body {
+    background-color: #ffffff;
+    color: #222;
+    font-family: 'Segoe UI', sans-serif;
+  }
+
+  h1, h2, h5 {
+    font-weight: 700;
+  }
+  
+  h1 {
+    color: #f57c00; /* orange vif */
+  }
+  
+  a {
+    text-decoration: none;
+  }
+
+  .btn-outline-warning {
+    border-color: #f57c00;
+    color: #f57c00;
+  }
+  
+  .btn-outline-warning:hover {
+    background-color: #f57c00;
+    color: white;
+  }
+
+  .card {
+    border: 1px solid #f0f0f0;
+    transition: transform 0.2s ease;
+  }
+  
+  .card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+  }
+
+  .card-title {
+    color: #2e7d32; /* vert foncé */
+  }
+  
+  .card-text {
+    font-size: 0.95rem;
+    color: #444;
+  }
+
+  #map {
+    border: 2px solid #f57c00;
+    border-radius: 4px;
+  }
+
+/* Boutons RS */
+.btn-outline-primary {
+    border-color: #1877f2;
+    color: #1877f2;
+  }
+  
+  .btn-outline-danger {
+    border-color: #e1306c;
+    color: #e1306c;
+  }
+  
+  .btn-outline-dark {
+    border-color: #444;
+    color: #444;
+  }
+  
+  .btn-outline-secondary {
+    color: #666;
+    border-color: #ccc;
+  }
+  
+  .btn-outline-secondary:hover {
+    background-color: #ccc;
+    color: #000;
+  }

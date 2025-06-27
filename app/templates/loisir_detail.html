@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+{% load static %}
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/nature.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+  <h1 class="text-info">{{ activite.nom }}</h1>
+
+  <div class="row">
+    <div class="col-md-8">
+      {% if activite.image %}
+        <img src="{{ activite.image.url }}" class="img-fluid rounded mb-3" alt="{{ activite.nom }}">
+      {% endif %}
+
+      <p class="lead">{{ activite.description }}</p>
+
+      <ul class="list-group mb-4">
+        <li class="list-group-item"><strong>Catégorie :</strong> {{ activite.get_categorie_display }}</li>
+        {% if activite.horaire %}<li class="list-group-item"><strong>Horaires :</strong> {{ activite.horaire }}</li>{% endif %}
+        {% if activite.tarif %}<li class="list-group-item"><strong>Tarif :</strong> {{ activite.tarif }}</li>{% endif %}
+        {% if activite.age_minimum %}<li class="list-group-item"><strong>Âge minimum :</strong> {{ activite.age_minimum }} ans</li>{% endif %}
+        {% if activite.accessibilite %}<li class="list-group-item"><strong>Accessibilité :</strong> {{ activite.accessibilite }}</li>{% endif %}
+        {% if activite.localisation %}<li class="list-group-item"><strong>Localisation :</strong> {{ activite.localisation }}</li>{% endif %}
+      </ul>
+
+      {% if activite.latitude and activite.longitude %}
+        <div id="map" style="height: 300px;" class="mb-4"></div>
+        <script>
+          function initMap() {
+            var location = { lat: {{ activite.latitude }}, lng: {{ activite.longitude }} };
+            var map = new google.maps.Map(document.getElementById('map'), {
+              zoom: 15,
+              center: location
+            });
+            new google.maps.Marker({ position: location, map: map });
+          }
+        </script>
+        <script async defer
+          src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap">
+        </script>
+      {% endif %}
+    </div>
+
+    <div class="col-md-4">
+      <div class="card mb-4">
+        <div class="card-body">
+          <h5 class="card-title">Informations complémentaires</h5>
+          {% if activite.site_web %}
+            <p><a href="{{ activite.site_web }}" target="_blank" class="btn btn-sm btn-outline-primary w-100 mb-2">🌐 Site Web</a></p>
+          {% endif %}
+          {% if activite.facebook %}
+            <p><a href="{{ activite.facebook }}" target="_blank" class="btn btn-sm btn-outline-primary w-100 mb-2">📘 Facebook</a></p>
+          {% endif %}
+          {% if activite.instagram %}
+            <p><a href="{{ activite.instagram }}" target="_blank" class="btn btn-sm btn-outline-primary w-100">📸 Instagram</a></p>
+          {% endif %}
+        </div>
+      </div>
+
+      <a href="{% url 'loisir' %}" class="btn btn-outline-secondary w-100">← Retour aux activités</a>
+    </div>
+  </div>
+</div>
+{% endblock %}

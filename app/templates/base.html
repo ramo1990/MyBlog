@@ -52,10 +52,9 @@
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Explorer</a>
                 <ul class="dropdown-menu">
-                  <li class="nav-item"><a class="nav-link" href="{% url 'destination_list' %}">Destinations 🇨🇮</a></li>
-                  <li class="nav-item"><a class="nav-link" href="{% url 'culture' %}">Culture et traditions</a></li>
-                  <li class="nav-item"><a class="nav-link" href="#">Dans la nature</a></li>
-                  <li class="nav-item"><a class="nav-link" href="#">Autour de Babi</a></li>
+                  <li class="nav-item"><a class="nav-link" href="{% url 'culture_home' %}">Culture et traditions</a></li>
+                  <li class="nav-item"><a class="nav-link" href="{% url 'nature' %}">Dans la nature</a></li>
+                  <li class="nav-item"><a class="nav-link" href="{% url 'autour_de_babi' %}">Autour de Babi</a></li>
                 </ul>
             </li>
 
@@ -63,21 +62,18 @@
               <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Profiter</a>
                 <ul class="dropdown-menu">
                   <li class="dropdown-item"><a class="nav-link" href="{% url 'restaurants_list' %}">Où manger</a></li>
-                  <li class="dropdown-item"><a class="nav-link" href="#">Gastronomie</a></li>
-                  <li class="dropdown-item"><a class="nav-link" href="#">Sortir</a></li>
-                  <li class="dropdown-item"><a class="nav-link" href="#">Loisir</a></li>
-                  <li class="dropdown-item"><a class="nav-link" href="#">Shopping</a></li>
+                  <li class="dropdown-item"><a class="nav-link" href="{% url 'sortie' %}">Sortir</a></li>
+                  <li class="dropdown-item"><a class="nav-link" href="{% url 'loisir' %}">Loisir</a></li>
+                  <li class="dropdown-item"><a class="nav-link" href="{% url 'shopping' %}">Shopping</a></li>
                 </ul>
             </li>
 
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Séjourner</a>
                 <ul class="dropdown-menu">
-                  <li class="dropdown-item"><a class="nav-link" href="{% url 'conseils' %}">Conseils de voyage</a></li>
                   <li class="dropdown-item"><a class="nav-link" href="{% url 'infos_pratiques' %}">infos pratiques</a></li>
-                  <li class="dropdown-item"><a class="nav-link" href="{% url 'que_faire' %}">Que faire ?</a></li>
                   <li class="dropdown-item"><a class="nav-link" href="{% url 'hebergements_list' %}">Hébergement</a></li>
-                  <li class="dropdown-item"><a class="nav-link" href="#">Transports</a></li>
+                  <li class="dropdown-item"><a class="nav-link" href="{% url 'transport' %}">Transports</a></li>
                 </ul>
             </li>
             

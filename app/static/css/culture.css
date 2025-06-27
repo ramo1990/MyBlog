@@ -1,0 +1,105 @@
+/* Couleurs drapeau CI */
+:root {
+    --orange-ci: #f77f00; /* orange vif */
+    --blanc-ci: #ffffff;  /* blanc */
+    --vert-ci: #009e60;   /* vert foncé */
+  }
+  /* Corps de la page */
+body {
+    background-color: var(--blanc-ci);
+    color: var(--vert-ci);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+  }
+
+/* Titre principal */
+h1 {
+    color: var(--orange-ci);
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 2rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+  }
+
+/* Paragraphe intro */
+.lead {
+    color: var(--vert-ci);
+    font-size: 1.2rem;
+    text-align: center;
+    max-width: 700px;
+    margin: 0 auto 3rem auto;
+  }
+
+/* Carte catégorie */
+.card {
+    border: 2px solid var(--vert-ci);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 20px rgba(0, 158, 96, 0.3);
+    border-color: var(--orange-ci);
+  }
+
+/* Image dans la carte */
+.card-img-top {
+    height: 200px;
+    object-fit: cover;
+    border-bottom: 3px solid var(--orange-ci);
+  }
+
+  /* Titres cartes */
+.card-title {
+    color: var(--orange-ci);
+    font-weight: 600;
+    font-size: 1.25rem;
+  }
+
+/* Texte cartes */
+.card-text {
+    color: var(--vert-ci);
+    font-size: 0.95rem;
+  }
+
+/* Boutons */
+.btn-primary {
+    background-color: var(--orange-ci);
+    border-color: var(--orange-ci);
+    font-weight: 600;
+    transition: background-color 0.3s ease;
+  }
+  
+  .btn-primary:hover, .btn-primary:focus {
+    background-color: var(--vert-ci);
+    border-color: var(--vert-ci);
+    color: var(--blanc-ci);
+  }
+
+/* Alerte événement */
+.alert-warning {
+    background-color: var(--orange-ci);
+    color: var(--blanc-ci);
+    border: none;
+    border-radius: 8px;
+    text-align: center;
+  }
+  
+  .alert-warning h4 {
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+  }
+
+/* Responsive */
+@media (max-width: 576px) {
+    .card-img-top {
+      height: 150px;
+    }
+    h1 {
+      font-size: 1.8rem;
+    }
+    .lead {
+      font-size: 1rem;
+    }
+  }

@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% load static %}
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/culture.css' %}">
+{% endblock %}
+
+{% block content %}
+<h1 class="mb-4">Culture et Traditions de la Côte d'Ivoire</h1>
+
+<p class="lead mb-5">
+  Plongez dans la richesse culturelle ivoirienne pour mieux comprendre les traditions locales
+  et préparer votre voyage sous le signe de la découverte authentique.
+</p>
+
+<!-- événement culturel du mois -->
+{% if featured %}
+<div class="alert alert-warning mb-5" role="alert">
+    <h4 class="alert-heading">🎉 Événement culturel du mois</h4>
+    <p><strong>{{ featured.name }}</strong> – {{ featured.description|truncatewords:20 }}</p>
+    {% if featured.image %}
+    <img src="{{ featured.image.url }}" class="img-fluid my-3" style="max-height: 250px;" alt="{{ featured.name }}">
+    {% endif %}
+    <hr>
+    <p class="mb-0">
+      <a href="{% url 'subcategory_detail' featured.category.slug featured.slug %}" class="btn btn-outline-light btn-sm">
+        Découvrir &rarr;
+      </a>
+    </p>
+  </div>
+{% endif %}
+
+<!-- Grandes catégories -->
+<div class="row">
+  {% for cat in categories %}
+  <div class="col-md-4 mb-4">
+    <div class="card h-100 shadow-sm">
+    {% if cat.image %}
+      <img src="{{ cat.image.url }}" class="card-img-top" alt="{{ cat.title }}">
+    {% else %}
+    <img src="{% static 'images/default.jpg' %}" class="card-img-top" alt="Default Image">
+    {% endif %}
+      <div class="card-body d-flex flex-column">
+        <h5 class="card-title">{{ cat.title }}</h5>
+        <p class="card-text flex-grow-1">{{ cat.description }}</p>
+        <a href="{% url 'category_detail' cat.slug %}" class="btn btn-primary mt-auto">En savoir plus</a>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+{% endblock content %}

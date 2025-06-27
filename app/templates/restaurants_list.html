@@ -5,9 +5,13 @@
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 {% endblock extra_head %}
 
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/resto_list.css' %}">
+{% endblock %}
+
 {% block content %}
 <div class="container my-5">
-    <h1 class="text-center">Où manger ?</h1>
+    <h1 class="©">Où manger ?</h1>
     <p class="lead text-center">Découvrez les meilleurs endroits pour savourer la cuisine locale ou internationale.</p>
 
 
@@ -30,18 +34,9 @@
         {% endfor %}
     </div>
 <!--  -->
-    <h3 class="mt-5">Catégories</h3>
-    <div class="btn-group mb-4" role="group">
-        <a href="{% url 'restaurants_list' %}" class="btn {% if not selected_category %}btn-primary{% else %}btn-outline-primary{% endif %}">Toutes</a>
-        {% for key, name in categories.items %}
-            <a href="?categorie={{ key }}" class="btn {% if selected_category == key %}btn-primary{% else %}btn-outline-primary{% endif %}">
-                {{ name }}
-            </a>
-        {% endfor %}
-    </div>
 
     <!-- Nos recommendations de resto -->
-    <h2 class="mt-5">Nos meilleures adresses</h2>
+    <h2 class="mt-5 text-center">Nos meilleures adresses</h2>
     <div class="row my-4">
         {% for resto in meilleurs_restos %}
         <div class="col-md-4 mb-4">
@@ -65,7 +60,7 @@
     </div>
     
 <!-- afficher le resto sur une carte -->
-    <h3 class="mt-5">Carte des restaurants</h3>
+    <h3 class="mt-5 text-center">Carte des restaurants</h3>
     <div id="map" style="height: 500px;"></div>
 
 <!-- filtre -->
@@ -75,7 +70,7 @@
                 <select name="categorie" class="form-select">
                     <option value="">Type de cuisine</option>
                     {% for key, label in categories.items %}
-                        <option value="{{ key }}" {% if selected_category == key %}selected{% endif %}>{{ label }}</option>
+                        <option value="{{ key }}" {% if selected_category and selected_category == key %}selected{% endif %}>{{ label }}</option>
                     {% endfor %}
                 </select>
             </div>
@@ -83,34 +78,30 @@
                 <select name="prix" class="form-select">
                     <option value="">Budget</option>
                     {% for key, label in prix_choices.items %}
-                        <option value="{{ key }}" {% if selected_prix == key %}selected{% endif %}>{{ label }}</option>
+                        <option value="{{ key }}" {% if selected_prix and selected_prix == key %}selected{% endif %}>{{ label }}</option>
                     {% endfor %}
                 </select>
             </div>
-            <!-- <div class="col-md-3">
-                <select name="access" class="form-select">
-                    <option value="">Accessibilité</option>
-                    {% for key, label in accessibilites.items %}
-                        <option value="{{ key }}" {% if selected_access == key %}selected{% endif %}>{{ label }}</option>
-                    {% endfor %}
-                </select>
-            </div> -->
             <div class="col-md-3">
                 <select name="tri" class="form-select">
                     <option value="">Trier par</option>
-                    <option value="popularite" {% if sort_by == 'popularite' %}selected{% endif %}>Popularité</option>
+                    <option value="popularite" {% if sort_by and sort_by == 'popularite' %}selected{% endif %}>Popularité</option>
                     <option value="nouveaute" {% if sort_by == 'nouveaute' %}selected{% endif %}>Nouveauté</option>
                 </select>
             </div>
             <div class="col-12 text-end">
                 <button type="submit" class="btn btn-primary">Filtrer</button>
+                <!-- Bouton Réinitialiser -->
+                <a href="{% url 'restaurants_list' %}" class="btn-reset">
+                    🔄
+                </a>
             </div>
         </form>
 
         
         {% for resto in restaurants %}
         <div class="col-md-4 mb-4">
-                <div class="card h-100">
+                <div class="card h-100 resto-card">
                     <a href="{% url 'restaurants_detail' resto.slug %}">
                     {% if resto.image %}
                         <img src="{{ resto.image.url }}" class="card-img-top" alt="{{ resto.title }}">

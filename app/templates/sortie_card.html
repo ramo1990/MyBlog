@@ -1,0 +1,15 @@
+{% load static %}
+
+<div class="card h-100 shadow-sm sortie-card">
+    {% if sortie.image %}
+      <img src="{{ sortie.image.url }}" class="card-img-top" alt="{{ sortie.nom }}">
+    {% else %}
+      <img src="{% static 'images/default.jpg' %}" class="card-img-top" alt="Image par défaut">
+    {% endif %}
+    <div class="card-body d-flex flex-column">
+      <h5 class="card-title">{{ sortie.nom }}</h5>
+      <p class="card-text small">{{ sortie.description|truncatewords:15 }}</p>
+      <a href="{% url 'sortie_detail' sortie.slug %}" class="btn btn-outline-danger mt-auto">Voir +</a>
+    </div>
+  </div>
+  

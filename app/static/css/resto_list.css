@@ -1,0 +1,107 @@
+/* Couleurs principales */
+:root {
+    --orange-ci: #f28500;
+    --green-ci: #007847;
+    --white-ci: #ffffff;
+    --light-bg: #f8f9fa;
+}
+/* Général */
+body {
+    background-color: var(--light-bg);
+    color: #333;
+    font-family: 'Segoe UI', sans-serif;
+}
+/* Titres */
+h1, h2, h3, h4 {
+    color: var(--green-ci);
+    font-weight: bold;
+}
+/* Boutons */
+.btn-primary {
+    background-color: var(--orange-ci);
+    border-color: var(--orange-ci);
+}
+.btn-primary:hover {
+    background-color: #e67300;
+    border-color: #e67300;
+}
+.btn-outline-primary {
+    color: var(--orange-ci);
+    border-color: var(--orange-ci);
+}
+.btn-outline-primary:hover {
+    background-color: var(--orange-ci);
+    color: white;
+}
+
+/* Carte des restaurants */
+.card {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    transition: box-shadow 0.2s ease-in-out;
+}
+.card:hover {
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+.card-title {
+    color: var(--orange-ci);
+}
+/* Applique tes styles spécifiques */
+.resto-card {
+    border: 2px solid var(--orange-ci);
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    transition: transform 0.2s ease;
+}
+.resto-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 18px rgba(0,0,0,0.15);
+}
+.resto-card .card-title a {
+    color: var(--green-ci);
+    font-weight: 600;
+    text-decoration: none;
+}
+.resto-card .card-title a:hover {
+    color: var(--orange-ci);
+    text-decoration: underline;
+}
+
+/* Section recommandée */
+.card.border-success {
+    border: 2px solid var(--green-ci);
+}
+.card.border-success .card-title {
+    color: var(--green-ci);
+}
+
+/* Carte Leaflet */
+#map {
+    border: 2px solid var(--green-ci);
+    border-radius: 8px;
+    margin-top: 1rem;
+}
+
+/* Catégories */
+.btn-group .btn {
+    margin-right: 5px;
+}
+
+/* reinitialiser les filtres */
+.btn-reset {
+    background-color: var(--orange-ci); /* Orange - Couleur du drapeau CI */
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    font-weight: bold;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    display: inline-block;
+    text-align: center;
+    text-decoration: none;
+}
+.btn-reset:hover {
+    background-color: #28a745; /* Vert - Couleur du drapeau CI */
+    color: white;
+    transform: scale(1.05);
+}

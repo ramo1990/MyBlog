@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="container my-5">
+  <h1 class="text-danger">{{ sortie.nom }}</h1>
+
+  <div class="row">
+    <div class="col-md-8">
+      {% if sortie.image %}
+        <img src="{{ sortie.image.url }}" alt="{{ sortie.nom }}" class="img-fluid mb-3 rounded">
+      {% endif %}
+
+      <p class="lead">{{ sortie.description }}</p>
+
+      <ul class="list-group mb-3">
+        <li class="list-group-item"><strong>Type :</strong> {{ sortie.get_type_display }}</li>
+        <li class="list-group-item"><strong>Adresse :</strong> {{ sortie.adresse }}</li>
+        {% if sortie.horaire %}<li class="list-group-item"><strong>Horaires :</strong> {{ sortie.horaire }}</li>{% endif %}
+        {% if sortie.tarif_moyen %}<li class="list-group-item"><strong>Prix moyen :</strong> {{ sortie.tarif_moyen }}</li>{% endif %}
+        {% if sortie.acces %}<li class="list-group-item"><strong>Accès :</strong> {{ sortie.acces }}</li>{% endif %}
+      </ul>
+
+      {% if sortie.programme %}
+        <div class="mb-4">
+          <h4>🎶 Programme</h4>
+          <p>{{ sortie.programme|linebreaks }}</p>
+        </div>
+      {% endif %}
+
+      {% if sortie.latitude and sortie.longitude %}
+        <div id="map" style="height: 300px;" class="mb-4"></div>
+
+        <script>
+          function initMap() {
+            var location = { lat: {{ sortie.latitude }}, lng: {{ sortie.longitude }} };
+            var map = new google.maps.Map(document.getElementById('map'), {
+              zoom: 15,
+              center: location
+            });
+            new google.maps.Marker({ position: location, map: map });
+          }
+        </script>
+
+        <script async defer
+          src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap">
+        </script>
+      {% endif %}
+    </div>
+
+    <div class="col-md-4">
+      <div class="mb-4">
+        <h5>🔗 Suivre le lieu</h5>
+        <ul class="list-unstyled">
+          {% if sortie.site_web %}<li><a href="{{ sortie.site_web }}" target="_blank">Site Web</a></li>{% endif %}
+          {% if sortie.facebook %}<li><a href="{{ sortie.facebook }}" target="_blank">Facebook</a></li>{% endif %}
+          {% if sortie.instagram %}<li><a href="{{ sortie.instagram }}" target="_blank">Instagram</a></li>{% endif %}
+        </ul>
+      </div>
+
+      <div class="mb-4">
+        <h5>⭐ Notes & Avis</h5>
+        <p class="text-muted">Fonction à venir : les utilisateurs pourront noter et commenter.</p>
+      </div>
+    </div>
+  </div>
+
+  <a href="{% url 'sortie' %}" class="btn btn-outline-secondary mt-4">← Retour aux sorties</a>
+</div>
+{% endblock %}

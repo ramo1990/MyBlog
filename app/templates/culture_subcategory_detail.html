@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% load static %}
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/culture.css' %}">
+{% endblock %}
+
+{% block content %}
+<head>
+    <meta charset="UTF-8">
+    <title>{{ subcategory.name }}</title>
+</head>
+<body>
+    <h1>{{ subcategory.name }}</h1>
+
+    {% if subcategory.description %}
+        <p>{{ subcategory.description }}</p>
+    {% endif %}
+
+    <h2>Images associées :</h2>
+    <div style="display: flex; flex-wrap: wrap;">
+        {% for image in images %}
+            <div style="margin: 10px;">
+                <img src="{{ image.image.url }}" alt="" style="max-width: 200px;">
+                {% if image.caption %}
+                    <p>{{ image.caption }}</p>
+                {% endif %}
+            </div>
+        {% empty %}
+            <p>Aucune image disponible.</p>
+        {% endfor %}
+    </div>
+
+    <p><a href="{% url 'category_detail' subcategory.category.slug %}">← Retour à la catégorie</a></p>
+</body>
+{% endblock content %}

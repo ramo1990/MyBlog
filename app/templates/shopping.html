@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% load static %}
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/shopping.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+  <h1 class="text-center text-warning mb-4">Faire du shopping en Côte d'Ivoire</h1>
+  <p class="lead text-center mb-5">
+    Explorez les marchés artisanaux, centres commerciaux, et boutiques locales du pays.
+  </p>
+
+  <div class="row">
+    {% for lieu in lieux %}
+      <div class="col-md-4 mb-4">
+        <div class="card h-100 shadow-sm">
+          {% if lieu.image %}
+            <img src="{{ lieu.image.url }}" class="card-img-top" alt="{{ lieu.nom }}">
+          {% else %}
+            <img src="{% static 'images/default.jpg' %}" class="card-img-top" alt="Image par défaut">
+          {% endif %}
+          <div class="card-body d-flex flex-column">
+            <h5 class="card-title">{{ lieu.nom }}</h5>
+            <p class="card-text small">{{ lieu.description|truncatewords:20 }}</p>
+            <p class="text-muted mb-1"><small><i class="bi bi-geo-alt"></i> {{ lieu.region }}</small></p>
+            <a href="{% url 'shopping_detail' lieu.slug %}" class="btn btn-outline-warning mt-auto">Voir +</a>
+          </div>
+        </div>
+      </div>
+    {% empty %}
+      <p class="text-center text-muted">Aucun lieu de shopping enregistré pour le moment.</p>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}

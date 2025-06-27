@@ -9,12 +9,12 @@
   <main class="page-a-propos">
     <article>
       <header>
-        <h1>À propos de Explore Abidjan</h1>
+        <h1>À propos de Tourisme Abidjan</h1>
       </header>
 
       <section>
         <h2>Notre mission</h2>
-        <p>Bienvenue sur <strong>Explore Abidjan</strong>, votre guide incontournable pour découvrir les richesses touristiques, culturelles et gastronomiques d’Abidjan, la capitale économique de la Côte d’Ivoire.</p>
+        <p>Bienvenue sur <strong>Tourisme Abidjan</strong>, votre guide incontournable pour découvrir les richesses touristiques, culturelles et gastronomiques d’Abidjan, la capitale économique de la Côte d’Ivoire.</p>
         <p>Nous vous aidons à vivre une expérience authentique, que vous soyez visiteur occasionnel, aventurier curieux ou habitant local.</p>
       </section>
 
@@ -22,6 +22,22 @@
         <h2>Pourquoi visiter Abidjan ?</h2>
         <p>Abidjan est une ville unique en Afrique de l’Ouest, où modernité et tradition cohabitent harmonieusement. Chaque quartier, de <em>Cocody</em> à <em>Yopougon</em>, a son ambiance et ses particularités à découvrir.</p>
         <p>Que ce soit pour ses plages, ses marchés, sa vie nocturne ou sa cuisine, Abidjan vous offre une immersion culturelle inoubliable.</p>
+      </section>
+
+      <!-- 📜 Contexte / Origine -->
+      <section class="mb-5">
+        <h2>Pourquoi ce projet ?</h2>
+        <p>
+          Le projet est né d’un constat simple : il existe peu de ressources structurées et accessibles en ligne pour valoriser la diversité culturelle de la Côte d’Ivoire.
+        </p>
+        <p>
+          Initié en 2025 par un collectif de passionnés de culture, d’éducation et de tourisme durable, ce site vise à :
+        </p>
+        <ul>
+          <li>Documenter les fêtes et traditions locales</li>
+          <li>Encourager le tourisme culturel responsable</li>
+          <li>Donner la parole aux communautés et artisans</li>
+        </ul>
       </section>
 
       <section>
@@ -40,9 +56,52 @@
         <p>Nous valorisons un tourisme <strong>responsable, local et durable</strong>. Notre objectif est de mettre en avant les talents, les cultures et les initiatives ivoiriennes qui font la richesse d’Abidjan.</p>
       </section>
 
+      <!-- 🧑‍🤝‍🧑 L’équipe -->
+      <section class="mb-5">
+        <h2>Qui sommes-nous ?</h2>
+        <p>
+          Nous sommes une petite équipe de développeurs, enseignants, guides locaux, et artistes engagés dans la valorisation du patrimoine ivoirien. Basés à Abidjan, Bouaké et Korhogo, nous collaborons avec des acteurs culturels sur le terrain.
+        </p>
+
+        <h4>Notre équipe</h4>
+        <div class="row mt-4">
+          <div class="col-md-4 text-center mb-4">
+            <img src="{% static 'images/equipe/alice.jpg' %}" class="rounded-circle mb-3" alt="Alice" width="120" height="120">
+            <h5>Alice Kouadio</h5>
+            <p class="text-muted">Coordinatrice culturelle</p>
+          </div>
+          <div class="col-md-4 text-center mb-4">
+            <img src="{% static 'images/equipe/yacouba.jpg' %}" class="rounded-circle mb-3" alt="Yacouba" width="120" height="120">
+            <h5>Yacouba Koné</h5>
+            <p class="text-muted">Développeur web & cartographe</p>
+          </div>
+          <div class="col-md-4 text-center mb-4">
+            <img src="{% static 'images/equipe/fatou.jpg' %}" class="rounded-circle mb-3" alt="Fatou" width="120" height="120">
+            <h5>Fatou Diabaté</h5>
+            <p class="text-muted">Rédactrice & Photographe</p>
+          </div>
+        </div>
+      </section>
+
       <section>
-        <h2>Contactez-nous</h2>
-        <p>Une question, une idée ou une collaboration ? Écrivez-nous à <a href="mailto:contact@exploreabidjan.com">contact@exploreabidjan.com</a> ou suivez-nous sur les réseaux sociaux.</p>
+        <h2>Nous contacter</h2>
+        <p>Une question, une idée ou une collaboration ? Écrivez-nous à <a href="mailto:contact@tourismeabidjan.com">contact@tourismeabidjan.com</a> ou suivez-nous sur les réseaux sociaux.</p>
+        <p>
+          Une question, une suggestion, une collaboration ou envie de contribuer ? N’hésitez pas à nous écrire !
+        </p>
+        <p>
+          📧 <strong>Email :</strong> <a href="mailto:contact@tourismeabidjan.com">contact@tourismeabidjan.com</a><br>
+          📍 Abidjan, Côte d'Ivoire
+        </p>
+        <a href="{% url 'contact' %}" class="btn btn-outline-primary mt-2">Voir la page Contact</a>
+      </section>
+
+      <!-- 💬 Remerciements -->
+      <section class="mb-5">
+        <h2>Remerciements</h2>
+        <p>
+          Merci aux structures locales, guides culturels et habitants qui partagent leur savoir et leur temps. Ce projet évolue grâce à vous !
+        </p>
       </section>
     </article>
   </main>

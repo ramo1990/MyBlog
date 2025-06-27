@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container my-5">
+    <h1 class="text-center text-success">📚 Catégorie : {{ categorie|capfirst }}</h1>
+    <div class="row mt-4">
+        {% for culture in cultures %}
+            <div class="col-md-4 mb-4">
+                <div class="card h-100">
+                    {% if culture.image %}
+                        <img src="{{ culture.image.url }}" class="card-img-top" alt="{{ culture.title }}">
+                    {% endif %}
+                    <div class="card-body">
+                        <h5 class="card-title">{{ culture.title }}</h5>
+                        <p class="card-text">{{ culture.content|truncatewords:20 }}</p>
+                        <a href="{% url 'culture_detail' culture.slug %}" class="btn btn-primary">Voir plus</a>
+                    </div>
+                </div>
+            </div>
+        {% empty %}
+            <p>Aucun contenu dans cette catégorie.</p>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

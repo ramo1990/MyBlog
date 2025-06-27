@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% load static %}
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/nature.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+  <h1 class="mb-4 text-success text-center">Dans la nature</h1>
+
+  <div class="text-center mb-4">
+    <p class="fs-5 fst-italic text-muted">
+      Ressentez la liberté, découvrez les merveilles naturelles de la Côte d'Ivoire.
+    </p>
+    <p class="lead">
+      Parcourez les trésors naturels de Côte d'Ivoire : plages, forêts, randonnées et faune sauvage.
+    </p>
+    <a href="#categories" class="btn btn-success btn-lg mt-2">
+      🌿 Explorez la nature
+    </a>
+  </div>
+
+  {% for cat, lieux in categories.items %}
+  <div id="categories">
+    {% if lieux %}
+      <h2 class="mt-5 text-primary text-capitalize">{{ cat }}</h2>
+      <div class="row">
+        {% for lieu in lieux %}
+          <div class="col-md-4 mb-4">
+            <div class="card nature-card h-100">
+              {% if lieu.image %}
+                <img src="{{ lieu.image.url }}" class="card-img-top" alt="{{ lieu.nom }}">
+              {% else %}
+                <img src="{% static 'images/default.jpg' %}" class="card-img-top" alt="Image par défaut">
+              {% endif %}
+              <div class="card-body d-flex flex-column">
+                <h5 class="card-title">{{ lieu.nom }}</h5>
+                <p class="card-text">{{ lieu.description|truncatewords:20 }}</p>
+                <a href="{% url 'nature_detail' lieu.slug %}" class="btn btn-outline-success mt-auto">Voir +</a>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    {% endif %}
+  </div>
+  {% endfor %}
+</div>
+{% endblock content %}

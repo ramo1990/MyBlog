@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container my-5">
+  <h1>{{ lieu.nom }}</h1>
+  <p><strong>Localisation :</strong> {{ lieu.localisation }}</p>
+  <p><strong>Description :</strong> {{ lieu.description }}</p>
+  <p><strong>Distance :</strong> {{ lieu.distance_km }} km</p>
+  <p><strong>Durée estimée :</strong> {{ lieu.duree }} h</p>
+  {% if lieu.image %}
+    <img src="{{ lieu.image.url }}" alt="{{ lieu.nom }}" class="img-fluid mt-3">
+  {% endif %}
+  <p class="mt-3"><a href="{% url 'autour_de_babi' %}" class="btn btn-outline-success">← Retour</a></p>
+</div>
+{% endblock %}

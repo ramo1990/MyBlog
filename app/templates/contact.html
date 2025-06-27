@@ -4,14 +4,35 @@
     <link rel="stylesheet" href="{% static 'css/contact.css' %}">
 {% endblock %}
 
+
 {% block content %}
-<div class="contact-page container mt-4">
-    <h2>Contactez-nous</h2>
-    <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit" class="btn btn-primary">Envoyer</button>
-    </form>
+<div class="contact-page">
+  <h2>Contactez-nous 📬</h2>
+
+    <div class="row">
+        <!-- Formulaire -->
+        <div class="col-md-7">
+            <form method="post" class="mb-4">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit" class="btn btn-primary">Envoyer</button>
+            </form>
+        </div>
+
+        <!-- Coordonnées -->
+        <div class="col-md-5">
+            <h4 class="mb-3">Nos coordonnées</h4>
+            <p>📧 contact@tourismeabidjan.com</p>
+            <p>📞 +225 01 23 45 67 89</p>
+            <p>📍 Cocody, Abidjan, Côte d'Ivoire</p>
+    
+            <h5 class="mt-4">Suivez-nous</h5>
+            <p>
+            <a href="https://facebook.com/tonprojet" target="_blank">🌐 Facebook</a><br>
+            <a href="https://instagram.com/tonprojet" target="_blank">📷 Instagram</a><br>
+            <a href="https://twitter.com/tonprojet" target="_blank">🐦 Twitter</a>
+            </p>
+        </div>
+    </div>
 </div>
 {% endblock %}
-

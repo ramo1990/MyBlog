@@ -46,138 +46,229 @@ def delete_post_image(sender, instance, **kwargs):
         if os.path.isfile(instance.image.path):
             os.remove(instance.image.path)
 
-# section CarouselSlide
-# class CarouselSlide(models.Model):
-#     title = models.CharField(max_length=200, blank=True)
-#     subtitle = models.CharField(max_length=300, blank=True)
-#     image = models.ImageField(upload_to='carousel/')
-#     order = models.PositiveIntegerField(default=0)  # pour gérer l'ordre
-#     active = models.BooleanField(default=True)
+# section culture et  tradiction
+class Category(models.Model):
+    title = models.CharField(max_length=100)
+    description = models.TextField()
+    image = models.ImageField(upload_to='culture/categories/', blank=True, null=True)
+    slug = models.SlugField(unique=True)
 
-#     class Meta:
-#         ordering = ['order']
-#     def __str__(self):
-#         return self.title or f"Slide {self.pk}"
-
-
-# section agenda
-class Agenda(models.Model):
-    title = models.CharField(max_length=200)
-    slug = models.SlugField(max_length=200, unique=True, blank=True)
-    date_debut = models.DateField(null=True, blank=True)
-    date_debut_texte = models.CharField(max_length=100, blank=True)
-    date_fin = models.DateField(null=True, blank=True)
-    content = models.TextField()
-    image = models.ImageField(upload_to='agenda_images/', null=True, blank=True)
-    place = models.CharField(max_length=255, blank=True)
-
-    def save(self, *args, **kwargs):
-        if not self.slug:
-            base_slug = slugify(self.titre)
-            slug = base_slug
-            count = 1
-            while Agenda.objects.filter(slug=slug).exists():
-                slug = f"{base_slug}-{count}"
-                count += 1
-            self.slug = slug
-        super().save(*args, **kwargs)
+    class Meta:
+        verbose_name = "Catégorie culturelle"
+        verbose_name_plural = "Catégories culturelles"
 
     def __str__(self):
         return self.title
 
-# section destinations
-class Destinations(models.Model):
+class SubCategory(models.Model):
+    category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='subcategories')
     title = models.CharField(max_length=100)
-    slug = models.SlugField(max_length=120, unique=True, blank=True)
-    content = models.TextField()
-    image = models.ImageField(upload_to='destinations/', blank=True, null=True)
+    description = models.TextField()
+    image = models.ImageField(upload_to='culture/subcategories/', blank=True, null=True)
+    slug = models.SlugField(unique=True)
+    is_featured = models.BooleanField(default=False)
+
+    class Meta:
+        verbose_name = "Culture Sub_Catégorie"
+        verbose_name_plural = "Cultures Sub_Catégories"
+
+    def __str__(self):
+        return f"{self.category.title} - {self.title}"
+
+class GalleryImage(models.Model):
+    subcategory = models.ForeignKey(SubCategory, on_delete=models.CASCADE, related_name='images')
+    image = models.ImageField(upload_to='culture/gallery/', blank=True, null=True)
+    caption = models.CharField(max_length=255, blank=True)
+
+    class Meta:
+        verbose_name = "Image de galerie culture"
+        verbose_name_plural = "Images de galerie cultures"
+    def __str__(self):
+        return f"Image for {self.subcategory.title}"
+
+# section autour de babi
+class Lieu(models.Model):
+    NIVEAU_DIFFCULTE = (
+        ("facile", "Facile"),
+        ("moyen", "Moyen"),
+        ("difficile", "Difficile")
+    )
+    nom = models.CharField(max_length=255)
+    slug = models.SlugField(unique=True)
+    description = models.TextField()
+    image = models.ImageField(upload_to='lieux/', blank=True, null=True)
+    localisation = models.CharField(max_length=255)  # Ex : "Grand-Bassam", "Azaguié"
+    distance_km = models.FloatField()  # distance depuis Abidjan
+    duree = models.FloatField()  # durée approximative en heures
     latitude = models.FloatField(blank=True, null=True)
     longitude = models.FloatField(blank=True, null=True)
-    date = models.DateTimeField(auto_now_add=True)
+    weekend_spot = models.BooleanField(default=False, verbose_name="Idée de sortie du week-end")
+    niveau_difficulte = models.CharField(max_length=50, choices= NIVEAU_DIFFCULTE, blank=True, null=True)
+    saison_ideale = models.CharField(max_length=100, blank=True, null=True)
+    equipement_conseille = models.TextField(blank=True, null=True)
+    acces = models.TextField(blank=True, null=True)  # infos de transport, routes, etc
+    region = models.CharField(max_length=100, blank=True, null=True)
+    date_evenement = models.DateTimeField(auto_now_add=True)
+    horaire = models.CharField(max_length=255, blank=True, null=True)
+    tarif = models.CharField(max_length=100, blank=True, null=True)
+    age_minimum = models.PositiveIntegerField(blank=True, null=True)
+    accessibilite = models.TextField(blank=True, null=True)  # infos sur l’accès PMR, parking, etc.
+    type = models.CharField(max_length=100, choices=[
+        ("nature", "Nature"),
+        ("culture", "Culture"),
+        ("plage", "Plage"),
+        ("gastronomie", "Gastronomie"),
+        ("village", "Village"),
+        ("randonnee", "Randonnee"),
+        ("animaux", "Animaux"),
+        ("village", "Village"),
+        ("parc", "Parc"),
+        ("sport", "Activité sportive"),
+        ("centre_loisir", "Centre de loisirs"),
+        ("jeux", "Jeux pour enfants"),
+    ])
 
     class Meta:
-        ordering = ['title']
-        verbose_name = "ville d'abidjan"
-        verbose_name_plural = "Destinations abidjan"
-    
+        verbose_name = "Autour de Babi"
+        verbose_name_plural = "Autour de Babis"
     def __str__(self):
-        return self.title
-
-    def get_absolute_url(self):
-        return reverse('destination_detail', args=[self.slug])
+        return self.nom
+# Tags multiples
+    tags = models.ManyToManyField('Tag', blank=True)
+class Tag(models.Model):
+    nom = models.CharField(max_length=50)
+    def __str__(self):
+        return self.nom
     
+# section loisir
+class ActiviteLoisir(models.Model):
+    CATEGORIES = [
+        ("parc", "Parc"),
+        ("sport", "Activité sportive"),
+        ("centre_loisir", "Centre de loisirs"),
+        ("jeux", "Jeux pour enfants"),
+        ("autre", "Autre"),
+    ]
+
+    nom = models.CharField(max_length=255)
+    slug = models.SlugField(unique=True, blank=True)
+    description = models.TextField()
+    image = models.ImageField(upload_to='loisirs/', blank=True, null=True)
+
+    categorie = models.CharField(max_length=50, choices=CATEGORIES)
+    localisation = models.CharField(max_length=255, blank=True, null=True)
+    latitude = models.FloatField(blank=True, null=True)
+    longitude = models.FloatField(blank=True, null=True)
+
+    horaire = models.CharField(max_length=255, blank=True, null=True)
+    tarif = models.CharField(max_length=100, blank=True, null=True)
+    age_minimum = models.PositiveIntegerField(blank=True, null=True)
+    accessibilite = models.TextField(blank=True, null=True)
+
+    site_web = models.URLField(blank=True, null=True)
+    telephone = models.CharField(max_length=50, blank=True, null=True)
+    facebook = models.URLField(blank=True, null=True)
+    instagram = models.URLField(blank=True, null=True)
+
+    date_ajout = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        verbose_name = "Activité de loisir"
+        verbose_name_plural = "Activités de loisir"
+
+    def __str__(self):
+        return self.nom
+
     def save(self, *args, **kwargs):
         if not self.slug:
-            base_slug = slugify(self.title)
-            slug = base_slug
-            num = 1
-            while Destinations.objects.filter(slug=slug).exists():
-                slug = f"{base_slug}-{num}"
-                num += 1
-            self.slug = slug
+            self.slug = slugify(self.nom)
         super().save(*args, **kwargs)
 
-class ImageSupplementaire(models.Model):
-    destination = models.ForeignKey(Destinations, on_delete=models.CASCADE, related_name='images')
-    image = models.ImageField(upload_to='destinations/gallery/')
-    description = models.CharField(max_length=200, blank=True)
 
-    def __str__(self):
-        return f"Image de {self.destination.ville}"
+# Section shopping
+class LieuShopping(models.Model):
+    TYPES = [
+        ("marche", "Marché local"),
+        ("boutique", "Boutique artisanale"),
+        ("mall", "Centre commercial"),
+        ("concept_store", "Concept Store"),
+        ("autre", "Autre"),
+    ]
 
-# section culture et  tradiction
-class Culture(models.Model):
-    title = models.CharField(max_length=200)
-    slug = models.SlugField(unique=True, blank=True) # editable=True; genere le slug automatiquement
-    content = models.TextField()
-    image = models.ImageField(upload_to='cultures_images/', blank=True, null=True)
-    video_url = models.URLField(blank=True, null=True, help_text="Coller ici l'URL Youtube")
-    audio_file = models.FileField(upload_to='culture_audio/',blank=True, null=True)
+    nom = models.CharField(max_length=255)
+    slug = models.SlugField(unique=True, blank=True)
+    description = models.TextField()
+    image = models.ImageField(upload_to='shopping/', blank=True, null=True)
 
-    def save(self, *args, **kwargs):
-        if not self.slug or Culture.objects.filter(slug=self.slug).exclude(pk=self.pk).exists():
-            base_slug = slugify(self.titre)
-            slug = base_slug
-            counter = 1
-            while Culture.objects.filter(slug=slug).exclude(pk=self.pk).exists():
-                slug = f'{base_slug}-{counter}'
-                counter += 1
-            self.slug = slug
-        super().save(*args, **kwargs)
+    type = models.CharField(max_length=50, choices=TYPES)
+    adresse = models.CharField(max_length=255)
+    region = models.CharField(max_length=100, blank=True, null=True)
+    horaires = models.CharField(max_length=100, blank=True, null=True)
+    telephone = models.CharField(max_length=50, blank=True, null=True)
+    site_web = models.URLField(blank=True, null=True)
+    facebook = models.URLField(blank=True, null=True)
+    instagram = models.URLField(blank=True, null=True)
 
-    def __str__(self):
-        return self.title
-    
-class CultureImage(models.Model):
-    culture = models.ForeignKey(Culture, on_delete=models.CASCADE, related_name='images')
-    image = models.ImageField(upload_to='culture_images/')
-    description = models.TextField(blank=True, null=True)
+    latitude = models.FloatField(blank=True, null=True)
+    longitude = models.FloatField(blank=True, null=True)
 
-# section conseilVoyage
-class ConseilVoyage(models.Model):
-    title = models.CharField(max_length=200)
-    slug = models.SlugField(max_length=200 , unique= True, blank=True)
-    content = models.TextField()
-    date = models.DateTimeField(auto_now_add=True)
+    date_ajout = models.DateTimeField(auto_now_add=True)
 
     class Meta:
-        ordering = ['-date']
-        verbose_name = "Conseil de voyage"
-        verbose_name_plural = "Conseils de voyage"
-    
-    def save(self, *args, **kwargs):
-        if not self.slug: # or ConseilVoyage.objects.filter(slug=self.slug).exclude(pk=self.pk).exists():
-            base_slug = slugify(self.title)
-            slug = base_slug
-            counter = 1
-            while ConseilVoyage.objects.filter(slug=slug).exclude(pk=self.pk).exists():
-                slug = f'{base_slug}-{counter}'
-                counter += 1
-            self.slug = slug
-        super().save(*args, **kwargs)
+        verbose_name = "Lieu de shopping"
+        verbose_name_plural = "Lieux de shopping"
 
     def __str__(self):
-        return self.title
+        return self.nom
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(self.nom)
+        super().save(*args, **kwargs)
+
+# section sortie
+class Sortie(models.Model):
+    TYPES_SORTIE = [
+        ("bar", "Bar"),
+        ("club", "Club"),
+        ("concert", "Concert"),
+        ("spectacle", "Spectacle"),
+        ("evenement", "Événement"),
+    ]
+
+    nom = models.CharField(max_length=255)
+    slug = models.SlugField(unique=True)
+    description = models.TextField()
+    image = models.ImageField(upload_to='sorties/', blank=True, null=True)
+    type = models.CharField(max_length=50, choices=TYPES_SORTIE)
+    adresse = models.CharField(max_length=255)
+    region = models.CharField(max_length=100, blank=True, null=True)
+    acces = models.CharField(max_length=255, blank=True, null=True)  # bus, taxi, voiture, etc.
+
+    date_debut = models.DateTimeField(blank=True, null=True)
+    date_fin = models.DateTimeField(blank=True, null=True)
+    horaire = models.CharField(max_length=100, blank=True, null=True)
+    age_minimum = models.PositiveIntegerField(blank=True, null=True)
+    tarif = models.CharField(max_length=100, blank=True, null=True)
+    dress_code = models.CharField(max_length=100, blank=True, null=True)
+
+    latitude = models.FloatField(blank=True, null=True)
+    longitude = models.FloatField(blank=True, null=True)
+
+    tendance = models.BooleanField(default=False)
+    date_ajout = models.DateTimeField(auto_now_add=True)
+    site_web = models.URLField(blank=True, null=True)
+    facebook = models.URLField(blank=True, null=True)
+    instagram = models.URLField(blank=True, null=True)
+    programme = models.TextField(blank=True, null=True)
+    tarif_moyen = models.CharField(max_length=100, blank=True, null=True)
+
+    class Meta:
+        verbose_name = "Sortie"
+        verbose_name_plural = "Sorties"
+
+    def __str__(self):
+        return self.nom
 
 # section contact
 class MessageContact(models.Model):
@@ -196,38 +287,6 @@ class APropos(models.Model):
     content = models.TextField()
     image = models.ImageField(upload_to='a_propos/', blank=True, null=True)
     updated_on = models.DateTimeField(auto_now=True)
-
-    def __str__(self):
-        return self.title
-
-# section gastronomie
-class Gastronomie(models.Model):
-    title = models.CharField(max_length=200)
-    slug = models.SlugField(unique=True, blank=True)    
-    content = models.TextField()
-    date = models.DateTimeField(auto_now_add=True)
-    image = models.ImageField(upload_to='gastronomie_images/', blank=True, null=True)
-
-    def save(self, *args, **kwargs):
-        if not self.slug:
-            self.slug = slugify(self.title)
-        super().save(*args, **kwargs)
-
-    def __str__(self):
-        return self.title
-
-#section ville et patrimoine
-class VillePatrimoine(models.Model):
-    title = models.CharField(max_length=200)
-    slug = models.SlugField(unique=True, blank=True)
-    content = models.TextField()
-    date = models.DateTimeField(auto_now_add=True)
-    image = models.ImageField(upload_to='villes_patrimoine/', blank=True, null=True)
-
-    def save(self, *args, **kwargs):
-        if not self.slug:
-            self.slug = slugify(self.title)
-        super().save(*args, **kwargs)
 
     def __str__(self):
         return self.title
@@ -298,23 +357,6 @@ class Restaurant(models.Model):
     def __str__(self):
         return self.title
     
-class Plat(models.Model):
-    restaurant = models.ForeignKey(Restaurant, on_delete=models.CASCADE, related_name='plats')
-    nom = models.CharField(max_length=100)
-    description = models.TextField(blank=True, null=True)
-    prix = models.DecimalField(max_digits=6, decimal_places=2, blank=True, null=True)
-    image = models.ImageField(upload_to='plats/', blank=True, null=True)
-
-    def __str__(self):
-        return self.nom
-    
-# plat typique
-class PlatTypique(models.Model):
-    nom = models.CharField(max_length=100)
-    description = models.TextField()
-    image = models.ImageField(upload_to='plats/', blank=True, null=True)
-    def __str__(self):
-        return self.nom
 ############
 # Infos pratique
 class InfoPratique(models.Model):
@@ -325,25 +367,30 @@ class InfoPratique(models.Model):
     def __str__(self):
         return self.title
 
-# Que faire ?
-class CategorieActivite(models.Model):
-    name = models.CharField(max_length=100, blank=True, null=True)
-    icon = models.CharField(max_length=10, help_text="Emoji ou icône")
+# section transport
+class MoyenTransport(models.Model):
+    TYPES = [
+        ('bus', 'Bus / Car'),
+        ('bateau', 'Bateau'),
+        ('avion', 'Avion'),
+        ('taxi', 'Taxi / VTC'),
+        ('location', 'Location de voiture'),
+    ]
+
+    nom = models.CharField(max_length=255)
+    slug = models.SlugField(unique=True)
+    type = models.CharField(max_length=50, choices=TYPES)
+    description = models.TextField()
+    image = models.ImageField(upload_to='transports/', blank=True, null=True)
+    region = models.CharField(max_length=100, blank=True, null=True)
+    horaires = models.CharField(max_length=255, blank=True, null=True)
+    tarifs = models.CharField(max_length=255, blank=True, null=True)
+    site_web = models.URLField(blank=True, null=True)
+    telephone = models.CharField(max_length=100, blank=True, null=True)
+
+    class Meta:
+        verbose_name = "Moyen de transport"
+        verbose_name_plural = "Transports"
 
     def __str__(self):
-        return self.name
-
-class Activite(models.Model):
-    categorie = models.ForeignKey(CategorieActivite, on_delete=models.CASCADE, related_name='activites')
-    title = models.CharField(max_length=200)
-    slug = models.SlugField(unique=True, blank=True)
-    content = models.TextField()
-    image = models.ImageField(upload_to='activites/', blank=True, null=True)
-
-    def save(self, *args, **kwargs):
-        if not self.slug:
-            self.slug = slugify(self.title)
-        super().save(*args, **kwargs)
-    
-    def __str__(self):
-        return self.title
+        return self.nom
