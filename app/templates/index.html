@@ -1,5 +1,7 @@
 {% extends "base.html" %}
 {% load static %}
+{% load i18n %}
+{% load static i18n %}
 
 {% block extra_css %}
     <link rel="stylesheet" href="{% static 'css/index.css' %}">
@@ -14,8 +16,8 @@
     <div class="row h-100 align-items-center">
       <div class="col-md-8">
         <div class="site-heading">
-          <h1 class="display-4 fw-bold">Abidjan:la Perle des Lagunes</h1>
-          <p class="lead">Voyage au cœur d’une ville vibrante</p>
+          <h1 class="display-4 fw-bold">{% trans "Abidjan:la Perle des Lagunes" %}</h1>
+          <p class="lead">{% trans "Voyage au cœur d’une ville vibrante" %}</p>
         </div>
       </div>
     </div>
@@ -24,44 +26,44 @@
 
 <!-- Section Vignettes vers sections clés -->
 <section class="container my-5">
-  <h2 class="text-center section-title mb-4">Découvrir nos rubriques</h2>
+  <h2 class="text-center section-title mb-4">{% trans "Découvrir nos rubriques" %}</h2>
     <div class="row g-4">
       <div class="col-6 col-md-3">
-        <a href="#" class="card-link text-decoration-none">
+        <a href="{% url 'nature' %}" class="card-link text-decoration-none">
           <div class="card shadow-sm">
             <img src="{% static 'images/image.png' %}" class="card-img-top" alt="Patrimoine">
             <div class="card-body text-center">
-              <h5 class="card-title">Villes & Patrimoines</h5>
+              <h5 class="card-title">{% trans "Dans la nature" %}</h5>
             </div>
           </div>
         </a>
       </div>
       <div class="col-6 col-md-3">
-        <a href="#" class="card-link text-decoration-none">
+        <a href="{% url 'restaurants_list' %}" class="card-link text-decoration-none">
           <div class="card shadow-sm">
             <img src="{% static 'images/image.png' %}" class="card-img-top" alt="Gastronomie">
             <div class="card-body text-center">
-              <h5 class="card-title">Gastronomie</h5>
+              <h5 class="card-title">{% trans "Gastronomie" %}</h5>
             </div>
           </div>
         </a>
       </div>
       <div class="col-6 col-md-3">
-        <a href="#" class="card-link text-decoration-none">
+        <a href="{% url 'autour_de_babi' %}" class="card-link text-decoration-none">
           <div class="card shadow-sm">
-            <img src="{% static 'images/image.png' %}" class="card-img-top" alt="Agenda">
+            <img src="{% static 'images/image.png' %}" class="card-img-top" alt="autour_babi">
             <div class="card-body text-center">
-              <h5 class="card-title">Agenda</h5>
+              <h5 class="card-title">{% trans "Autour d'Abidjan" %}</h5>
             </div>
           </div>
         </a>
       </div>
       <div class="col-6 col-md-3">
-        <a href="{#}" class="card-link text-decoration-none">
+        <a href="{% url 'hebergements_list' %}" class="card-link text-decoration-none">
           <div class="card shadow-sm">
             <img src="{% static 'images/image.png' %}" class="card-img-top" alt="Destinations">
             <div class="card-body text-center">
-              <h5 class="card-title">Destinations</h5>
+              <h5 class="card-title">{% trans "Hébergements" %}</h5>
             </div>
           </div>
         </a>
@@ -72,7 +74,7 @@
 
 <!-- Main Content -->
 <section class="container mt-5 mb-5">
-  <h2 class="text-center section-title mb-5">A la une</h2>
+  <h2 class="text-center section-title mb-5">{% trans "A la une" %}</h2>
 
 <div class="agenda-carousel-container position-relative">
   <div class="swiper mySwiper">
@@ -88,9 +90,9 @@
           <p class="text-muted small">{{ post.created_on|date:"d F Y" }}</p>
           <p class="card-text">{{ post.content|truncatechars:150 }}</p>
           {% if post.slug %}
-          <a href="{% url 'post_detail' post.slug %}" class="btn btn-ci mt-auto">Lire l'article</a>
+          <a href="{% url 'post_detail' post.slug %}" class="btn btn-ci mt-auto">{% trans "Lire l'article" %}</a>
           {% else %}
-          <span class="btn btn-secondary mt-auto disabled"> pas de lien</span>
+          <span class="btn btn-secondary mt-auto disabled">{% trans "pas de lien" %}</span>
           {% endif %}
         </div>
       </article>
@@ -103,37 +105,33 @@
   <div class="swiper-button-next"></div>
 </div>
   <div class="text-center mb-4">
-    <a href="{% url 'post_list' %}" class="btn btn-ci btn-lg">Tous nos articles</a>
+    <a href="{% url 'post_list' %}" class="btn btn-ci btn-lg">{% trans "Tous nos articles" %}</a>
   </div>
 </section>
 
-<!-- section agenda -->
+<!-- section autour de babi -->
 <section class="container mt-5 mb-5">
-  <h2 class="text-center mb-5 section-title">Agenda incontournables</h2>
+  <h2 class="text-center mb-5 section-title">{% trans "Lieu proche" %}</h2>
 
   <div class="agenda-carousel-container position-relative">
   <div class="swiper mySwiper mb-4">
     <div class="swiper-wrapper">
-      {% for event in events|slice:":6" %}
+      {% for lieu in lieux|slice:":6" %}
       <div class="swiper-slide">
         <article class="card h-100 shadow-sm">
-          {% if event.image %}
-          <img src="{{ event.image.url }}" alt="{{ event.title }}" class="img-fluid card-img-top">
+          {% if lieu.image %}
+          <img src="{{ lieu.image.url }}" alt="{{ lieu.nom }}" class="img-fluid card-img-top">
           {% endif %}
           <div class="card-body d-flex flex-column">
-            <h2 class="card-title h5">{{ event.title }}</h2>          
+            <h2 class="card-title h5">{{ lieu.nom }}</h2>          
             <p class="text-muted small">
-              {% if event.date_fin %}
-                Du {{ event.date_debut|date:"d M Y" }} au {{ event.date_fin|date:"d M Y" }}
-              {% else %}
-                Le {{ event.date_debut|date:"d M Y" }}
-              {% endif %}
+              Le {{ lieu.date_evenement|date:"d M Y" }}
             </p>
-            <p class="card-text">{{ event.content|truncatechars:200 }}</p>
-            {% if event.slug %}
-            <a href="{% url 'agenda_detail' event.slug %}" class="btn btn-ci mt-auto">Voir plus &rarr;</a>
+            <p class="card-text">{{ lieu.description|truncatechars:200 }}</p>
+            {% if lieu.slug %}
+            <a href="{% url 'autour_babi_detail' lieu.slug %}" class="btn btn-ci mt-auto">{% trans "Voir plus" %} &rarr;</a>
             {% else %}
-            <span class="btn btn-secondary mt-auto disabled">pas de lien</span>
+            <span class="btn btn-secondary mt-auto disabled">{% trans "pas de lien" %}</span>
             {% endif %}
           </div>
         </article>
@@ -144,36 +142,34 @@
     <!-- Arrows -->
     <div class="swiper-button-prev"></div>
     <div class="swiper-button-next"></div>
-
   </div>
   
-
   <div class="text-center mb-4">
-    <a href="#" class="btn btn-ci btn-lg">VOIR TOUT L'AGENDA →</a>
+    <a href="{% url 'autour_de_babi' %}" class="btn btn-ci btn-lg">{% trans "VOIR TOUS" %} →</a>
   </div>
 </section>
 
 <!-- Section Gastronomie -->
 <section class="container mt-5 mb-5">
-  <h2 class="text-center mb-5 section-title">Découvertes Gastronomiques</h2>
+  <h2 class="text-center mb-5 section-title">{% trans "Hebergements" %}</h2>
 
   <div class="agenda-carousel-container position-relative">
   <div class="swiper mySwiper mb-4">
     <div class="swiper-wrapper">
-    {% for plat in gastronomie_list|slice:":6" %}
+    {% for h in hebergements|slice:":6" %}
     <div class="swiper-slide">
       <article class="card h-100 shadow-sm">
-        {% if plat.image %}
-        <img src="{{ plat.image.url }}" alt="{{ plat.title }}" class="img-fluid card-img-top">
+        {% if h.image %}
+        <img src="{{ h.image.url }}" alt="{{ h.title }}" class="img-fluid card-img-top">
         {% endif %}
         <div class="card-body d-flex flex-column">
-          <h2 class="card-title h5">{{ plat.title }}</h2>
-          <p class="text-muted small">{{ plat.date|date:"d F Y" }}</p>
-          <p class="card-text">{{ plat.content|truncatechars:200 }}</p>
-          {% if plat.slug %}
-          <a href="#" class="btn btn-ci mt-auto">Voir plus &rarr;</a>
+          <h2 class="card-title h5">{{ h.title }}</h2>
+          <p class="text-muted small">{{ h.quartier }}</p>
+          <p class="card-text">{{ h.content|truncatechars:200 }}</p>
+          {% if h.slug %}
+          <a href="{% url 'hebergement_detail' h.slug %}" class="btn btn-ci mt-auto">{% trans "Voir plus" %} &rarr;</a>
           {% else %}
-          <span class="btn btn-secondary mt-auto disabled"> pas de lien</span>
+          <span class="btn btn-secondary mt-auto disabled">{% trans "pas de lien" %}</span>
           {% endif %}
         </div>
       </article>
@@ -186,31 +182,31 @@
     <div class="swiper-button-next"></div>
 </div>
   <div class="text-center mb-4">
-    <a href="#" class="btn btn-ci btn-lg">VOIR TOUT →</a>
+    <a href="#" class="btn btn-ci btn-lg">{% trans "VOIR TOUT" %} →</a>
   </div>
 </section>
 
 <!-- Section Ville & Patrimoine -->
 <section class="container mt-5 mb-5">
-  <h2 class="text-center mb-5 section-title">Villes et Patrimoines </h2>
+  <h2 class="text-center mb-5 section-title"> {% trans "Où manger" %} </h2>
 
   <div class="agenda-carousel-container position-relative">
   <div class="swiper mySwiper mb-4">
     <div class="swiper-wrapper">
-    {% for ville in ville_list|slice:":6" %}
+    {% for r in restaurants|slice:":6" %}
     <div class="swiper-slide">
       <article class="card h-100 shadow-sm">
-        {% if ville.image %}
-        <img src="{{ ville.image.url }}" alt="{{ ville.title }}" class="img-fluid card-img-top">
+        {% if r.image %}
+        <img src="{{ r.image.url }}" alt="{{ r.title }}" class="img-fluid card-img-top">
         {% endif %}
         <div class="card-body d-flex flex-column">
-          <h2 class="card-title h5">{{ ville.title }}</h2>
-          <p class="text-muted small">{{ ville.date|date:"d M Y" }}</p>
-          <p class="card-text">{{ ville.content|truncatechars:200 }}</p>
-          {% if ville.slug %}
-          <a href="{% url 'ville_detail' ville.slug %}" class="btn btn-ci mt-auto">Voir plus &rarr;</a>
+          <h2 class="card-title h5">{{ r.title }}</h2>
+          <p class="text-muted small">{{ r.quartier }}</p>
+          <p class="card-text">{{ r.content|truncatechars:200 }}</p>
+          {% if r.slug %}
+          <a href="{% url 'restaurants_detail' r.slug %}" class="btn btn-ci mt-auto">{% trans "Voir plus" %} &rarr;</a>
           {% else %}
-          <span class="btn btn-secondary mt-auto disabled">Pas de lien</span>
+          <span class="btn btn-secondary mt-auto disabled">{% trans "Pas de lien" %}</span>
           {% endif %}
         </div>
       </article>
@@ -224,7 +220,7 @@
 </div>
 
   <div class="text-center mt-4">
-    <a href="#" class="btn btn-ci btn-lg">Voir toutes les villes →</a>
+    <a href="{% url 'restaurants_list' %}" class="btn btn-ci btn-lg">{% trans "Voir tous les restos" %} →</a>
   </div>
 </section>
 

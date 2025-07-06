@@ -1,5 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load i18n %}
+{% load static i18n %}
 
 {% block extra_head %}
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
@@ -17,16 +19,16 @@
         <img src="{{ resto.image.url }}" class="img-fluid mb-4 rounded" alt="{{ resto.title }}">
     {% endif %}
 
-    <p><strong>Quartier :</strong> {{ resto.quartier }}</p>
-    <p><strong>Adresse :</strong> {{ resto.adresse }}</p>
-    <p><strong>Contact :</strong> {{ resto.phone }}</p>
-    <p><strong>Horaires :</strong> {{ resto.horaires }}</p>
-    <p><strong>Prix moyen :</strong> {{ resto.prix_moyen }}</p>
+    <p><strong>{% trans "Quartier" %} :</strong> {{ resto.quartier }}</p>
+    <p><strong>{% trans "Adresse" %} :</strong> {{ resto.adresse }}</p>
+    <p><strong>{% trans "Contact" %} :</strong> {{ resto.phone }}</p>
+    <p><strong>{% trans "Horaires" %} :</strong> {{ resto.horaires }}</p>
+    <p><strong>{% trans "Prix moyen" %} :</strong> {{ resto.prix_moyen }}</p>
     {% if resto.phone %}
-        <p><strong>Téléphone :</strong> {{ resto.phone }}</p>
+        <p><strong>{% trans "Téléphone" %} :</strong> {{ resto.phone }}</p>
     {% endif %}
     {% if resto.site_web %}
-        <p><a href="{{ resto.site_web }}" class="btn btn-sm btn-outline-primary" target="_blank">Voir le site web</a></p>
+        <p><a href="{{ resto.site_web }}" class="btn btn-sm btn-outline-primary" target="_blank">{% trans "Voir le site web" %}</a></p>
     {% endif %}
 
     <div class="mt-4">
@@ -36,7 +38,7 @@
 
     {% if resto.latitude and resto.longitude %}
         <div class="mt-5">
-            <h4>Localisation</h4>
+            <h4>{% trans "Localisation" %}</h4>
             <div id="map" style="height: 400px;"></div>
         </div>
     {% endif %}
@@ -44,7 +46,7 @@
 
     {% if plats %}
     <div class="mt-4">
-        <h4>Menu / Spécialités</h4>
+        <h4>{% trans "Menu / Spécialités" %}</h4>
         <div class="row">
             {% for plat in plats %}
             <div class="col-md-4 mb-3">

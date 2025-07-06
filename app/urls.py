@@ -8,7 +8,7 @@ from django.views.generic import TemplateView
 
 urlpatterns = [
     path('', PostList.as_view(), name='home'),
-    path("articles/", PostAllList.as_view(), name="post_list"),
+    path('articles/', PostAllList.as_view(), name="post_list"),
     path('post/<slug:slug>/edit/', PostUpdateView.as_view(), name='post_edit'),
     path('post/<slug:slug>/delete/', PostDeleteView.as_view(), name='post_delete'),
     path('culture/', culture_home, name='culture_home'),
@@ -33,7 +33,7 @@ urlpatterns = [
     path('shopping/', shopping, name='shopping'),
     path('shopping/<slug:slug>/', shopping_detail, name='shopping_detail'),
     path('transport/', transport, name='transport'),
-    path('transport/<slug:slug>/', transport_detail, name='transport_detail'),
+    path('transport/<slug:slug>/', transport_detail, name='transport'),
 
 
     path('mentions-legales/', TemplateView.as_view(template_name="mentions-legales.html"), name="mentions_legales"),

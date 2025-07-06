@@ -1,5 +1,8 @@
 {% extends "base.html" %}
 {% load static %}
+{% load i18n %}
+{% load static i18n %}
+
 {% block extra_css %}
     <link rel="stylesheet" href="{% static 'css/nature.css' %}">
 {% endblock %}
@@ -23,24 +26,24 @@
 
       <h4 class="text-primary mt-4">Infos pratiques</h4>
       <ul class="list-group mb-4">
-        <li class="list-group-item"><strong>Localisation :</strong> {{ lieu.localisation }}</li>
-        <li class="list-group-item"><strong>Distance depuis Abidjan :</strong> {{ lieu.distance_km }} km</li>
-        <li class="list-group-item"><strong>Durée approximative :</strong> {{ lieu.duree }} heures</li>
+        <li class="list-group-item"><strong>{% trans "Localisation" %} :</strong> {{ lieu.localisation }}</li>
+        <li class="list-group-item"><strong>{% trans "Distance depuis Abidjan" %} :</strong> {{ lieu.distance_km }} km</li>
+        <li class="list-group-item"><strong>{% trans "Durée approximative" %} :</strong> {{ lieu.duree }} {% trans "heures" %}</li>
         {% if lieu.niveau_difficulte %}
-          <li class="list-group-item"><strong>Niveau :</strong> {{ lieu.niveau_difficulte|capfirst }}</li>
+          <li class="list-group-item"><strong>{% trans "Niveau" %} :</strong> {{ lieu.niveau_difficulte|capfirst }}</li>
         {% endif %}
         {% if lieu.saison_ideale %}
-          <li class="list-group-item"><strong>Saison idéale :</strong> {{ lieu.saison_ideale }}</li>
+          <li class="list-group-item"><strong>{% trans "Saison idéale" %} :</strong> {{ lieu.saison_ideale }}</li>
         {% endif %}
         {% if lieu.equipement_conseille %}
-          <li class="list-group-item"><strong>Équipement conseillé :</strong> {{ lieu.equipement_conseille }}</li>
+          <li class="list-group-item"><strong>{% trans "Équipement conseillé" %} :</strong> {{ lieu.equipement_conseille }}</li>
         {% endif %}
         {% if lieu.acces %}
-          <li class="list-group-item"><strong>Accès :</strong> {{ lieu.acces }}</li>
+          <li class="list-group-item"><strong>{% trans "Accès" %} :</strong> {{ lieu.acces }}</li>
         {% endif %}
       </ul>
 
-      <a href="{% url 'nature' %}" class="btn btn-outline-success">← Retour aux sites</a>
+      <a href="{% url 'nature' %}" class="btn btn-outline-success">← {% trans "Retour" %}</a>
 
     </div>
   </div>

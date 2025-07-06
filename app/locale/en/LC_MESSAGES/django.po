@@ -1,0 +1,769 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-07-05 12:59+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: app/templates/autour_babi.html:10
+msgid "Autour de Babi"
+msgstr "Around Abidjan"
+
+#: app/templates/autour_babi.html:12
+msgid ""
+"Envie de changer d’air sans aller trop loin ? Découvrez des lieux à moins de "
+"2h d’Abidjan : nature, culture, gastronomie et escapades faciles à organiser "
+"pour une journée ou un week-end"
+msgstr ""
+"Looking for a change of scenery without going too far? Discover places less "
+"than 2 hours from Abidjan: nature, culture, gastronomy and easy-to-organize "
+"day or weekend getaways."
+
+#: app/templates/autour_babi.html:19
+msgid "Idées de sorties du week-end"
+msgstr "Ideas for weekend outings"
+
+#: app/templates/autour_babi.html:30 app/templates/culture_home.html:28
+#: app/templates/loisir.html:33
+msgid "Découvrir"
+msgstr "Discover"
+
+#: app/templates/autour_babi.html:51 app/templates/culture_home.html:47
+msgid "En savoir plus"
+msgstr "Read more"
+
+#: app/templates/autour_babi.html:57
+msgid "Aucun lieu disponible autour d’Abidjan pour le moment"
+msgstr "No location available around Abidjan at the moment"
+
+#: app/templates/autour_babi.html:63
+msgid "Explorer toutes les destinations"
+msgstr "View all restaurants"
+
+#: app/templates/autour_babi_detail.html:9 app/templates/loisir_detail.html:28
+#: app/templates/nature_detail.html:29 app/templates/restaurant_detail.html:41
+msgid "Localisation"
+msgstr "Location"
+
+#: app/templates/autour_babi_detail.html:10
+msgid "Description"
+msgstr "Description"
+
+#: app/templates/autour_babi_detail.html:11
+msgid "Distance"
+msgstr "Distance"
+
+#: app/templates/autour_babi_detail.html:12
+msgid "Durée estimée"
+msgstr "Estimated time"
+
+#: app/templates/autour_babi_detail.html:16 app/templates/loisir_detail.html:65
+#: app/templates/nature_detail.html:46 app/templates/shopping_detail.html:69
+#: app/templates/sortie_detail.html:70
+msgid "Retour"
+msgstr "Back"
+
+#: app/templates/base.html:35
+msgid "Rechercher"
+msgstr "Search"
+
+#: app/templates/base.html:53
+msgid "ACCUEIL"
+msgstr "HOME"
+
+#: app/templates/base.html:56
+msgid "Explorer"
+msgstr "Explore"
+
+#: app/templates/base.html:58
+msgid "Culture et traditions"
+msgstr "Culture & traditions"
+
+#: app/templates/base.html:59 app/templates/index.html:36
+#: app/templates/nature.html:12
+msgid "Dans la nature"
+msgstr "In Nature"
+
+#: app/templates/base.html:60 app/templates/index.html:56
+msgid "Autour d'Abidjan"
+msgstr "Around Abidjan"
+
+#: app/templates/base.html:65
+msgid "Profiter"
+msgstr "Enjoy"
+
+#: app/templates/base.html:67 app/templates/index.html:191
+#: app/templates/restaurants_list.html:17
+msgid "Où manger"
+msgstr "Where to eat"
+
+#: app/templates/base.html:68
+msgid "Sortir"
+msgstr "Out"
+
+#: app/templates/base.html:69
+msgid "Loisir"
+msgstr "Leisure"
+
+#: app/templates/base.html:70
+msgid "Shopping"
+msgstr "Shopping"
+
+#: app/templates/base.html:75
+msgid "Séjourner"
+msgstr "Stay"
+
+#: app/templates/base.html:77
+msgid "Infos pratiques"
+msgstr "Useful info"
+
+#: app/templates/base.html:78
+msgid "Hébergement"
+msgstr "Hosting"
+
+#: app/templates/base.html:79
+msgid "Transports"
+msgstr "Transports"
+
+#: app/templates/base.html:83
+msgid "À PROPOS"
+msgstr "About"
+
+#: app/templates/base.html:84 app/templates/base.html:138
+#: app/templates/restaurant_detail.html:24
+msgid "Contact"
+msgstr "Contact us"
+
+#: app/templates/base.html:136
+msgid "Accueil"
+msgstr "Home"
+
+#: app/templates/base.html:137
+msgid "A propos"
+msgstr "About us"
+
+#: app/templates/base.html:143
+msgid "Mentions légales"
+msgstr "Terms & Conditions"
+
+#: app/templates/base.html:144
+msgid "Politique de confidentialité"
+msgstr "Privacy policy"
+
+#: app/templates/base.html:147
+msgid "2025 Visit Abidjan. Tous droits réservés."
+msgstr "2025 Visit Abidjan. All rights reserved."
+
+#: app/templates/culture_category_detail.html:19
+msgid "Eléments culturels liés"
+msgstr "Related cultural elements"
+
+#: app/templates/culture_category_detail.html:32
+msgid "Voir la fiche"
+msgstr "See details"
+
+#: app/templates/culture_category_detail.html:37
+msgid "Aucun contenu culturel disponible pour cette catégorie"
+msgstr "No cultural content available for this category"
+
+#: app/templates/culture_home.html:11
+msgid "Culture et Traditions de la Côte d'Ivoire"
+msgstr "Culture & traditions"
+
+#: app/templates/culture_home.html:14
+msgid ""
+"Plongez dans la richesse culturelle ivoirienne pour mieux comprendre les "
+"traditions locales et préparer votre voyage sous le signe de la découverte "
+"authentique."
+msgstr ""
+"Dive into the cultural richness of Ivory Coast to better understand local "
+"traditions and prepare your trip in the spirit of authentic discovery."
+
+#: app/templates/culture_home.html:20
+msgid "Événement culturel du mois"
+msgstr "Cultural event of the month"
+
+#: app/templates/culture_subcategory_detail.html:22
+msgid "Images associées"
+msgstr "Related images"
+
+#: app/templates/culture_subcategory_detail.html:32
+msgid "Aucune image disponible"
+msgstr "No images available"
+
+#: app/templates/culture_subcategory_detail.html:36
+msgid "Retour à la catégorie"
+msgstr "Back"
+
+#: app/templates/index.html:19
+msgid "Abidjan:la Perle des Lagunes"
+msgstr "Abidjan:The Pearl of the Lagoon"
+
+#: app/templates/index.html:20
+msgid "Voyage au cœur d’une ville vibrante"
+msgstr "Journey to the heart of a vibrant city"
+
+#: app/templates/index.html:29
+msgid "Découvrir nos rubriques"
+msgstr "Discover our sections"
+
+#: app/templates/index.html:46
+msgid "Gastronomie"
+msgstr "Gastronomy"
+
+#: app/templates/index.html:66
+msgid "Hébergements"
+msgstr "Accommodations"
+
+#: app/templates/index.html:77
+msgid "A la une"
+msgstr "Headlines"
+
+#: app/templates/index.html:93
+msgid "Lire l'article"
+msgstr "Read the article"
+
+#: app/templates/index.html:95 app/templates/index.html:134
+#: app/templates/index.html:172
+msgid "pas de lien"
+msgstr "No link"
+
+#: app/templates/index.html:108
+msgid "Tous nos articles"
+msgstr "All articles"
+
+#: app/templates/index.html:114
+msgid "Lieu proche"
+msgstr "Places near Abidjan"
+
+#: app/templates/index.html:132 app/templates/index.html:170
+#: app/templates/index.html:207
+msgid "Voir plus"
+msgstr "Read more"
+
+#: app/templates/index.html:148
+msgid "VOIR TOUS"
+msgstr "Read more"
+
+#: app/templates/index.html:154
+msgid "Hebergements"
+msgstr "Accommodations"
+
+#: app/templates/index.html:185
+msgid "VOIR TOUT"
+msgstr "Read more"
+
+#: app/templates/index.html:209
+msgid "Pas de lien"
+msgstr "No link"
+
+#: app/templates/index.html:223
+msgid "Voir tous les restos"
+msgstr "View all restaurants"
+
+#: app/templates/infos_pratiques.html:19
+msgid "Infos Pratiques pour votre séjour à Abidjan"
+msgstr "Practical information for your stay in Abidjan"
+
+#: app/templates/infos_pratiques.html:22
+msgid "Comment se rendre à Abidjan"
+msgstr "How to get to Abidjan"
+
+#: app/templates/infos_pratiques.html:23
+msgid "Arriver à Abidjan : Aéroport international Félix Houphouët-Boigny"
+msgstr "Getting to Abidjan: Félix Houphouët-Boigny International Airport"
+
+#: app/templates/infos_pratiques.html:24
+msgid ""
+"La principale porte d’entrée en Côte d’Ivoire est l’aéroport international "
+"Félix Houphouët-Boigny (ABJ), situé dans la commune de Port-Bouët, à environ "
+"16 km du centre-ville d’Abidjan. C’est le plus grand aéroport de l’Afrique "
+"de l’Ouest francophone, desservi par des compagnies majeures comme :"
+msgstr "The main gateway to Ivory Coast is Félix Houphouët-Boigny International Airport (ABJ), located in the commune of Port-Bouët, around 16 km from Abidjan city centre. It is the largest airport in French-speaking West Africa, served by major airlines such as :"
+
+#: app/templates/infos_pratiques.html:27
+msgid "Air France, Brussels Airlines, Turkish Airlines"
+msgstr "Air France, Brussels Airlines, Turkish Airlines"
+
+#: app/templates/infos_pratiques.html:28
+msgid "Air Côte d’Ivoire</strong>, compagnie nationale"
+msgstr "Air Côte d'Ivoire</strong>, national airline"
+
+#: app/templates/infos_pratiques.html:29
+msgid "Royal Air Maroc, Ethiopian Airlines, Asky, etc"
+msgstr "Royal Air Maroc, Ethiopian Airlines, Asky, etc."
+
+#: app/templates/infos_pratiques.html:34
+msgid "Formalités pour entrer en Côte d'Ivoire"
+msgstr "Formalities for entering in Ivory Coast"
+
+#: app/templates/infos_pratiques.html:35
+msgid "Visa pour la Côte d'Ivoire"
+msgstr "Visa for Ivory Coast"
+
+#: app/templates/infos_pratiques.html:37
+msgid ""
+"Excepté les ressortissants de la CEDEAO (Communauté Économique des États de "
+"l’Afrique de l’Ouest), un visa est nécessaire pour entrer en Côte d'Ivoire"
+msgstr "Except for ECOWAS (Economic Community of West African States) nationals, a visa is required to enter Ivory Coast."
+
+#: app/templates/infos_pratiques.html:40
+msgid "Demande en ligne"
+msgstr "Apply online"
+
+#: app/templates/infos_pratiques.html:41
+msgid "Délai"
+msgstr "Deadline"
+
+#: app/templates/infos_pratiques.html:41
+msgid "48 heures (en moyenne)"
+msgstr "48 hours (average)"
+
+#: app/templates/infos_pratiques.html:42 app/templates/infos_pratiques.html:44
+msgid "Prix"
+msgstr "Price"
+
+#: app/templates/infos_pratiques.html:42
+msgid "Environ 73€ (frais de traitement inclus)"
+msgstr "Approximately €73 (including handling costs)"
+
+#: app/templates/infos_pratiques.html:43
+msgid "Récupération"
+msgstr "Recovery"
+
+#: app/templates/infos_pratiques.html:43
+msgid "À l’aéroport d’Abidjan (service « e-Visa »)"
+msgstr "At Abidjan airport (e-Visa service)"
+
+#: app/templates/infos_pratiques.html:44
+msgid "90 jours, entrées multiples"
+msgstr "90 days, multiple entries"
+
+#: app/templates/infos_pratiques.html:47
+msgid "Documents requis pour l’entrée"
+msgstr "Documents required for entry"
+
+#: app/templates/infos_pratiques.html:48
+msgid ""
+"Pour l'obtention du <strong> visa et le passage à la frontière</strong>, "
+"vous devez présenter"
+msgstr ""
+"To obtain the <strong>visa and cross the border</strong>, you must present"
+
+#: app/templates/infos_pratiques.html:50
+msgid "Passeport"
+msgstr "Passport"
+
+#: app/templates/infos_pratiques.html:50
+msgid "valide au moins 6 mois après la date d’entrée"
+msgstr "Valid for at least 6 months after the date of entry"
+
+#: app/templates/infos_pratiques.html:51
+msgid "Lettre d'invitation ou réservation d'hôtel"
+msgstr "Letter of invitation or hotel reservation"
+
+#: app/templates/infos_pratiques.html:52
+msgid "Billet d’avion aller-retour"
+msgstr "Round-trip air ticket"
+
+#: app/templates/infos_pratiques.html:53
+msgid "Carnet de vaccination contre la fièvre jaune"
+msgstr "Yellow fever vaccination certificate"
+
+#: app/templates/infos_pratiques.html:53
+msgid "(obligatoire à l’arrivée)"
+msgstr "(compulsory on arrival)"
+
+#: app/templates/infos_pratiques.html:54
+msgid "Justificatif de ressources (selon nationalité et durée du séjour)"
+msgstr "Proof of income (depending on nationality and length of stay)"
+
+#: app/templates/infos_pratiques.html:59
+msgid "Monnaie, Budget et Coût de la vie à Abidjan"
+msgstr "Currency, Budget and Cost of living in Abidjan"
+
+#: app/templates/infos_pratiques.html:61
+msgid "Monnaie"
+msgstr "Currency"
+
+#: app/templates/infos_pratiques.html:62
+msgid "Moyens de paiement"
+msgstr "Payment methods"
+
+#: app/templates/infos_pratiques.html:62
+msgid ""
+"Espèces, cartes bancaires (Visa, MasterCard), paiements mobiles (Orange "
+"Money, MTN Money)"
+msgstr ""
+"Cash, bank cards (Visa, MasterCard), mobile payments (Orange Money, MTN "
+"Money)"
+
+#: app/templates/infos_pratiques.html:63
+msgid "Budget estimatif"
+msgstr "Estimated budget"
+
+#: app/templates/infos_pratiques.html:63
+msgid "Repas local ≈ 2 000 CFA, hôtel moyen de gamme ≈ 30 000 CFA/nuit"
+msgstr "Local meal ≈ 2,000 CFA, mid-range hotel ≈ 30,000 CFA/night"
+
+#: app/templates/infos_pratiques.html:68
+msgid "Télécommunications et Internet à Abidjan"
+msgstr "Telecommunications and Internet in Abidjan"
+
+#: app/templates/infos_pratiques.html:70
+msgid "Opérateurs principaux : Orange, MTN, Moov"
+msgstr "Main operators: Orange, MTN, Moov"
+
+#: app/templates/infos_pratiques.html:71
+msgid "Connexion 4G disponible dans presque toute la ville"
+msgstr "4G connection available throughout most of the city"
+
+#: app/templates/infos_pratiques.html:72
+msgid "Cartes SIM faciles à obtenir avec une pièce d’identité"
+msgstr "SIM cards are easy to obtain with ID"
+
+#: app/templates/infos_pratiques.html:77
+msgid "Climat et meilleure période pour visiter Abidjan"
+msgstr "Climate and best time to visit Abidjan"
+
+#: app/templates/infos_pratiques.html:79
+msgid "Climat"
+msgstr "Climate"
+
+#: app/templates/infos_pratiques.html:79
+msgid ""
+"Tropical humide avec deux saisons des pluies (avril-juillet et octobre-"
+"novembre)"
+msgstr ""
+"Humid tropical with two rainy seasons (April-July and October-November)"
+
+#: app/templates/infos_pratiques.html:80
+msgid "Période idéale"
+msgstr "Ideal period"
+
+#: app/templates/infos_pratiques.html:80
+msgid "Décembre à mars (saison sèche, températures agréables)"
+msgstr "December to March (dry season, pleasant temperatures)"
+
+#: app/templates/infos_pratiques.html:85
+msgid "Santé et sécurité à Abidjan"
+msgstr "Health and safety in Abidjan"
+
+#: app/templates/infos_pratiques.html:87
+msgid "Vaccination contre la fièvre jaune obligatoire"
+msgstr "Yellow fever vaccination compulsory"
+
+#: app/templates/infos_pratiques.html:88
+msgid "Traitement antipaludéen recommandé (zones à risques)"
+msgstr "Anti-malaria treatment recommended (high-risk areas)"
+
+#: app/templates/infos_pratiques.html:89
+msgid ""
+"Ville relativement sûre, éviter de se déplacer seul la nuit dans certains "
+"quartiers"
+msgstr ""
+"Relatively safe city, but avoid travelling alone at night in certain areas"
+
+#: app/templates/infos_pratiques.html:94
+msgid "Fuseau horaire et décalage avec l'Europe"
+msgstr "Time zone and time difference with Europe"
+
+#: app/templates/infos_pratiques.html:96
+msgid "Fuseau horaire : GMT+0 (aucun changement d'heure)"
+msgstr "Time zone: GMT+0 (no time change)"
+
+#: app/templates/infos_pratiques.html:97
+msgid "Décalage avec la France : -1h en hiver, -2h en été"
+msgstr "Time difference with France: -1h in winter, -2h in summer"
+
+#: app/templates/infos_pratiques.html:102
+msgid "Langue, culture et traditions à Abidjan"
+msgstr "Language, culture and traditions in Abidjan"
+
+#: app/templates/infos_pratiques.html:104
+msgid "Langue officielle : Français"
+msgstr "Official language: French"
+
+#: app/templates/infos_pratiques.html:105
+msgid "Langues locales : Dioula, Baoulé, Bété, etc"
+msgstr "Local languages: Dioula, Baoulé, Bété, etc."
+
+#: app/templates/infos_pratiques.html:106
+msgid ""
+"Culture vivante : musique coupé-décalé, gastronomie (attieké, alloco), "
+"artisanat ivoirien"
+msgstr ""
+"Living culture: coupé-décalé music, gastronomy (attieké, alloco), Ivorian "
+"crafts."
+
+#: app/templates/loisir.html:12
+msgid "Activités de loisir"
+msgstr "Leisure activities"
+
+#: app/templates/loisir.html:14
+msgid ""
+"Découvrez des espaces de détente, parcs, jeux pour enfants et activités "
+"sportives pour toute la famille"
+msgstr ""
+"Discover relaxation areas, parks, children's playgrounds and sports "
+"activities for all the family."
+
+#: app/templates/loisir_detail.html:23
+msgid "Catégorie"
+msgstr "Category"
+
+#: app/templates/loisir_detail.html:24 app/templates/restaurant_detail.html:25
+#: app/templates/sortie_detail.html:21
+msgid "Horaires"
+msgstr "Opening times"
+
+#: app/templates/loisir_detail.html:25
+msgid "Tarif"
+msgstr "Price"
+
+#: app/templates/loisir_detail.html:26
+msgid "Âge minimum"
+msgstr "Minimum age"
+
+#: app/templates/loisir_detail.html:27 app/templates/shopping_detail.html:26
+msgid "Accessibilité"
+msgstr "Access"
+
+#: app/templates/loisir_detail.html:52
+msgid "Informations complémentaires"
+msgstr "More information"
+
+#: app/templates/loisir_detail.html:54 app/templates/shopping_detail.html:58
+#: app/templates/sortie_detail.html:57
+msgid "Site Web"
+msgstr "Website"
+
+#: app/templates/loisir_detail.html:57 app/templates/shopping_detail.html:61
+#: app/templates/sortie_detail.html:58
+msgid "Facebook"
+msgstr "Facebook"
+
+#: app/templates/loisir_detail.html:60 app/templates/shopping_detail.html:64
+#: app/templates/sortie_detail.html:59
+msgid "Instagram"
+msgstr "Instagram"
+
+#: app/templates/nature.html:16
+msgid ""
+"Ressentez la liberté, découvrez les merveilles naturelles de la Côte "
+"d'Ivoire."
+msgstr "Feel the freedom and discover the natural wonders of Côte d'Ivoire."
+
+#: app/templates/nature.html:19
+msgid ""
+"Parcourez les trésors naturels de Côte d'Ivoire : plages, forêts, randonnées "
+"et faune sauvage."
+msgstr ""
+"Explore Ivory Coast's natural treasures: beaches, forests, hiking and "
+"wildlife."
+
+#: app/templates/nature.html:22
+msgid "Explorez la nature"
+msgstr "In Nature"
+
+#: app/templates/nature_detail.html:30
+msgid "Distance depuis Abidjan"
+msgstr "Distance from Abidjan"
+
+#: app/templates/nature_detail.html:31
+msgid "Durée approximative"
+msgstr "Approximate duration"
+
+#: app/templates/nature_detail.html:31
+msgid "heures"
+msgstr "hours"
+
+#: app/templates/nature_detail.html:33
+msgid "Niveau"
+msgstr "Level"
+
+#: app/templates/nature_detail.html:36
+msgid "Saison idéale"
+msgstr "Ideal season"
+
+#: app/templates/nature_detail.html:39
+msgid "Équipement conseillé"
+msgstr "Recommended equipment"
+
+#: app/templates/nature_detail.html:42 app/templates/sortie_detail.html:23
+msgid "Accès"
+msgstr "Access"
+
+#: app/templates/restaurant_detail.html:22
+msgid "Quartier"
+msgstr "District"
+
+#: app/templates/restaurant_detail.html:23
+#: app/templates/shopping_detail.html:22 app/templates/sortie_detail.html:20
+msgid "Adresse"
+msgstr "Address"
+
+#: app/templates/restaurant_detail.html:26 app/templates/sortie_detail.html:22
+msgid "Prix moyen"
+msgstr "average price"
+
+#: app/templates/restaurant_detail.html:28
+#: app/templates/shopping_detail.html:28
+msgid "Téléphone"
+msgstr "Phone"
+
+#: app/templates/restaurant_detail.html:31
+msgid "Voir le site web"
+msgstr "Website details"
+
+#: app/templates/restaurant_detail.html:49
+msgid "Menu / Spécialités"
+msgstr "Menu / Specialities"
+
+#: app/templates/restaurants_list.html:18
+msgid ""
+"Découvrez les meilleurs endroits pour savourer la cuisine locale ou "
+"internationale"
+msgstr "Discover the best places to enjoy local and international cuisine"
+
+#: app/templates/restaurants_list.html:25
+msgid "Plats typiques à découvrir"
+msgstr "Traditional dishes to discover"
+
+#: app/templates/restaurants_list.html:42
+msgid "Nos meilleures adresses"
+msgstr "Our best places"
+
+#: app/templates/restaurants_list.html:55
+msgid "Visiter"
+msgstr "Visit"
+
+#: app/templates/restaurants_list.html:61
+msgid "Aucune recommandation pour le moment"
+msgstr "No location available around Abidjan at the moment"
+
+#: app/templates/restaurants_list.html:66
+msgid "Carte des restaurants"
+msgstr "Menu of restaurants"
+
+#: app/templates/restaurants_list.html:74
+msgid "Type de cuisine"
+msgstr "Type of kitchen"
+
+#: app/templates/restaurants_list.html:82
+msgid "Budget"
+msgstr "Budget"
+
+#: app/templates/restaurants_list.html:90
+msgid "Trier par"
+msgstr "Sort by"
+
+#: app/templates/restaurants_list.html:91
+msgid "Popularité"
+msgstr "Popular"
+
+#: app/templates/restaurants_list.html:92
+msgid "Nouveauté"
+msgstr "New"
+
+#: app/templates/restaurants_list.html:96
+msgid "Filtrer"
+msgstr "Filter"
+
+#: app/templates/restaurants_list.html:120
+msgid "Site web"
+msgstr "Website"
+
+#: app/templates/restaurants_list.html:127
+msgid "Aucun restaurant trouvé dans cette catégorie"
+msgstr "No restaurants found in this category"
+
+#: app/templates/shopping.html:12
+msgid "Faire du shopping en Côte d'Ivoire"
+msgstr "Shopping in Ivory Coast"
+
+#: app/templates/shopping.html:14
+msgid ""
+"Explorez les marchés artisanaux, centres commerciaux, et boutiques locales "
+"du pays"
+msgstr "Explore local markets, malls, and artisan shops"
+
+#: app/templates/shopping.html:30 app/templates/sortie_card.html:14
+msgid "Voir"
+msgstr "Read more"
+
+#: app/templates/shopping.html:35
+msgid "Aucun lieu de shopping enregistré pour le moment"
+msgstr "No shopping locations registered at the moment"
+
+#: app/templates/shopping_detail.html:21 app/templates/sortie_detail.html:19
+msgid "Type"
+msgstr "Type"
+
+#: app/templates/shopping_detail.html:23
+msgid "Heures d’ouverture"
+msgstr "Opening hours"
+
+#: app/templates/shopping_detail.html:24
+msgid "Services"
+msgstr "Services"
+
+#: app/templates/shopping_detail.html:25
+msgid "Parking disponible"
+msgstr "Parking available"
+
+#: app/templates/shopping_detail.html:27
+msgid "Conseils"
+msgstr "Advice"
+
+#: app/templates/shopping_detail.html:29
+msgid "Région"
+msgstr "Region"
+
+#: app/templates/shopping_detail.html:56
+msgid "Retrouvez ce lieu"
+msgstr "Find out more about this venue"
+
+#: app/templates/sortie_detail.html:28
+msgid "Programme"
+msgstr "Program"
+
+#: app/templates/sortie_detail.html:55
+msgid "Suivre le lieu"
+msgstr "Follow location"
+
+#: app/templates/sortie_detail.html:64
+msgid "Notes & Avis"
+msgstr "Notes & Opinions"
+
+#: app/templates/sortie_detail.html:65
+msgid "Fonction à venir : les utilisateurs pourront noter et commenter"
+msgstr "Coming soon: users will be able to rate and comment"
+
+#: app/templates/sortir.html:8
+msgid "Sortir à Abidjan"
+msgstr "Going out in Abidjan"
+
+#: app/templates/sortir.html:10
+msgid ""
+"Trouvez où sortir ce soir : bars, clubs, spectacles, concerts et événements "
+"immanquables à Abidjan"
+msgstr ""
+"Find out where to go out tonight: bars, clubs, shows, concerts and "
+"unmissable events in Abidjan"
+
+#: app/templates/sortir.html:16
+msgid "Lieux tendance"
+msgstr "Trendy places"

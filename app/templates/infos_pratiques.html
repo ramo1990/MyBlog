@@ -1,5 +1,11 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load i18n %}
+{% load static i18n %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/infos_pratiques.css' %}">
+{% endblock %}
 
 {% block content %}
 <!-- Balise SEO importante -->
@@ -10,75 +16,94 @@
 
 <main class="infos-pratiques">
     <div class="container">
-        <h1>Infos Pratiques pour votre séjour à Abidjan</h1>
+        <h1>{% trans "Infos Pratiques pour votre séjour à Abidjan" %}</h1>
 
         <section class="info-block">
-            <h2>📍 Comment se rendre à Abidjan et se déplacer</h2>
+            <h2>📍 {% trans "Comment se rendre à Abidjan" %}</h2>
+            <h5>{% trans "Arriver à Abidjan : Aéroport international Félix Houphouët-Boigny" %}</h5>
+            <p>{% trans "La principale porte d’entrée en Côte d’Ivoire est l’aéroport international Félix Houphouët-Boigny (ABJ), situé dans la commune de Port-Bouët, à environ 16 km du centre-ville d’Abidjan. C’est le plus grand aéroport de l’Afrique de l’Ouest francophone, desservi par des compagnies majeures comme :" %}
+            </p>
             <ul>
-                <li><strong>Aéroport :</strong> Aéroport international Félix Houphouët-Boigny (Abidjan).</li>
-                <li><strong>Transports urbains :</strong> Taxis (jaunes), bus SOTRA, véhicules personnels ou VTC (Yango).</li>
-                <li><strong>Déplacements interurbains :</strong> UTB, STIF, Air Côte d’Ivoire pour les liaisons régionales.</li>
+                <li><strong>{% trans "Air France, Brussels Airlines, Turkish Airlines" %}</strong></li>
+                <li><strong>{% trans "Air Côte d’Ivoire</strong>, compagnie nationale" %}</li>
+                <li><strong>{% trans "Royal Air Maroc, Ethiopian Airlines, Asky, etc" %}.</strong></li>
             </ul>
         </section>
 
         <section class="info-block">
-            <h2>🛂 Formalités pour entrer en Côte d'Ivoire</h2>
+            <h2>🛂 {% trans "Formalités pour entrer en Côte d'Ivoire" %}</h2>
+            <h5>{% trans "Visa pour la Côte d'Ivoire" %}</h5>
+
+            <p>{% trans "Excepté les ressortissants de la CEDEAO (Communauté Économique des États de l’Afrique de l’Ouest), un visa est nécessaire pour entrer en Côte d'Ivoire" %}.
+            </p>
             <ul>
-                <li><strong>Visa :</strong> Obligatoire pour la majorité des nationalités. e-Visa disponible en ligne.</li>
-                <li><strong>Passeport :</strong> Valide 6 mois minimum après l'arrivée.</li>
-                <li><strong>Vaccination :</strong> Fièvre jaune obligatoire. Carnet à présenter à l'aéroport.</li>
+                <li><a href="https://snedai.com/e-visa/">{% trans "Demande en ligne" %}  </a></li>
+                <li><strong>{% trans "Délai" %} :</strong> {% trans "48 heures (en moyenne)" %}</li>
+                <li><strong>{% trans "Prix" %} :</strong> {% trans "Environ 73€ (frais de traitement inclus)" %}</li>
+                <li><strong>{% trans "Récupération" %} :</strong> {% trans "À l’aéroport d’Abidjan (service « e-Visa »)" %}</li>
+                <li><strong>{% trans "Prix" %} :</strong> {% trans "90 jours, entrées multiples" %}</li>
+            </ul>
+
+            <h5>📄 {% trans "Documents requis pour l’entrée" %}</h5>
+            <p>{% trans "Pour l'obtention du <strong> visa et le passage à la frontière</strong>, vous devez présenter" %} :</p>
+            <ul>
+                <li>{% trans "Passeport" %} <strong></strong>{% trans "valide au moins 6 mois après la date d’entrée" %} </strong> </li>
+                <li>{% trans "Lettre d'invitation ou réservation d'hôtel" %}</li>
+                <li>{% trans "Billet d’avion aller-retour" %}</li>
+                <li><strong>{% trans "Carnet de vaccination contre la fièvre jaune" %}</strong> {% trans "(obligatoire à l’arrivée)" %}</li>
+                <li>{% trans "Justificatif de ressources (selon nationalité et durée du séjour)" %}</li>
             </ul>
         </section>
 
         <section class="info-block">
-            <h2>💱 Monnaie, Budget et Coût de la vie à Abidjan</h2>
+            <h2>💱 {% trans "Monnaie, Budget et Coût de la vie à Abidjan" %}</h2>
             <ul>
-                <li><strong>Monnaie :</strong> Franc CFA (XOF).</li>
-                <li><strong>Moyens de paiement :</strong> Espèces, cartes bancaires (Visa, MasterCard), paiements mobiles (Orange Money, MTN Money).</li>
-                <li><strong>Budget estimatif :</strong> Repas local ≈ 2 000 CFA, hôtel moyen de gamme ≈ 30 000 CFA/nuit.</li>
+                <li><strong>{% trans "Monnaie" %} :</strong> Franc CFA (XOF).</li>
+                <li><strong>{% trans "Moyens de paiement" %} :</strong> {% trans "Espèces, cartes bancaires (Visa, MasterCard), paiements mobiles (Orange Money, MTN Money)" %}.</li>
+                <li><strong>{% trans "Budget estimatif" %} :</strong> {% trans "Repas local ≈ 2 000 CFA, hôtel moyen de gamme ≈ 30 000 CFA/nuit" %}.</li>
             </ul>
         </section>
 
         <section class="info-block">
-            <h2>📱 Télécommunications et Internet à Abidjan</h2>
+            <h2>📱 {% trans "Télécommunications et Internet à Abidjan" %}</h2>
             <ul>
-                <li>Opérateurs principaux : Orange, MTN, Moov.</li>
-                <li>Connexion 4G disponible dans presque toute la ville.</li>
-                <li>Cartes SIM faciles à obtenir avec une pièce d’identité.</li>
+                <li>{% trans "Opérateurs principaux : Orange, MTN, Moov" %}.</li>
+                <li>{% trans "Connexion 4G disponible dans presque toute la ville" %}.</li>
+                <li>{% trans "Cartes SIM faciles à obtenir avec une pièce d’identité" %}.</li>
             </ul>
         </section>
 
         <section class="info-block">
-            <h2>🌤️ Climat et meilleure période pour visiter Abidjan</h2>
+            <h2>🌤️ {% trans "Climat et meilleure période pour visiter Abidjan" %}</h2>
             <ul>
-                <li><strong>Climat :</strong> Tropical humide avec deux saisons des pluies (avril-juillet et octobre-novembre).</li>
-                <li><strong>Période idéale :</strong> Décembre à mars (saison sèche, températures agréables).</li>
+                <li><strong>{% trans "Climat" %} :</strong> {% trans "Tropical humide avec deux saisons des pluies (avril-juillet et octobre-novembre)" %}.</li>
+                <li><strong>{% trans "Période idéale" %} :</strong> {% trans "Décembre à mars (saison sèche, températures agréables)" %}.</li>
             </ul>
         </section>
 
         <section class="info-block">
-            <h2>🧑‍⚕️ Santé et sécurité à Abidjan</h2>
+            <h2>🧑‍⚕️ {% trans "Santé et sécurité à Abidjan" %}</h2>
             <ul>
-                <li>Vaccination contre la fièvre jaune obligatoire.</li>
-                <li>Traitement antipaludéen recommandé (zones à risques).</li>
-                <li>Ville relativement sûre, éviter de se déplacer seul la nuit dans certains quartiers.</li>
+                <li>{% trans "Vaccination contre la fièvre jaune obligatoire" %}.</li>
+                <li>{% trans "Traitement antipaludéen recommandé (zones à risques)" %}.</li>
+                <li>{% trans "Ville relativement sûre, éviter de se déplacer seul la nuit dans certains quartiers" %}.</li>
             </ul>
         </section>
 
         <section class="info-block">
-            <h2>🕰️ Fuseau horaire et décalage avec l'Europe</h2>
+            <h2>🕰️ {% trans "Fuseau horaire et décalage avec l'Europe" %}</h2>
             <ul>
-                <li>Fuseau horaire : GMT+0 (aucun changement d'heure).</li>
-                <li>Décalage avec la France : -1h en hiver, -2h en été.</li>
+                <li>{% trans "Fuseau horaire : GMT+0 (aucun changement d'heure)" %}.</li>
+                <li>{% trans "Décalage avec la France : -1h en hiver, -2h en été" %}.</li>
             </ul>
         </section>
 
         <section class="info-block">
-            <h2>🗣️ Langue, culture et traditions à Abidjan</h2>
+            <h2>🗣️ {% trans "Langue, culture et traditions à Abidjan" %}</h2>
             <ul>
-                <li>Langue officielle : Français.</li>
-                <li>Langues locales : Dioula, Baoulé, Bété, etc.</li>
-                <li>Culture vivante : musique coupé-décalé, gastronomie (attieké, alloco), artisanat ivoirien.</li>
+                <li>{% trans "Langue officielle : Français" %}.</li>
+                <li>{% trans "Langues locales : Dioula, Baoulé, Bété, etc" %}.</li>
+                <li>{% trans "Culture vivante : musique coupé-décalé, gastronomie (attieké, alloco), artisanat ivoirien" %}.</li>
             </ul>
         </section>
     </div>

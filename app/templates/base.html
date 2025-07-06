@@ -1,4 +1,7 @@
 {% load static %}
+{% load i18n %}
+{% load static i18n %}
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -29,7 +32,7 @@
     <div class="overlay-content">
       <form method="GET" action="{% url 'search' %}">
         <input type="search" name="q" placeholder="Rechercher..." class="form-control mb-2" autofocus>
-        <button type="submit" class="btn-ci-green w-100">Rechercher</button>
+        <button type="submit" class="btn-ci-green w-100">{% trans "Rechercher" %}</button>
       </form>
       <button class="btn-close" id="closeSearchOverlay" aria-label="Fermer"></button>
     </div>
@@ -47,41 +50,64 @@
 
       <div class="collapse navbar-collapse" id="navbarMenu">
         <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-          <li class="nav-item"><a class="nav-link" href="{% url 'home' %}">ACCUEIL</a></li>
+          <li class="nav-item"><a class="nav-link" href="{% url 'home' %}">{% trans "ACCUEIL" %}</a></li>
           
             <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Explorer</a>
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">{% trans "Explorer" %}</a>
                 <ul class="dropdown-menu">
-                  <li class="nav-item"><a class="nav-link" href="{% url 'culture_home' %}">Culture et traditions</a></li>
-                  <li class="nav-item"><a class="nav-link" href="{% url 'nature' %}">Dans la nature</a></li>
-                  <li class="nav-item"><a class="nav-link" href="{% url 'autour_de_babi' %}">Autour de Babi</a></li>
+                  <li class="nav-item"><a class="nav-link" href="{% url 'culture_home' %}">{% trans "Culture et traditions" %}</a></li>
+                  <li class="nav-item"><a class="nav-link" href="{% url 'nature' %}">{% trans "Dans la nature" %}</a></li>
+                  <li class="nav-item"><a class="nav-link" href="{% url 'autour_de_babi' %}">{% trans "Autour d'Abidjan" %}</a></li>
                 </ul>
             </li>
 
             <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Profiter</a>
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">{% trans "Profiter" %}</a>
                 <ul class="dropdown-menu">
-                  <li class="dropdown-item"><a class="nav-link" href="{% url 'restaurants_list' %}">Où manger</a></li>
-                  <li class="dropdown-item"><a class="nav-link" href="{% url 'sortie' %}">Sortir</a></li>
-                  <li class="dropdown-item"><a class="nav-link" href="{% url 'loisir' %}">Loisir</a></li>
-                  <li class="dropdown-item"><a class="nav-link" href="{% url 'shopping' %}">Shopping</a></li>
+                  <li class="dropdown-item"><a class="nav-link" href="{% url 'restaurants_list' %}">{% trans "Où manger" %}</a></li>
+                  <li class="dropdown-item"><a class="nav-link" href="{% url 'sortie' %}">{% trans "Sortir" %}</a></li>
+                  <li class="dropdown-item"><a class="nav-link" href="{% url 'loisir' %}">{% trans "Loisir" %}</a></li>
+                  <li class="dropdown-item"><a class="nav-link" href="{% url 'shopping' %}">{% trans "Shopping" %}</a></li>
                 </ul>
             </li>
 
             <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Séjourner</a>
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">{% trans "Séjourner" %}</a>
                 <ul class="dropdown-menu">
-                  <li class="dropdown-item"><a class="nav-link" href="{% url 'infos_pratiques' %}">infos pratiques</a></li>
-                  <li class="dropdown-item"><a class="nav-link" href="{% url 'hebergements_list' %}">Hébergement</a></li>
-                  <li class="dropdown-item"><a class="nav-link" href="{% url 'transport' %}">Transports</a></li>
+                  <li class="dropdown-item"><a class="nav-link" href="{% url 'infos_pratiques' %}">{% trans "Infos pratiques" %}</a></li>
+                  <li class="dropdown-item"><a class="nav-link" href="{% url 'hebergements_list' %}">{% trans "Hébergement" %}</a></li>
+                  <li class="dropdown-item"><a class="nav-link" href="{% url 'transport' %}">{% trans "Transports" %}</a></li>
                 </ul>
             </li>
             
-          <li class="nav-item"><a class="nav-link" href="{% url 'a_propos' %}">À PROPOS</a></li>
-          <li class="nav-item"><a class="nav-link" href="{% url 'contact' %}">Contact</a></li>
-
+          <li class="nav-item"><a class="nav-link" href="{% url 'a_propos' %}">{% trans "À PROPOS" %}</a></li>
+          <li class="nav-item"><a class="nav-link" href="{% url 'contact' %}">{% trans "Contact" %}</a></li>
         </ul>
       </div>
+
+      <!-- changer de langue -->
+      <form id="lang-fr" action="{% url 'set_language' %}" method="post" style="display: none;">
+        {% csrf_token %}
+        <input type="hidden" name="language" value="fr">
+      </form>
+      <form id="lang-en" action="{% url 'set_language' %}" method="post" style="display: none;">
+        {% csrf_token %}
+        <input type="hidden" name="language" value="en">
+      </form>
+      <!-- Drapeaux cliquables -->
+      <div class="language-switcher">
+        <a href="#" onclick="document.getElementById('lang-fr').submit(); return false;" title="Français">🇫🇷</a>
+        <a href="#" onclick="document.getElementById('lang-en').submit(); return false;" title="English">🇬🇧</a>
+      </div>
+      <!-- <form action="{% url 'set_language' %}" method="post">
+        {% csrf_token %}
+        <select name="language" onchange="this.form.submit()">
+            <option value="fr" {% if LANGUAGE_CODE == 'fr' %}selected{% endif %}>🇫🇷</option>
+            <option value="en" {% if LANGUAGE_CODE == 'en' %}selected{% endif %}>🇬🇧</option>
+        </select>
+    </form> -->
+
+
       <!-- search -->
       <form method="GET" action="{% url 'search' %}" class="d-flex align-items-center" id="searchForm">
         <input id="searchInput" type="search" name="q" class="form-control me-2 d-none" placeholder="Rechercher...">
@@ -107,18 +133,18 @@
     <!-- Navigation footer -->
     <div class="footerNav mb-3">
       <ul class="list-inline mb-0">
-        <li class="list-inline-item"><a href="{% url 'home' %}" class="text-white text-decoration-none">Accueil</a></li>
-        <li class="list-inline-item"><a href="{% url 'a_propos' %}" class="text-white text-decoration-none">A propos</a></li>
-        <li class="list-inline-item"><a href="{% url 'contact' %}" class="text-white text-decoration-none">Contact</a></li>
+        <li class="list-inline-item"><a href="{% url 'home' %}" class="text-white text-decoration-none">{% trans "Accueil" %}</a></li>
+        <li class="list-inline-item"><a href="{% url 'a_propos' %}" class="text-white text-decoration-none">{% trans "A propos" %}</a></li>
+        <li class="list-inline-item"><a href="{% url 'contact' %}" class="text-white text-decoration-none">{% trans "Contact" %}</a></li>
       </ul>
     </div>
     <!-- Droits et mentions -->
     <nav>
-      <a href="{% url 'mentions_legales' %}" class="text-white text-decoration-none me-2">Mentions légales</a> |
-      <a href="{% url 'politique_confidentialite' %}" class="text-white text-decoration-none ms-2">Politique de confidentialité</a>
+      <a href="{% url 'mentions_legales' %}" class="text-white text-decoration-none me-2">{% trans "Mentions légales" %}</a> |
+      <a href="{% url 'politique_confidentialite' %}" class="text-white text-decoration-none ms-2">{% trans "Politique de confidentialité" %}</a>
     </nav>
   </div>
-  <p class="mb-1">&copy; 2025 Visit Abidjan. Tous droits réservés.</p>
+  <p class="mb-1">&copy; {% trans "2025 Visit Abidjan. Tous droits réservés." %}</p>
   </footer>
 
 

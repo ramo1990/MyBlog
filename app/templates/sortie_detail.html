@@ -1,5 +1,7 @@
 {% extends "base.html" %}
 {% load static %}
+{% load i18n %}
+{% load static i18n %}
 
 {% block content %}
 <div class="container my-5">
@@ -14,16 +16,16 @@
       <p class="lead">{{ sortie.description }}</p>
 
       <ul class="list-group mb-3">
-        <li class="list-group-item"><strong>Type :</strong> {{ sortie.get_type_display }}</li>
-        <li class="list-group-item"><strong>Adresse :</strong> {{ sortie.adresse }}</li>
-        {% if sortie.horaire %}<li class="list-group-item"><strong>Horaires :</strong> {{ sortie.horaire }}</li>{% endif %}
-        {% if sortie.tarif_moyen %}<li class="list-group-item"><strong>Prix moyen :</strong> {{ sortie.tarif_moyen }}</li>{% endif %}
-        {% if sortie.acces %}<li class="list-group-item"><strong>Accès :</strong> {{ sortie.acces }}</li>{% endif %}
+        <li class="list-group-item"><strong>{% trans "Type" %} :</strong> {{ sortie.get_type_display }}</li>
+        <li class="list-group-item"><strong>{% trans "Adresse" %} :</strong> {{ sortie.adresse }}</li>
+        {% if sortie.horaire %}<li class="list-group-item"><strong>{% trans "Horaires" %} :</strong> {{ sortie.horaire }}</li>{% endif %}
+        {% if sortie.tarif_moyen %}<li class="list-group-item"><strong>{% trans "Prix moyen" %} :</strong> {{ sortie.tarif_moyen }}</li>{% endif %}
+        {% if sortie.acces %}<li class="list-group-item"><strong>{% trans "Accès" %} :</strong> {{ sortie.acces }}</li>{% endif %}
       </ul>
 
       {% if sortie.programme %}
         <div class="mb-4">
-          <h4>🎶 Programme</h4>
+          <h4>🎶 {% trans "Programme" %}</h4>
           <p>{{ sortie.programme|linebreaks }}</p>
         </div>
       {% endif %}
@@ -50,21 +52,21 @@
 
     <div class="col-md-4">
       <div class="mb-4">
-        <h5>🔗 Suivre le lieu</h5>
+        <h5>🔗 {% trans "Suivre le lieu" %}</h5>
         <ul class="list-unstyled">
-          {% if sortie.site_web %}<li><a href="{{ sortie.site_web }}" target="_blank">Site Web</a></li>{% endif %}
-          {% if sortie.facebook %}<li><a href="{{ sortie.facebook }}" target="_blank">Facebook</a></li>{% endif %}
-          {% if sortie.instagram %}<li><a href="{{ sortie.instagram }}" target="_blank">Instagram</a></li>{% endif %}
+          {% if sortie.site_web %}<li><a href="{{ sortie.site_web }}" target="_blank">{% trans "Site Web" %}</a></li>{% endif %}
+          {% if sortie.facebook %}<li><a href="{{ sortie.facebook }}" target="_blank">{% trans "Facebook" %}</a></li>{% endif %}
+          {% if sortie.instagram %}<li><a href="{{ sortie.instagram }}" target="_blank">{% trans "Instagram" %}</a></li>{% endif %}
         </ul>
       </div>
 
       <div class="mb-4">
-        <h5>⭐ Notes & Avis</h5>
-        <p class="text-muted">Fonction à venir : les utilisateurs pourront noter et commenter.</p>
+        <h5>⭐ {% trans "Notes & Avis" %}</h5>
+        <p class="text-muted">{% trans "Fonction à venir : les utilisateurs pourront noter et commenter" %}.</p>
       </div>
     </div>
   </div>
 
-  <a href="{% url 'sortie' %}" class="btn btn-outline-secondary mt-4">← Retour aux sorties</a>
+  <a href="{% url 'sortie' %}" class="btn btn-outline-secondary mt-4">← {% trans "Retour" %}</a>
 </div>
 {% endblock %}

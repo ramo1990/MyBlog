@@ -1,21 +1,22 @@
 {% extends "base.html" %}
 {% load static %}
+{% load i18n %}
+{% load static i18n %}
 
 {% block content %}
 <div class="container my-5">
   <!-- Introduction -->
   <div class="text-center mb-5">
-    <h1 class="text-success">Autour de Babi 🌴</h1>
+    <h1 class="text-success">{% trans "Autour de Babi" %} 🌴</h1>
     <p class="lead">
-      Envie de changer d’air sans aller trop loin ? Découvrez des lieux à moins de 2h d’Abidjan :
-      nature, culture, gastronomie et escapades faciles à organiser pour une journée ou un week-end !
+      {% trans "Envie de changer d’air sans aller trop loin ? Découvrez des lieux à moins de 2h d’Abidjan : nature, culture, gastronomie et escapades faciles à organiser pour une journée ou un week-end" %} !
     </p>
   </div>
 
 <!-- 🌞 Idées de sorties du week-end -->
 {% if weekend_idees %}
   <div class="my-5">
-    <h2 class="text-warning text-center">🌞 Idées de sorties du week-end</h2>
+    <h2 class="text-warning text-center">🌞 {% trans "Idées de sorties du week-end" %}</h2>
     <div class="row mt-4">
       {% for lieu in weekend_idees %}
         <div class="col-md-4 mb-4">
@@ -26,7 +27,7 @@
             <div class="card-body d-flex flex-column">
               <h5 class="card-title text-warning">{{ lieu.nom }}</h5>
               <p class="card-text">{{ lieu.description|truncatewords:15 }}</p>
-              <a href="{% url 'autour_babi_detail' lieu.slug %}" class="btn btn-outline-warning mt-auto">Découvrir</a>
+              <a href="{% url 'autour_babi_detail' lieu.slug %}" class="btn btn-outline-warning mt-auto">{% trans "Découvrir" %}</a>
             </div>
           </div>
         </div>
@@ -47,19 +48,19 @@
             <h5 class="card-title">{{ lieu.nom }}</h5>
             <p class="card-text">{{ lieu.description|truncatewords:20 }}</p>
             <p class="text-muted small">🕒 {{ lieu.duree }}h de route | 📍 {{ lieu.localisation }}</p>
-            <a href="{% url 'autour_babi_detail' lieu.slug %}" class="btn btn-outline-success mt-auto">En savoir plus</a>
+            <a href="{% url 'autour_babi_detail' lieu.slug %}" class="btn btn-outline-success mt-auto">{% trans "En savoir plus" %}</a>
 
         </div>
     </div>
   </div>
   {% empty %}
-    <p class="text-muted text-center">Aucun lieu disponible autour d’Abidjan pour le moment.</p>
+    <p class="text-muted text-center">{% trans "Aucun lieu disponible autour d’Abidjan pour le moment" %}.</p>
     {% endfor %}
 </div>
 
   <!-- Bouton -->
   <div class="text-center mt-4">
-    <a href="{% url 'autour_de_babi' %}" class="btn btn-success btn-lg">Explorer toutes les destinations</a>
+    <a href="{% url 'autour_de_babi' %}" class="btn btn-success btn-lg">{% trans "Explorer toutes les destinations" %}</a>
   </div>
 </div>
 

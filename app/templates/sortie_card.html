@@ -1,4 +1,6 @@
 {% load static %}
+{% load i18n %}
+{% load static i18n %}
 
 <div class="card h-100 shadow-sm sortie-card">
     {% if sortie.image %}
@@ -9,7 +11,7 @@
     <div class="card-body d-flex flex-column">
       <h5 class="card-title">{{ sortie.nom }}</h5>
       <p class="card-text small">{{ sortie.description|truncatewords:15 }}</p>
-      <a href="{% url 'sortie_detail' sortie.slug %}" class="btn btn-outline-danger mt-auto">Voir +</a>
+      <a href="{% url 'sortie_detail' sortie.slug %}" class="btn btn-outline-danger mt-auto">{% trans "Voir" %} +</a>
     </div>
   </div>
   

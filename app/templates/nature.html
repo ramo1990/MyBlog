@@ -1,22 +1,25 @@
 {% extends "base.html" %}
 {% load static %}
+{% load i18n %}
+{% load static i18n %}
+
 {% block extra_css %}
     <link rel="stylesheet" href="{% static 'css/nature.css' %}">
 {% endblock %}
 
 {% block content %}
 <div class="container my-5">
-  <h1 class="mb-4 text-success text-center">Dans la nature</h1>
+  <h1 class="mb-4 text-success text-center">{% trans "Dans la nature" %}</h1>
 
   <div class="text-center mb-4">
     <p class="fs-5 fst-italic text-muted">
-      Ressentez la liberté, découvrez les merveilles naturelles de la Côte d'Ivoire.
+      {% trans "Ressentez la liberté, découvrez les merveilles naturelles de la Côte d'Ivoire." %}
     </p>
     <p class="lead">
-      Parcourez les trésors naturels de Côte d'Ivoire : plages, forêts, randonnées et faune sauvage.
+      {% trans "Parcourez les trésors naturels de Côte d'Ivoire : plages, forêts, randonnées et faune sauvage." %}
     </p>
     <a href="#categories" class="btn btn-success btn-lg mt-2">
-      🌿 Explorez la nature
+      🌿 {% trans "Explorez la nature" %}
     </a>
   </div>
 

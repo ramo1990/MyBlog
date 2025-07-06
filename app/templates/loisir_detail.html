@@ -1,5 +1,8 @@
 {% extends "base.html" %}
 {% load static %}
+{% load i18n %}
+{% load static i18n %}
+
 {% block extra_css %}
     <link rel="stylesheet" href="{% static 'css/nature.css' %}">
 {% endblock %}
@@ -17,12 +20,12 @@
       <p class="lead">{{ activite.description }}</p>
 
       <ul class="list-group mb-4">
-        <li class="list-group-item"><strong>Catégorie :</strong> {{ activite.get_categorie_display }}</li>
-        {% if activite.horaire %}<li class="list-group-item"><strong>Horaires :</strong> {{ activite.horaire }}</li>{% endif %}
-        {% if activite.tarif %}<li class="list-group-item"><strong>Tarif :</strong> {{ activite.tarif }}</li>{% endif %}
-        {% if activite.age_minimum %}<li class="list-group-item"><strong>Âge minimum :</strong> {{ activite.age_minimum }} ans</li>{% endif %}
-        {% if activite.accessibilite %}<li class="list-group-item"><strong>Accessibilité :</strong> {{ activite.accessibilite }}</li>{% endif %}
-        {% if activite.localisation %}<li class="list-group-item"><strong>Localisation :</strong> {{ activite.localisation }}</li>{% endif %}
+        <li class="list-group-item"><strong>{% trans "Catégorie" %} :</strong> {{ activite.get_categorie_display }}</li>
+        {% if activite.horaire %}<li class="list-group-item"><strong>{% trans "Horaires" %} :</strong> {{ activite.horaire }}</li>{% endif %}
+        {% if activite.tarif %}<li class="list-group-item"><strong>{% trans "Tarif" %} :</strong> {{ activite.tarif }}</li>{% endif %}
+        {% if activite.age_minimum %}<li class="list-group-item"><strong>{% trans "Âge minimum" %} :</strong> {{ activite.age_minimum }} ans</li>{% endif %}
+        {% if activite.accessibilite %}<li class="list-group-item"><strong>{% trans "Accessibilité" %} :</strong> {{ activite.accessibilite }}</li>{% endif %}
+        {% if activite.localisation %}<li class="list-group-item"><strong>{% trans "Localisation" %} :</strong> {{ activite.localisation }}</li>{% endif %}
       </ul>
 
       {% if activite.latitude and activite.longitude %}
@@ -46,20 +49,20 @@
     <div class="col-md-4">
       <div class="card mb-4">
         <div class="card-body">
-          <h5 class="card-title">Informations complémentaires</h5>
+          <h5 class="card-title">{% trans "Informations complémentaires" %}</h5>
           {% if activite.site_web %}
-            <p><a href="{{ activite.site_web }}" target="_blank" class="btn btn-sm btn-outline-primary w-100 mb-2">🌐 Site Web</a></p>
+            <p><a href="{{ activite.site_web }}" target="_blank" class="btn btn-sm btn-outline-primary w-100 mb-2">🌐 {% trans "Site Web" %}</a></p>
           {% endif %}
           {% if activite.facebook %}
-            <p><a href="{{ activite.facebook }}" target="_blank" class="btn btn-sm btn-outline-primary w-100 mb-2">📘 Facebook</a></p>
+            <p><a href="{{ activite.facebook }}" target="_blank" class="btn btn-sm btn-outline-primary w-100 mb-2">📘 {% trans "Facebook" %}</a></p>
           {% endif %}
           {% if activite.instagram %}
-            <p><a href="{{ activite.instagram }}" target="_blank" class="btn btn-sm btn-outline-primary w-100">📸 Instagram</a></p>
+            <p><a href="{{ activite.instagram }}" target="_blank" class="btn btn-sm btn-outline-primary w-100">📸 {% trans "Instagram" %}</a></p>
           {% endif %}
         </div>
       </div>
 
-      <a href="{% url 'loisir' %}" class="btn btn-outline-secondary w-100">← Retour aux activités</a>
+      <a href="{% url 'loisir' %}" class="btn btn-outline-secondary w-100">← {% trans "Retour" %}</a>
     </div>
   </div>
 </div>

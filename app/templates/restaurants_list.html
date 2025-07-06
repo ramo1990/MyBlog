@@ -1,5 +1,8 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load i18n %}
+{% load static i18n %}
+
 {% block extra_head %}
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
@@ -11,15 +14,15 @@
 
 {% block content %}
 <div class="container my-5">
-    <h1 class="©">Où manger ?</h1>
-    <p class="lead text-center">Découvrez les meilleurs endroits pour savourer la cuisine locale ou internationale.</p>
+    <h1 class="©">{% trans "Où manger" %} ?</h1>
+    <p class="lead text-center">{% trans "Découvrez les meilleurs endroits pour savourer la cuisine locale ou internationale" %}.</p>
 
 
     <div class="text-center my-4">
         <img src="{% static 'images/cotiv-ethnies.gif' %}" class="img-fluid rounded" alt="Cuisine locale">
     </div>
     <!-- plat typique -->
-    <h2 class="mt-5 text-center">Plats typiques à découvrir</h2>
+    <h2 class="mt-5 text-center">{% trans "Plats typiques à découvrir" %}</h2>
     <div class="row my-4">
         {% for plat in plats %}
         <div class="col-md-3 text-center">
@@ -36,7 +39,7 @@
 <!--  -->
 
     <!-- Nos recommendations de resto -->
-    <h2 class="mt-5 text-center">Nos meilleures adresses</h2>
+    <h2 class="mt-5 text-center">{% trans "Nos meilleures adresses" %}</h2>
     <div class="row my-4">
         {% for resto in meilleurs_restos %}
         <div class="col-md-4 mb-4">
@@ -49,18 +52,18 @@
                     <p class="card-text">{{ resto.content|truncatechars:100 }}</p>
                     <p><strong>Adresse:</strong> {{ resto.adresse }}</p>
                     {% if resto.site_web %}
-                        <a href="{{ resto.site_web }}" class="btn btn-sm btn-success" target="_blank">Visiter</a>
+                        <a href="{{ resto.site_web }}" class="btn btn-sm btn-success" target="_blank">{% trans "Visiter" %}</a>
                     {% endif %}
                 </div>
             </div>
         </div>
         {% empty %}
-            <p>Aucune recommandation pour le moment.</p>
+            <p>{% trans "Aucune recommandation pour le moment" %}.</p>
         {% endfor %}
     </div>
     
 <!-- afficher le resto sur une carte -->
-    <h3 class="mt-5 text-center">Carte des restaurants</h3>
+    <h3 class="mt-5 text-center">{% trans "Carte des restaurants" %}</h3>
     <div id="map" style="height: 500px;"></div>
 
 <!-- filtre -->
@@ -68,7 +71,7 @@
         <form method="get" class="row g-3 mb-4">
             <div class="col-md-3">
                 <select name="categorie" class="form-select">
-                    <option value="">Type de cuisine</option>
+                    <option value="">{% trans "Type de cuisine" %}</option>
                     {% for key, label in categories.items %}
                         <option value="{{ key }}" {% if selected_category and selected_category == key %}selected{% endif %}>{{ label }}</option>
                     {% endfor %}
@@ -76,7 +79,7 @@
             </div>
             <div class="col-md-3">
                 <select name="prix" class="form-select">
-                    <option value="">Budget</option>
+                    <option value="">{% trans "Budget" %}</option>
                     {% for key, label in prix_choices.items %}
                         <option value="{{ key }}" {% if selected_prix and selected_prix == key %}selected{% endif %}>{{ label }}</option>
                     {% endfor %}
@@ -84,13 +87,13 @@
             </div>
             <div class="col-md-3">
                 <select name="tri" class="form-select">
-                    <option value="">Trier par</option>
-                    <option value="popularite" {% if sort_by and sort_by == 'popularite' %}selected{% endif %}>Popularité</option>
-                    <option value="nouveaute" {% if sort_by == 'nouveaute' %}selected{% endif %}>Nouveauté</option>
+                    <option value="">{% trans "Trier par" %}</option>
+                    <option value="popularite" {% if sort_by and sort_by == 'popularite' %}selected{% endif %}>{% trans "Popularité" %}</option>
+                    <option value="nouveaute" {% if sort_by == 'nouveaute' %}selected{% endif %}>{% trans "Nouveauté" %}</option>
                 </select>
             </div>
             <div class="col-12 text-end">
-                <button type="submit" class="btn btn-primary">Filtrer</button>
+                <button type="submit" class="btn btn-primary">{% trans "Filtrer" %}</button>
                 <!-- Bouton Réinitialiser -->
                 <a href="{% url 'restaurants_list' %}" class="btn-reset">
                     🔄
@@ -114,14 +117,14 @@
                         <p><strong>Adresse:</strong> {{ resto.adresse }}</p>
                         {% if resto.phone %}<p><strong>Tel:</strong> {{ resto.phone }}</p>{% endif %}
                         {% if resto.site_web %}
-                            <a href="{{ resto.site_web }}" target="_blank" class="btn btn-sm btn-outline-secondary">Site web</a>
+                            <a href="{{ resto.site_web }}" target="_blank" class="btn btn-sm btn-outline-secondary">{% trans "Site web" %}</a>
                         {% endif %}
                         
                     </div>
                 </div>
             </div>
         {% empty %}
-            <p>Aucun restaurant trouvé dans cette catégorie.</p>
+            <p>{% trans "Aucun restaurant trouvé dans cette catégorie" %}.</p>
         {% endfor %}
     </div>
 </div>

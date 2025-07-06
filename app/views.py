@@ -9,8 +9,11 @@ from django.db.models import Q
 # from .models import Category, SubCategory
 from django.core.mail import send_mail
 from .forms import *
+from django.utils.translation import get_language
 # from django.contrib.auth.decorators import login_required
 # from .models import FeaturedEvent
+
+print(get_language())
 
 class PostList(generic.ListView):
     queryset = Post.objects.filter(status=1).order_by('-created_on')
@@ -19,9 +22,9 @@ class PostList(generic.ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        # context['events'] = Agenda.objects.order_by('date_debut')[:6]
-        # context['gastronomie_list'] = Gastronomie.objects.order_by('date')[:6]
-        # context['ville_list'] = VillePatrimoine.objects.order_by('-date')[:6]
+        context['lieux'] = Lieu.objects.order_by('date_evenement')[:6]
+        context['hebergements'] = Hebergement.objects.all()[:6]
+        context['restaurants'] = Restaurant.objects.all()[:6]
         return context
 
 class DetailView(generic.DetailView):
@@ -289,29 +292,30 @@ def search(request):
     results = []
 
     if query:
-        destinations = Destinations.objects.filter(Q(title__icontains=query) | Q(content__icontains=query))
-        restaurants = Restaurant.objects.filter(Q(title__icontains=query) | Q(categorie__icontains=query))
-        ville_patrimoine = VillePatrimoine.objects.filter(Q(title__icontains=query) | Q(content__icontains=query))
         post = Post.objects.filter(Q(title__icontains=query) | Q(content__icontains=query))
-        agenda = Agenda.objects.filter(Q(title__icontains=query) | Q(content__icontains=query))
-        culture = Culture.objects.filter(Q(title__icontains=query) | Q(content__icontains=query))
-        conseil_voyage = ConseilVoyage.objects.filter(Q(title__icontains=query) | Q(content__icontains=query))
-        gastronomie = Gastronomie.objects.filter(Q(title__icontains=query) | Q(content__icontains=query))
+        restaurants = Restaurant.objects.filter(Q(title__icontains=query) | Q(categorie__icontains=query))
+        category = Category.objects.filter(Q(title__icontains=query) | Q(description__icontains=query))
+        subCategory = SubCategory.objects.filter(Q(title__icontains=query) | Q(description__icontains=query))
+        lieu = Lieu.objects.filter(Q(nom__icontains=query) | Q(description__icontains=query))
+        activiteLoisir = ActiviteLoisir.objects.filter(Q(nom__icontains=query) | Q(description__icontains=query))
+        lieuShopping = LieuShopping.objects.filter(Q(nom__icontains=query) | Q(description__icontains=query))
+        sortie = Sortie.objects.filter(Q(nom__icontains=query) | Q(description__icontains=query))
         hebergement = Hebergement.objects.filter(Q(title__icontains=query) | Q(content__icontains=query))
-        que_faire = Activite.objects.filter(Q(title__icontains=query) | Q(content__icontains=query))
+        infoPratique = InfoPratique.objects.filter(Q(title__icontains=query) | Q(content__icontains=query))
+        moyenTransport = MoyenTransport.objects.filter(Q(nom__icontains=query) | Q(description__icontains=query))
 
         results = {
-            'destinations':destinations,
-            'restaurants':restaurants,
-            'ville_patrimoine':ville_patrimoine,
             'post':post,
-            'agenda':agenda,
-            'culture':culture,
-            'conseil_voyage':conseil_voyage,
-            'gastronomie':gastronomie,
+            'restaurants':restaurants,
+            'category':category,
+            'subCategory':subCategory,
+            'lieu':lieu,
+            'activiteLoisir':activiteLoisir,
+            'lieuShopping':lieuShopping,
+            'sortie':sortie,
             'hebergement':hebergement,
-            # 'Info_pratique':Info_pratique,
-            'que_faire':que_faire,
+            'infoPratique':infoPratique,
+            'moyenTransport':moyenTransport,
         }
     return render(request, 'search_results.html', {
         'query':query,

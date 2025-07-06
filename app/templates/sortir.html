@@ -1,17 +1,19 @@
 {% extends "base.html" %}
 {% load static %}
+{% load i18n %}
+{% load static i18n %}
 
 {% block content %}
 <div class="container my-5">
-  <h1 class="text-center text-danger mb-4">Sortir à Abidjan</h1>
+  <h1 class="text-center text-danger mb-4">{% trans "Sortir à Abidjan" %}</h1>
   <p class="lead text-center mb-5">
-    Trouvez où sortir ce soir : bars, clubs, spectacles, concerts et événements immanquables à Abidjan.
+    {% trans "Trouvez où sortir ce soir : bars, clubs, spectacles, concerts et événements immanquables à Abidjan" %}.
   </p>
 
   {# SECTION : TENDANCE #}
   {% if tendances %}
   <section class="mb-5">
-    <h2 class="text-warning mb-3">🔥 Lieux tendance</h2>
+    <h2 class="text-warning mb-3">🔥 {% trans "Lieux tendance" %}</h2>
     <div class="row">
       {% for sortie in tendances %}
         <div class="col-md-3 mb-4">

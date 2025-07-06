@@ -1,5 +1,8 @@
 {% extends "base.html" %}
 {% load static %}
+{% load i18n %}
+{% load static i18n %}
+
 {% block extra_css %}
     <link rel="stylesheet" href="{% static 'css/culture.css' %}">
 {% endblock %}
@@ -16,7 +19,7 @@
         <p>{{ subcategory.description }}</p>
     {% endif %}
 
-    <h2>Images associées :</h2>
+    <h2>{% trans "Images associées" %} :</h2>
     <div style="display: flex; flex-wrap: wrap;">
         {% for image in images %}
             <div style="margin: 10px;">
@@ -26,10 +29,10 @@
                 {% endif %}
             </div>
         {% empty %}
-            <p>Aucune image disponible.</p>
+            <p>{% trans "Aucune image disponible" %}.</p>
         {% endfor %}
     </div>
 
-    <p><a href="{% url 'category_detail' subcategory.category.slug %}">← Retour à la catégorie</a></p>
+    <p><a href="{% url 'category_detail' subcategory.category.slug %}">← {% trans "Retour à la catégorie" %}</a></p>
 </body>
 {% endblock content %}

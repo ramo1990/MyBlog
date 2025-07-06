@@ -169,6 +169,32 @@ footer {
   background-color: #006f43 !important; /* un vert un peu plus foncé */
 }
 
+.language-selector {
+  display: inline-block;
+  margin-left: 1rem;
+}
+.language-selector select {
+  background: linear-gradient(to right, var(--orange-ci), var(--green-ci));
+  color: var(--white-ci);
+  border: none;
+  padding: 6px 12px;
+  border-radius: 30px;
+  font-size: 16px;
+  font-weight: 500;
+  appearance: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  outline: none;
+  text-align: center;
+}
+.language-selector select:hover {
+  background: var(--green-ci);
+}
+.language-selector select option {
+  background-color: #fff;
+  color: var(--black-ci);
+  font-size: 16px;
+}
 
 /* Responsive Tweaks pour petit ecran*/
 @media (min-width: 768px) and (max-width: 991px) {
