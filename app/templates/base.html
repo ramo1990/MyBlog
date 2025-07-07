@@ -85,28 +85,30 @@
         </ul>
       </div>
 
-      <!-- changer de langue -->
-      <form id="lang-fr" action="{% url 'set_language' %}" method="post" style="display: none;">
+      <!-- Formulaire pour changer la langue -->
+      <form id="language-form" action="{% url 'set_language' %}" method="post" class="ms-3" style="width: auto; display: inline-block;">
+        <!-- Jeton CSRF pour sécuriser la requête POST -->
         {% csrf_token %}
-        <input type="hidden" name="language" value="fr">
-      </form>
-      <form id="lang-en" action="{% url 'set_language' %}" method="post" style="display: none;">
-        {% csrf_token %}
-        <input type="hidden" name="language" value="en">
-      </form>
-      <!-- Drapeaux cliquables -->
-      <div class="language-switcher">
-        <a href="#" onclick="document.getElementById('lang-fr').submit(); return false;" title="Français">🇫🇷</a>
-        <a href="#" onclick="document.getElementById('lang-en').submit(); return false;" title="English">🇬🇧</a>
-      </div>
-      <!-- <form action="{% url 'set_language' %}" method="post">
-        {% csrf_token %}
-        <select name="language" onchange="this.form.submit()">
-            <option value="fr" {% if LANGUAGE_CODE == 'fr' %}selected{% endif %}>🇫🇷</option>
-            <option value="en" {% if LANGUAGE_CODE == 'en' %}selected{% endif %}>🇬🇧</option>
+        <!-- Champ caché qui contiendra la langue sélectionnée ('fr' ou 'en') -->
+        <input type="hidden" name="language" id="language-input" value="">
+        <select class="form-select form-select-sm bg-success text-white" onchange="submitLanguage(this)">
+          <!-- Option pour le français ; 'selected' si la langue actuelle est 'fr' -->
+          <option value="fr" {% if LANGUAGE_CODE == 'fr' %}selected{% endif %}>🇫🇷</option>
+          <!-- Option pour l'anglais ; 'selected' si la langue actuelle est 'en' -->
+          <option value="en" {% if LANGUAGE_CODE == 'en' %}selected{% endif %}>🇬🇧</option>
         </select>
-    </form> -->
-
+      </form>
+      <!-- Script JavaScript appelé quand l'utilisateur change la langue -->
+      <script>
+        function submitLanguage(select) {
+          // Récupère la valeur choisie (ex : 'fr' ou 'en')
+          const lang = select.value;
+          // Insère cette valeur dans le champ caché
+          document.getElementById('language-input').value = lang;
+          // Soumet le formulaire pour envoyer la langue à Django
+          document.getElementById('language-form').submit();
+        }
+      </script>
 
       <!-- search -->
       <form method="GET" action="{% url 'search' %}" class="d-flex align-items-center" id="searchForm">
